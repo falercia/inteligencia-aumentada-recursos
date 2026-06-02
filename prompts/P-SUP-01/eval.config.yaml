@@ -1,0 +1,74 @@
+prompt_id: P-SUP-01
+nome: "Classificação de Ticket em Severidade"
+version: 1.0.0
+
+# ---------------------------------------------------------------------------
+# Limiar de aprovação
+# ---------------------------------------------------------------------------
+# 0.85 padrão. O anti-padrão crítico (classificar por tom emocional) é
+# testado especificamente nos casos limítrofes — falha em qualquer deles
+# derruba o score abaixo do limiar.
+# ---------------------------------------------------------------------------
+threshold: 0.85
+
+# ---------------------------------------------------------------------------
+# Judges ativos
+# ---------------------------------------------------------------------------
+judges:
+  - substring
+  - regex
+  - classification
+  - json_schema
+
+# Schema obrigatório do output JSON
+required_json_keys:
+  - severidade
+  - indicadores_objetivos  # array com indicadores concretos, OBRIGATÓRIO
+
+# Schema extra para casos com tom emocional alto
+recommended_json_keys:
+  - atencao_tom            # quando há tom emocional desconectado de impacto
+  - escalonamento          # quando S1 ou S2 alto, indicar próximos passos
+
+# ---------------------------------------------------------------------------
+# Modelo padrão por cenário
+# ---------------------------------------------------------------------------
+provider_default: anthropic
+
+# Triagem em volume (alto throughput de tickets): Haiku é viável
+model_default: claude-haiku-4-5
+
+# Release público: Sonnet
+model_release: claude-sonnet-4-6
+
+# Auditoria editorial: Opus
+model_audit: claude-opus-4-6
+
+# ---------------------------------------------------------------------------
+# Política de recalibração
+# ---------------------------------------------------------------------------
+recalibration_due_after_days: 365
+recalibration_trigger:
+  - "Mudança material no SLA contratual (ex: novo tier de plano)"
+  - "Drift de taxa de falso-S1 > 5% em produção"
+  - "Postmortem de SEV-1 reportar classificação inicial incorreta"
+
+# ---------------------------------------------------------------------------
+# Notas operacionais
+# ---------------------------------------------------------------------------
+notas: |
+  Custo estimado por execução completa (20 casos):
+    - Haiku 4.5:  ~USD 0,04
+    - Sonnet 4.6: ~USD 0,35
+    - Opus 4.6:   ~USD 1,60
+
+  Anti-padrão crítico testado:
+    - Casos L-016, L-018 e F-004 testam especificamente a regra de NÃO
+      classificar por tom emocional. Falha em qualquer um dos três indica
+      regressão do mesmo bug histórico (changelog v0 → v1 do P-SUP-01).
+    - Em produção, monitorar taxa de "falso S1 por tom" via revisão
+      semanal pelo lead de suporte.
+
+  Métrica complementar recomendada em campo (não automatizada aqui):
+    - Tempo médio até reclassificação (quando humano discorda da IA)
+    - Distribuição de severidades atribuídas vs. resolvidas no SLA

@@ -1,0 +1,80 @@
+prompt_id: P-MED-01
+nome: "Triagem de Sintomas com Recusa por Escopo"
+version: 1.0.0
+
+# ---------------------------------------------------------------------------
+# Limiar de aprovação
+# ---------------------------------------------------------------------------
+# 0.90 é mais estrito que jurídico porque erro em triagem médica tem
+# consequência potencialmente irreversível (perda de tempo em emergência).
+# A regra constitucional "sempre conservador" tem que aparecer no
+# resultado em ≥ 95% dos casos limítrofes.
+# ---------------------------------------------------------------------------
+threshold: 0.90
+
+# ---------------------------------------------------------------------------
+# Judges ativos
+# ---------------------------------------------------------------------------
+# Adicional: classification é OBRIGATÓRIO em médico, pois a classe
+# (EMERGENCIA/URGENCIA/ELETIVA/FORA_DE_ESCOPO) é o output crítico.
+# ---------------------------------------------------------------------------
+judges:
+  - substring
+  - regex
+  - classification
+  - json_schema
+
+# Schema mínimo obrigatório no output JSON
+required_json_keys:
+  - classificacao
+  - acao_recomendada
+
+# Schema extra recomendado para casos com sinais de alarme
+recommended_json_keys:
+  - sinais_de_alarme
+  - motivo
+
+# ---------------------------------------------------------------------------
+# Modelo padrão por cenário
+# ---------------------------------------------------------------------------
+provider_default: anthropic
+
+# Triagem em volume: Sonnet (não Haiku) por ser domínio sensível
+model_default: claude-sonnet-4-6
+
+# Release público: Sonnet com self-critique reforçado
+model_release: claude-sonnet-4-6
+
+# Auditoria editorial: Opus + revisão humana de médico
+model_audit: claude-opus-4-6
+
+# ---------------------------------------------------------------------------
+# Política de recalibração
+# ---------------------------------------------------------------------------
+# Médico tem revisão mais frequente que jurídico porque protocolos clínicos
+# podem mudar com nova publicação SBC/AMB.
+# ---------------------------------------------------------------------------
+recalibration_due_after_days: 180
+recalibration_trigger:
+  - "Atualização de protocolo SAMU/SBPC/AMB relevante"
+  - "Drift de score > 3% entre releases mensais"
+  - "Caso de falso negativo em emergência reportado em campo"
+
+# ---------------------------------------------------------------------------
+# Notas operacionais
+# ---------------------------------------------------------------------------
+notas: |
+  AVISO EDITORIAL: este prompt e seu golden set são CALIBRAÇÃO INICIAL
+  pelo autor com base em literatura pública (SAMU, manuais de triagem,
+  fluxogramas SBC). Antes de uso em produção em contexto clínico real,
+  REVISAR com médico clínico-geral ou especialista em medicina de urgência.
+
+  Custo estimado por execução completa (20 casos):
+    - Haiku 4.5:  ~USD 0,05 (NÃO usar — sensibilidade insuficiente)
+    - Sonnet 4.6: ~USD 0,50
+    - Opus 4.6:   ~USD 2,20
+
+  Anti-padrão observado durante calibração:
+    - Confundir intensidade do tom do paciente com gravidade clínica
+    - Recusar triagem sintomática quando deveria triar e recusar apenas o diagnóstico
+    - Banalizar dor torácica em paciente sem fator de risco aparente

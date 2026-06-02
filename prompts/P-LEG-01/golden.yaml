@@ -1,0 +1,528 @@
+prompt_id: P-LEG-01
+nome: "Revisão de Cláusula de Não-Concorrência CLT"
+version: 1.0.0
+calibrated_by: "Fabio Garcia (autor da obra) — calibração inicial"
+calibration_date: 2026-06-02
+review_due: 2027-06-02
+notas_de_calibracao: |
+  Os 5 elementos essenciais do TST avaliados em todos os casos:
+    1. Elemento temporal (até 2 anos é regra geral; 24 meses é o limite alto)
+    2. Elemento geográfico (restrição razoável ao mercado relevante)
+    3. Elemento material (restrição à atividade exercida, não a toda economia)
+    4. Contraprestação financeira (~30%+ da remuneração no período de restrição)
+    5. Interesse legítimo do empregador (segredo industrial, carteira de clientes, know-how)
+  Anti-padrão crítico: inventar acórdão ou citar lei inexistente. Constituição
+  do prompt bloqueia. Marcado em casos limítrofes específicos.
+
+cases:
+
+  # ===========================================================================
+  # FÁCEIS (10) — sanidade básica de classificação
+  # ===========================================================================
+
+  - id: P-LEG-01-F-001
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo período de 12 (doze) meses contados a partir do término do contrato
+        de trabalho, o empregado se obriga a não exercer atividade concorrente
+        no mesmo mercado de varejo de moda do empregador, restrita ao estado
+        de São Paulo. Em contrapartida, o empregador pagará valor equivalente
+        a 50% (cinquenta por cento) da última remuneração mensal pelo período
+        da restrição."
+      cargo: "Gerente Regional de Vendas"
+      salario: 12000
+    expected:
+      must_contain:
+        - "elemento temporal"
+        - "elemento geográfico"
+        - "elemento material"
+        - "contraprestação"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio|alto|crítico)"
+      json_keys: []
+      classification: "baixo"
+    notes: |
+      Cláusula canônica VÁLIDA: 12 meses (ok), SP (geográfico razoável para
+      varejo regional), atividade restrita ao varejo de moda (material ok),
+      50% da remuneração (contraprestação ampla), gerente regional tem acesso
+      a estratégia/clientes (interesse legítimo claro). Resultado esperado:
+      RISCO BAIXO, 5 elementos PRESENTES.
+
+  - id: P-LEG-01-F-002
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado fica proibido, vitaliciamente, de trabalhar em qualquer
+        empresa do ramo de tecnologia, em qualquer parte do mundo, sem nenhuma
+        contraprestação financeira."
+      cargo: "Desenvolvedor Pleno"
+      salario: 9000
+    expected:
+      must_contain:
+        - "vitalícia"
+        - "ausência de contraprestação"
+        - "extensão geográfica desproporcional"
+      regex_required:
+        - "classificação[:\\s]*(alto|crítico)"
+      classification: "crítico"
+    notes: |
+      Cláusula canônica NULA: vitalícia (temporal viola), mundial (geográfico
+      desproporcional), toda tecnologia (material amplo demais), sem contraprestação
+      (viola caput do art. 422 + jurisprudência TST), desenvolvedor pleno
+      sem evidência de segredo industrial (interesse legítimo questionável).
+      Resultado esperado: RISCO CRÍTICO, múltiplos elementos AUSENTES.
+
+  - id: P-LEG-01-F-003
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Por 6 (seis) meses após a rescisão, o empregado não poderá atuar em
+        empresa concorrente direta da empregadora no segmento de educação
+        executiva online, no território brasileiro, recebendo 40% da última
+        remuneração mensal durante o período."
+      cargo: "Diretor Comercial"
+      salario: 35000
+    expected:
+      must_contain:
+        - "elemento temporal"
+        - "elemento geográfico"
+        - "elemento material"
+        - "contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "baixo"
+    notes: |
+      VÁLIDA com folga. 6 meses curto, BR razoável para EAD nacional, segmento
+      específico (não toda educação), 40% adequado, diretor comercial tem
+      claro acesso a carteira. RISCO BAIXO.
+
+  - id: P-LEG-01-F-004
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado fica proibido de trabalhar em qualquer empresa pelos
+        próximos 18 meses após a saída."
+      cargo: "Analista Júnior de Marketing"
+      salario: 4500
+    expected:
+      must_contain:
+        - "material amplo demais"
+        - "ausência de contraprestação"
+        - "ausência de interesse legítimo demonstrado"
+      regex_required:
+        - "classificação[:\\s]*(alto|crítico)"
+      classification: "crítico"
+    notes: |
+      NULA: "qualquer empresa" viola elemento material, sem contraprestação
+      mencionada, analista júnior dificilmente carrega segredo industrial,
+      sem delimitação geográfica. RISCO CRÍTICO.
+
+  - id: P-LEG-01-F-005
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo prazo de 24 (vinte e quatro) meses após o término do contrato,
+        o empregado obriga-se a não trabalhar para os 3 (três) concorrentes
+        diretos listados em anexo, no mercado de software de gestão hospitalar
+        no Brasil, recebendo 100% da última remuneração mensal pelo período
+        da restrição, considerando que o empregado teve acesso ao código-fonte
+        proprietário, à carteira de clientes hospitais e às estratégias
+        comerciais do empregador."
+      cargo: "VP de Produto"
+      salario: 60000
+    expected:
+      must_contain:
+        - "elemento temporal"
+        - "elemento geográfico"
+        - "elemento material"
+        - "contraprestação"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "baixo"
+    notes: |
+      VÁLIDA com cláusula bem desenhada: 24 meses no limite mas justificado
+      por VP/produto sensível, BR adequado, concorrentes nomeados (material
+      preciso), 100% da remuneração (contraprestação robusta), interesse
+      legítimo explicitado (código + carteira + estratégia). RISCO BAIXO.
+
+  - id: P-LEG-01-F-006
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Sem remuneração compensatória, o empregado obriga-se a não trabalhar
+        em empresa do mesmo setor pelos próximos 24 meses."
+      cargo: "Coordenador de RH"
+      salario: 7500
+    expected:
+      must_contain:
+        - "ausência de contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(alto|crítico)"
+      classification: "crítico"
+    notes: |
+      NULA pela ausência de contraprestação (TST entende como condição essencial
+      para validade pós-contratual; coordenador de RH carrega informação
+      sensível, mas sem pagamento, cláusula cai). RISCO CRÍTICO.
+
+  - id: P-LEG-01-F-007
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Em consideração ao acesso a informações confidenciais sobre clientes,
+        produtos e estratégias comerciais, o empregado obriga-se, pelo prazo
+        de 12 meses após o término do contrato, a não atuar como empregado
+        ou prestador em empresa que atue como concorrente direta da empregadora
+        no segmento de seguros corporativos no estado de São Paulo. Pela
+        restrição, o empregador pagará valor mensal equivalente a 35% da
+        última remuneração."
+      cargo: "Gerente de Conta Corporativa"
+      salario: 18000
+    expected:
+      must_contain:
+        - "elemento temporal"
+        - "elemento geográfico"
+        - "elemento material"
+        - "contraprestação"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "baixo"
+    notes: |
+      VÁLIDA: 12 meses ok, SP razoável, segmento específico, 35% no piso mas
+      aceitável quando o setor é claramente segmentado, gerente de conta
+      com clientes nomeados. RISCO BAIXO.
+
+  - id: P-LEG-01-F-008
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado se compromete a não trabalhar para empresa concorrente."
+      cargo: "Vendedor"
+      salario: 3500
+    expected:
+      must_contain:
+        - "ausência"
+      regex_required:
+        - "classificação[:\\s]*(alto|crítico)"
+      classification: "crítico"
+    notes: |
+      NULA por inexistência de TODOS os 5 elementos: sem temporal, sem geográfico,
+      sem material específico, sem contraprestação, sem interesse legítimo
+      demonstrado. Cláusula tipo "lorem ipsum jurídico". RISCO CRÍTICO.
+
+  - id: P-LEG-01-F-009
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo período de 9 (nove) meses, contados a partir do desligamento,
+        o empregado fica restrito a não exercer atividade idêntica em empresa
+        listada na relação de concorrentes do Anexo I deste contrato, dentro
+        da Região Metropolitana de São Paulo, mediante pagamento mensal de
+        45% da última remuneração."
+      cargo: "Engenheiro de Software Sênior"
+      salario: 16000
+    expected:
+      must_contain:
+        - "elemento temporal"
+        - "elemento geográfico"
+        - "elemento material"
+        - "contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "baixo"
+    notes: |
+      VÁLIDA: bem dimensionada. Eng sênior em produto crítico tem interesse
+      legítimo. Faltaria apenas explicitar o interesse legítimo na cláusula
+      (ponto de atenção menor). RISCO BAIXO.
+
+  - id: P-LEG-01-F-010
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado fica obrigado, pelos próximos 36 meses, a não trabalhar
+        em qualquer empresa do setor financeiro no Brasil, sem pagamento
+        adicional, sob pena de multa de 100% da última remuneração anual."
+      cargo: "Analista de Crédito Sênior"
+      salario: 14000
+    expected:
+      must_contain:
+        - "extensão temporal excessiva"
+        - "ausência de contraprestação"
+        - "extensão material desproporcional"
+      regex_required:
+        - "classificação[:\\s]*(crítico)"
+      classification: "crítico"
+    notes: |
+      NULA: 36 meses extrapola limite jurisprudencial (2 anos é teto), "qualquer
+      empresa do setor financeiro" é material amplo demais, sem contraprestação,
+      multa potencialmente abusiva. RISCO CRÍTICO.
+
+  # ===========================================================================
+  # MÉDIOS (5) — 1 ou 2 elementos questionáveis
+  # ===========================================================================
+
+  - id: P-LEG-01-M-011
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo prazo de 18 meses, o empregado obriga-se a não atuar em concorrente
+        direta no Brasil, com pagamento de 25% da remuneração mensal."
+      cargo: "Gerente de Marketing Digital"
+      salario: 11000
+    expected:
+      must_contain:
+        - "contraprestação no limite inferior"
+        - "elemento temporal"
+        - "elemento geográfico"
+      regex_required:
+        - "classificação[:\\s]*(médio|alto)"
+      classification: "médio"
+    notes: |
+      MÉDIO: 18 meses ok, BR justificável para marketing digital, mas 25% de
+      contraprestação está abaixo do piso confortável (jurisprudência aceita
+      30-50% como referência). Ponto de negociação, não nulidade automática.
+      RISCO MÉDIO.
+
+  - id: P-LEG-01-M-012
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado obriga-se, pelo prazo de 24 meses, a não atuar como
+        empregado ou consultor em empresa concorrente no Brasil ou no exterior,
+        recebendo 50% da última remuneração mensal pelo período."
+      cargo: "Chief Revenue Officer"
+      salario: 80000
+    expected:
+      must_contain:
+        - "extensão geográfica ampla"
+        - "interesse legítimo"
+        - "contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(médio|alto)"
+      classification: "médio"
+    notes: |
+      MÉDIO: CRO carrega segredo industrial e carteira (interesse legítimo
+      claro), 24 meses no limite alto mas justificável, 50% adequado, mas
+      "Brasil ou no exterior" abre flanco geográfico se a empresa só atua
+      no BR. Ajustar para "mercados em que a empregadora atua". RISCO MÉDIO.
+
+  - id: P-LEG-01-M-013
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo prazo de 12 meses, o empregado não poderá atuar em empresa
+        concorrente no segmento de varejo alimentício, recebendo 40% da
+        última remuneração mensal."
+      cargo: "Repositor de Loja"
+      salario: 2200
+    expected:
+      must_contain:
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(médio|alto)"
+      classification: "alto"
+    notes: |
+      MÉDIO-ALTO: estrutura formal está OK, mas o cargo (repositor) dificilmente
+      carrega segredo industrial ou carteira que justifique restrição
+      pós-contratual. Sem interesse legítimo demonstrado, cláusula vira
+      restrição abusiva à liberdade profissional. RISCO ALTO em interesse
+      legítimo, demais ok.
+
+  - id: P-LEG-01-M-014
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Por 12 meses, fica vedado ao empregado prestar serviços em empresa
+        concorrente no estado de São Paulo, recebendo 30% da remuneração
+        mensal. A empregadora poderá, a seu exclusivo critério, dispensar
+        a restrição mediante notificação prévia."
+      cargo: "Diretor de Tecnologia"
+      salario: 45000
+    expected:
+      must_contain:
+        - "cláusula de dispensa unilateral"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(médio)"
+      classification: "médio"
+    notes: |
+      MÉDIO: estrutura essencial ok, mas a cláusula de dispensa unilateral
+      sem contraprestação durante o aviso prévio gera insegurança ao empregado.
+      Ponto de negociação: ou removê-la, ou prever prazo mínimo de aviso
+      (60-90 dias) e manutenção da contraprestação. RISCO MÉDIO.
+
+  - id: P-LEG-01-M-015
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado obriga-se, pelo prazo de 18 meses, a não atuar em empresa
+        concorrente direta no segmento de farmácia popular no Brasil, mediante
+        pagamento de 100% da remuneração mensal durante o período."
+      cargo: "Estagiário de Marketing"
+      salario: 1800
+    expected:
+      must_contain:
+        - "estagiário"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(alto|crítico)"
+      classification: "alto"
+    notes: |
+      MÉDIO-ALTO: contraprestação generosa, mas estagiário não carrega
+      tradicionalmente segredo industrial nem carteira que justifique
+      restrição pós-contratual de 18 meses. Sem interesse legítimo robusto,
+      cláusula é desproporcional ao perfil profissional. RISCO ALTO.
+
+  # ===========================================================================
+  # LIMÍTROFES (5) — testes de calibração no limite
+  # ===========================================================================
+
+  - id: P-LEG-01-L-016
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo prazo de 24 (vinte e quatro) meses, o empregado obriga-se a
+        não atuar como empregado, consultor ou sócio em qualquer empresa
+        ou pessoa jurídica que atue no segmento de inteligência artificial
+        generativa no Brasil, recebendo 60% da última remuneração mensal
+        pelo período da restrição, em razão do acesso a roadmap de produto,
+        decisões de fine-tuning proprietário e parcerias estratégicas
+        confidenciais firmadas pelo empregador."
+      cargo: "Chief AI Officer"
+      salario: 95000
+    expected:
+      must_contain:
+        - "elemento temporal no limite"
+        - "interesse legítimo"
+        - "contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "médio"
+    notes: |
+      LIMÍTROFE: 24 meses é o teto aceito; "segmento de IA generativa" é
+      definição material em evolução (pode ser amplo demais ou específico
+      dependendo da interpretação); contraprestação robusta; interesse
+      legítimo explicitado e plausível para o cargo. Recomendação:
+      preservar mas explicitar "mesmas verticais de aplicação" para fechar
+      o flanco material. RISCO MÉDIO.
+
+  - id: P-LEG-01-L-017
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado obriga-se, pelo prazo de 12 meses, a não atuar em qualquer
+        empresa concorrente nos estados de SP, RJ, MG, RS, PR, SC e BA,
+        mediante pagamento de 100% da última remuneração."
+      cargo: "Diretor Nacional de Vendas"
+      salario: 50000
+    expected:
+      must_contain:
+        - "elemento geográfico"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(baixo|médio)"
+      classification: "médio"
+    notes: |
+      LIMÍTROFE: a lista de 7 estados é praticamente "Brasil relevante", o
+      que pode ser interpretado como proxy de "Brasil"; se a empregadora
+      atua nesses 7 estados, é razoável; se atua só em SP, a abrangência
+      é desproporcional. A análise pede contexto (atuação da empregadora).
+      Recomendação: declarar lacuna se mercados de atuação não fornecidos.
+
+  - id: P-LEG-01-L-018
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo prazo de 6 meses após o desligamento, fica vedado ao empregado
+        atuar em empresa concorrente, com contraprestação de 50% da
+        remuneração mensal, ressalvado o caso em que o empregado seja
+        dispensado por justa causa, hipótese em que a restrição se aplicará
+        sem qualquer contraprestação."
+      cargo: "Gerente de Operações"
+      salario: 13000
+    expected:
+      must_contain:
+        - "justa causa"
+        - "contraprestação"
+      regex_required:
+        - "classificação[:\\s]*(médio|alto)"
+      classification: "médio"
+    notes: |
+      LIMÍTROFE: a cláusula condicional (sem contraprestação em justa causa)
+      é controversa na jurisprudência. Posição majoritária do TST: mesmo
+      em justa causa, a restrição pós-contratual exige contraprestação,
+      sob pena de nulidade da restrição. Ponto de negociação relevante.
+      RISCO MÉDIO.
+
+  - id: P-LEG-01-L-019
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "Pelo período de 12 meses, o empregado obriga-se a não atuar em
+        empresa concorrente no Brasil, recebendo bônus único de 6 (seis)
+        vezes a última remuneração mensal, pago na rescisão do contrato."
+      cargo: "VP de Engenharia"
+      salario: 55000
+    expected:
+      must_contain:
+        - "contraprestação"
+        - "forma de pagamento"
+      regex_required:
+        - "classificação[:\\s]*(médio|alto)"
+      classification: "médio"
+    notes: |
+      LIMÍTROFE: 6x mensais = 50% mensalizado, contraprestação adequada em
+      valor, mas pagamento único à vista pode ser questionado quando o
+      empregado quebrar a restrição depois (problema de execução).
+      Jurisprudência divide. Recomendação: parcelamento mensal evita
+      contestação. RISCO MÉDIO.
+
+  - id: P-LEG-01-L-020
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      clausula: |
+        "O empregado, em razão da função estratégica exercida, obriga-se,
+        pelo prazo de 24 meses após o término do contrato, a não atuar
+        em empresa concorrente direta, no Brasil, recebendo, durante todo
+        o período, 50% da última remuneração mensal, ficando expressamente
+        autorizada a empregadora a reduzir o prazo a qualquer tempo, mediante
+        comunicação prévia de 30 dias, sem direito a indenização do
+        empregado pelo tempo remanescente."
+      cargo: "CEO"
+      salario: 150000
+    expected:
+      must_contain:
+        - "redução unilateral"
+        - "interesse legítimo"
+      regex_required:
+        - "classificação[:\\s]*(médio)"
+      classification: "médio"
+    notes: |
+      LIMÍTROFE: CEO carrega interesse legítimo robusto, 24 meses no teto
+      mas justificável, contraprestação ok. O ponto crítico é a redução
+      unilateral SEM indenização pelo tempo remanescente — pode ser visto
+      como abusivo, deixa o empregado sem planejamento de carreira. Ponto
+      de negociação obrigatório. RISCO MÉDIO.

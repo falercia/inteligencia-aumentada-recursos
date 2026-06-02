@@ -1,0 +1,62 @@
+prompt_id: P-LEG-01
+nome: "Revisão de Cláusula de Não-Concorrência CLT"
+version: 1.0.0
+
+# ---------------------------------------------------------------------------
+# Limiar de aprovação
+# ---------------------------------------------------------------------------
+# 0.85 é o piso editorial para jurídico não-contencioso (triagem, parecer
+# preliminar). Para uso em decisão judicial vinculante, o limiar deveria
+# ser ≥ 0.95, com revisão humana obrigatória — mas isso está FORA do
+# escopo declarado do prompt (constituição bloqueia parecer final).
+# ---------------------------------------------------------------------------
+threshold: 0.85
+
+# ---------------------------------------------------------------------------
+# Judges ativos
+# ---------------------------------------------------------------------------
+# substring   → presença dos 5 elementos do TST mencionados
+# regex       → formato da classificação (baixo/médio/alto/crítico)
+# classification → comparação direta da classe esperada
+# ---------------------------------------------------------------------------
+judges:
+  - substring
+  - regex
+  - classification
+
+# ---------------------------------------------------------------------------
+# Modelo padrão por cenário
+# ---------------------------------------------------------------------------
+provider_default: anthropic
+
+# Triagem em volume (CI a cada commit): Haiku
+model_default: claude-haiku-4-5
+
+# Release público (publicação trimestral do prompt): Sonnet
+model_release: claude-sonnet-4-6
+
+# Auditoria editorial anual (revisão pelo autor): Opus
+model_audit: claude-opus-4-6
+
+# ---------------------------------------------------------------------------
+# Política de recalibração
+# ---------------------------------------------------------------------------
+recalibration_due_after_days: 365
+recalibration_trigger:
+  - "Mudança jurisprudencial relevante do TST"
+  - "Reforma trabalhista material"
+  - "Drift de score > 5% entre releases mensais"
+
+# ---------------------------------------------------------------------------
+# Notas operacionais
+# ---------------------------------------------------------------------------
+notas: |
+  Custo estimado por execução completa (20 casos):
+    - Haiku 4.5:  ~USD 0,05
+    - Sonnet 4.6: ~USD 0,40
+    - Opus 4.6:   ~USD 1,80
+
+  Tempo médio de execução:
+    - Haiku:  ~25s
+    - Sonnet: ~45s
+    - Opus:   ~75s

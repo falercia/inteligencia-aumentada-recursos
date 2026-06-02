@@ -1,0 +1,553 @@
+prompt_id: P-SUP-01
+nome: "Classificação de Ticket em Severidade"
+version: 1.0.0
+calibrated_by: "Fabio Garcia (autor da obra) — calibração inicial"
+calibration_date: 2026-06-02
+review_due: 2027-06-02
+notas_de_calibracao: |
+  Regra constitucional crítica do prompt: classificar por IMPACTO TÉCNICO
+  e CONTRATUAL, NÃO por tom emocional do cliente. Este é o anti-padrão
+  documentado no APX-L (changelog do P-SUP-01): a v0 classificava como S1
+  qualquer ticket com "urgentíssimo" ou "vou cancelar", mesmo sem impacto
+  objetivo.
+
+  Escala adotada:
+    - S1 CRÍTICA: produção fora do ar OU vazamento OU sangramento de dinheiro
+    - S2 ALTA:    funcionalidade core degradada com impacto a múltiplos clientes
+    - S3 MÉDIA:   bug afeta cliente único, workaround disponível
+    - S4 BAIXA:   melhoria, débito técnico, dúvida operacional
+
+  Schema obrigatório de saída: campo "indicadores_objetivos" como array
+  com itens concretos (downtime, número de usuários, financeiro perdido).
+
+cases:
+
+  # ===========================================================================
+  # FÁCEIS (10) — sanidade básica
+  # ===========================================================================
+
+  - id: P-SUP-01-F-001
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "URGENTE!!! Plataforma toda fora do ar há 30 minutos. Times de vendas
+        parados, 200 usuários afetados. Status page diz tudo verde mas não
+        loga ninguém. Já tentamos sair e entrar de novo, mesma coisa.
+        Cliente Plano Enterprise."
+      contexto_cliente: "Enterprise · SLA 99.9% · 200 usuários ativos"
+    expected:
+      classification: "S1"
+      must_contain:
+        - "downtime"
+        - "S1"
+        - "200 usuários"
+      regex_required:
+        - "(S1|severidade.*1|crítica)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S1 canônico: outage de produção + Enterprise + 200 usuários impactados.
+      O tom é urgente, mas a classificação não vem do tom, vem dos
+      indicadores objetivos (downtime, número de usuários, plano contratual).
+
+  - id: P-SUP-01-F-002
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Olá, gostaria de saber como faço para exportar meu relatório de vendas
+        em PDF. Vi a opção em CSV mas preciso enviar para meu diretor em
+        PDF. Tem como?"
+      contexto_cliente: "Starter · 5 usuários"
+    expected:
+      classification: "S4"
+      must_contain:
+        - "dúvida"
+        - "documentação"
+      regex_required:
+        - "(S4|baixa|dúvida)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S4 canônico: dúvida de funcionalidade, sem impacto operacional. Tom
+      educado, sem urgência. Resposta: link para documentação ou tutorial.
+
+  - id: P-SUP-01-F-003
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Sou da equipe de segurança da empresa X. Detectamos vazamento de
+        dados pessoais de nossos clientes através da API pública da plataforma
+        de vocês. Confirmamos que conseguimos extrair CPF e e-mail de
+        usuários sem autenticação. Anexo o screenshot da query."
+      contexto_cliente: "Enterprise · 50.000 usuários"
+    expected:
+      classification: "S1"
+      must_contain:
+        - "vazamento"
+        - "S1"
+        - "LGPD"
+      regex_required:
+        - "(S1|severidade.*1|crítica|vazamento|LGPD)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "escalonamento"
+    notes: |
+      S1 canônico por outro vetor: vazamento de dados pessoais. Aciona LGPD
+      (notificação ANPD em 72h). Tom educado (segurança técnica), severidade
+      máxima.
+
+  - id: P-SUP-01-F-004
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "ABSURDO! VOCÊS SÃO PIORES QUE O ATENDIMENTO DO BANCO DO BRASIL. Estou
+        há 2 dias esperando uma resposta sobre uma vírgula que ficou errada
+        na fatura do mês passado, valor de R$ 2,00. VOU CANCELAR MEU PLANO
+        E VOU COMENTAR ISSO NO RECLAME AQUI E NO LINKEDIN. INACEITÁVEL."
+      contexto_cliente: "Starter · 1 usuário · cliente há 3 meses"
+    expected:
+      classification: "S3"
+      must_contain:
+        - "tom emocional"
+        - "impacto contratual"
+        - "S3"
+      regex_required:
+        - "(S3|média|impacto.*objetiv)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "atencao_tom"
+    notes: |
+      Anti-padrão CLÁSSICO. Tom emocional alto, ameaça de cancelamento e
+      exposição pública. Indicadores OBJETIVOS: erro de R$ 2,00 + cliente
+      Starter + atraso de 2 dias na resposta. Classificação CORRETA é S3
+      pela natureza do problema (erro pequeno mas real). NÃO escalar para
+      S1 só porque o cliente está bravo.
+
+  - id: P-SUP-01-F-005
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Boa tarde. Notei que a integração com o Salesforce está enviando
+        dados duplicados desde ontem (uma versão por hora ao invés de uma
+        por dia). Já temos cerca de 12.000 registros duplicados. Pode
+        validar?"
+      contexto_cliente: "Enterprise · 800 usuários"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "12.000"
+        - "integração"
+        - "S2"
+      regex_required:
+        - "(S2|alta|integração)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S2: bug com impacto material e quantificável (12k registros duplicados),
+      integração core afetada, cliente Enterprise. Mas plataforma ainda
+      funciona, dados podem ser remediados. Não é S1.
+
+  - id: P-SUP-01-F-006
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Sugestão: seria bom ter um modo escuro na interface. Cansei de usar
+        o branco brilhante à noite. Outras ferramentas já têm faz tempo."
+      contexto_cliente: "Pro · 10 usuários"
+    expected:
+      classification: "S4"
+      must_contain:
+        - "feature request"
+        - "backlog"
+        - "S4"
+      regex_required:
+        - "(S4|baixa|feature|sugestão|backlog)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S4: feature request. Encaminhar para product backlog. Não é bug.
+
+  - id: P-SUP-01-F-007
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Cobrança feita em duplicidade no cartão de crédito hoje pela manhã,
+        R$ 4.800,00 a mais. Cliente Enterprise. Já temos 3 colaboradores
+        relatando o mesmo problema. Quando vão estornar?"
+      contexto_cliente: "Enterprise · 120 usuários"
+    expected:
+      classification: "S1"
+      must_contain:
+        - "cobrança"
+        - "financeiro"
+        - "S1"
+      regex_required:
+        - "(S1|severidade.*1|crítica|cobrança|financeiro)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "escalonamento"
+    notes: |
+      S1: sangramento de dinheiro real, múltiplos colaboradores afetados,
+      Enterprise. Escalar para financeiro + engenharia. Estorno + RCA.
+
+  - id: P-SUP-01-F-008
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Bom dia. Quando vocês pretendem lançar o módulo de relatórios em BI
+        que estava no roadmap de 2025? Faz sentido para meu time."
+      contexto_cliente: "Pro · 25 usuários"
+    expected:
+      classification: "S4"
+      must_contain:
+        - "roadmap"
+        - "produto"
+      regex_required:
+        - "(S4|baixa|roadmap|produto)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S4: pergunta sobre roadmap. Encaminhar para product manager. Não tem
+      impacto operacional.
+
+  - id: P-SUP-01-F-009
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "API está retornando erro 500 em todos os endpoints de criação de
+        pedidos desde as 14h. Nosso e-commerce não consegue processar
+        nenhuma venda. Já são 800 pedidos abandonados nas últimas 2h."
+      contexto_cliente: "Enterprise · API · SLA 99.95%"
+    expected:
+      classification: "S1"
+      must_contain:
+        - "API"
+        - "800 pedidos"
+        - "S1"
+      regex_required:
+        - "(S1|severidade.*1|crítica|API|outage)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S1: API core fora, impacto financeiro direto e quantificado (800 pedidos
+      abandonados), Enterprise com SLA estrito. Outage em produção.
+
+  - id: P-SUP-01-F-010
+    category: facil
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Esqueci minha senha e o e-mail de recuperação não chegou. Já olhei
+        no spam."
+      contexto_cliente: "Starter · 1 usuário"
+    expected:
+      classification: "S3"
+      must_contain:
+        - "acesso"
+        - "single point"
+      regex_required:
+        - "(S3|média|S2|acesso)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      S3: usuário bloqueado, mas impacto pessoal e workaround existe (suporte
+      manual de redefinição). Se fosse múltiplos usuários ou Enterprise
+      sem acesso, escalaria para S2.
+
+  # ===========================================================================
+  # MÉDIOS (5) — variação típica
+  # ===========================================================================
+
+  - id: P-SUP-01-M-011
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Os relatórios de vendas estão lentos hoje, demoram uns 30 segundos
+        para carregar (normal era 2-3 segundos). 50 pessoas do time já
+        reclamaram. Não está caindo, só lento."
+      contexto_cliente: "Pro · 80 usuários"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "performance"
+        - "50 pessoas"
+        - "S2"
+      regex_required:
+        - "(S2|alta|performance|lentidão)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      MÉDIO inclinando para S2: degradação de performance significativa
+      (10x lento), múltiplos usuários afetados (50/80 = 60%+), mas plataforma
+      não está down. Workaround: usar mesmo lento. Não chega a S1 mas merece
+      atenção urgente.
+
+  - id: P-SUP-01-M-012
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Encontrei um bug: quando edito um pedido depois de salvar uma vez,
+        o desconto aplicado some. Tenho que reaplicar manualmente. Acontece
+        com qualquer pedido. Já são 3 dias assim."
+      contexto_cliente: "Pro · 15 usuários"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "bug"
+        - "workaround"
+        - "S2"
+      regex_required:
+        - "(S2|alta|bug|reproduz)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      MÉDIO: bug funcional reproduzível, afeta múltiplos clientes (Pro = todos
+      têm o problema), workaround existe (reaplicar manual). S2 pela
+      reprodutibilidade ampla, não S3 pela natureza generalizada.
+
+  - id: P-SUP-01-M-013
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Estou tentando configurar webhook para notificações de novos pedidos
+        seguindo a documentação. Recebo erro 401 mesmo enviando o token
+        que está no painel. Já tentei regenerar 2x."
+      contexto_cliente: "Pro · 5 usuários"
+    expected:
+      classification: "S3"
+      must_contain:
+        - "configuração"
+        - "documentação"
+        - "S3"
+      regex_required:
+        - "(S3|média|webhook|configuração)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      MÉDIO inclinando para S3: problema técnico afetando cliente único
+      durante configuração. Não está em produção ainda. Pode ser bug nosso
+      ou usuário fazendo errado. Investigação 1-2 dias.
+
+  - id: P-SUP-01-M-014
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Notei que o cálculo de comissão saiu com R$ 380 a mais para um
+        vendedor neste mês. Conferimos manualmente, deveria ser R$ 4.200
+        e veio R$ 4.580. Outros 2 vendedores também tiveram pequenas
+        diferenças. Suspeito que seja um arredondamento errado."
+      contexto_cliente: "Pro · 30 usuários"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "cálculo"
+        - "financeiro"
+        - "S2"
+      regex_required:
+        - "(S2|alta|cálculo|reproduz)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      MÉDIO inclinando para S2: bug financeiro afetando múltiplos casos
+      (3 vendedores). Valor isolado é pequeno mas a NATUREZA (cálculo
+      financeiro errado) é alta. Engenharia precisa investigar o
+      arredondamento. Workaround manual existe.
+
+  - id: P-SUP-01-M-015
+    category: medio
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Dashboard de gestão não está atualizando os números do dia em tempo
+        real como antes — agora demora uns 5-10 minutos para refletir. CFO
+        precisa dos números para a reunião de 16h."
+      contexto_cliente: "Enterprise · 500 usuários"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "atraso"
+        - "S2"
+      regex_required:
+        - "(S2|alta|atraso|sincronização)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      MÉDIO inclinando para S2: degradação de feature core para Enterprise,
+      mas dados estão sincronizando (apenas com atraso). Não é S1 (não
+      está parado), é S2 (degradação relevante). Importância para reunião
+      é contexto, não indicador objetivo de severidade.
+
+  # ===========================================================================
+  # LIMÍTROFES (5) — separação tom emocional × impacto objetivo
+  # ===========================================================================
+
+  - id: P-SUP-01-L-016
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "VOCÊS NÃO PRESTAM!!! Plataforma me deslogou 3 vezes hoje e perdi
+        rascunhos. Já estava acabando de escrever uma proposta para
+        cliente importante de R$ 500 MIL. VOU PROCESSAR VOCÊS POR DANO
+        MATERIAL. EXIJO RETORNO IMEDIATO DO MEU CEO PARA O DE VOCÊS."
+      contexto_cliente: "Pro · 1 usuário · cliente há 2 anos"
+    expected:
+      classification: "S3"
+      must_contain:
+        - "tom emocional"
+        - "S3"
+        - "deslog"
+      regex_required:
+        - "(S3|média|impacto.*objetiv)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "atencao_tom"
+    notes: |
+      LIMÍTROFE clássico — teste do anti-padrão. Tom emocional MUITO alto +
+      ameaça de processo + menção de valor financeiro grande. Mas o
+      IMPACTO OBJETIVO é: cliente único, sintoma reproduzível, autosalvamento
+      provavelmente quebrado. Classificação CORRETA é S3 (afeta cliente
+      único com workaround manual). O valor de R$ 500 mil é narrativa do
+      cliente, não impacto técnico mensurável na plataforma. Atenção
+      separada para o tom (escalar via CSM, não via severidade técnica).
+
+  - id: P-SUP-01-L-017
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Boa tarde. Notei que um campo customizado que criei na semana passada
+        sumiu do formulário. Não é urgente, mas precisamos dele para o
+        fechamento de mês."
+      contexto_cliente: "Enterprise · 200 usuários · contrato em renovação em 30 dias"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "regressão"
+        - "renovação"
+        - "S2"
+      regex_required:
+        - "(S2|alta|regressão|configuração)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "atencao_negocio"
+    notes: |
+      LIMÍTROFE: tom é educado e cliente disse "não é urgente", mas o
+      IMPACTO OBJETIVO sugere regressão (campo customizado SUMIU sem
+      ação do cliente). Enterprise + contrato em renovação = atenção
+      comercial. S2 pela natureza (regressão de configuração) e contexto
+      contratual (renovação iminente). Tom calmo não baixa a severidade,
+      do mesmo modo que tom raivoso não eleva.
+
+  - id: P-SUP-01-L-018
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Estamos com problema crítico! Não conseguimos acessar nada! Toda a
+        equipe está parada!"
+      contexto_cliente: "Starter · 3 usuários · cliente há 1 mês"
+    expected:
+      classification: "S2"
+      must_contain:
+        - "indicadores objetivos"
+        - "pedir reprodução"
+        - "S2"
+      regex_required:
+        - "(S2|alta|investigar|reproduz)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "informacoes_faltantes"
+    notes: |
+      LIMÍTROFE: cliente usa palavra "crítico" mas SEM dado objetivo (que
+      tela? erro específico? quando começou? testou em outro browser?).
+      Severidade inicial S2 com solicitação imediata de detalhes técnicos.
+      Se confirmado outage e múltiplos usuários, ESCALA para S1.
+      O tom "crítico" do cliente não atribui severidade automaticamente
+      sem indicadores.
+
+  - id: P-SUP-01-L-019
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Olá, descobri que um competidor consegue ver dados do meu pipeline.
+        Compartilhei o link de visualização com a equipe e parece que ficou
+        acessível sem login. Isso é grave?"
+      contexto_cliente: "Pro · 12 usuários"
+    expected:
+      classification: "S1"
+      must_contain:
+        - "vazamento"
+        - "S1"
+        - "investigação"
+      regex_required:
+        - "(S1|severidade.*1|crítica|vazamento|segurança)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+        - "escalonamento"
+    notes: |
+      LIMÍTROFE inclinando para S1: cliente descreveu vazamento potencial
+      mas em situação ambígua (link compartilhado vs. bug de segurança).
+      Conservador prevalece. S1 com investigação imediata. Pode descer
+      para S3 (educação do cliente sobre link público) se confirmado que
+      cliente compartilhou link público intencionalmente.
+
+  - id: P-SUP-01-L-020
+    category: limitrofe
+    calibration_date: 2026-06-02
+    input:
+      ticket: |
+        "Oi! Reparei que a contagem de clientes ativos no relatório está
+        diferente do que mostra no dashboard principal. No relatório aparece
+        387 e no dashboard 392. Não muda nossa decisão, mas é estranho."
+      contexto_cliente: "Pro · 25 usuários"
+    expected:
+      classification: "S3"
+      must_contain:
+        - "inconsistência"
+        - "dados"
+        - "S3"
+      regex_required:
+        - "(S3|média|inconsistência|dados)"
+      json_keys:
+        - "severidade"
+        - "indicadores_objetivos"
+    notes: |
+      LIMÍTROFE: discrepância pequena, cliente diz que não muda decisão,
+      mas inconsistência de DADOS entre views é vermelho silencioso —
+      pode indicar bug em pipeline de ETL ou cache stale. S3 com
+      investigação técnica programada. Não é S2 (impacto baixo) nem
+      S4 (não é dúvida, é bug real).
