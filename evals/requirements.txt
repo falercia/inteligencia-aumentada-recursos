@@ -1,0 +1,12 @@
+# Motor de regressão — dependências mínimas
+# v1.1.0 · julho de 2026
+
+# Provedor padrão. Comentar se for usar apenas outros provedores.
+anthropic>=0.40.0
+
+# Carregamento de golden sets em YAML
+pyyaml>=6.0
+
+# Opcional: outros provedores
+# openai>=1.50.0
+# google-generativeai>=0.8.0

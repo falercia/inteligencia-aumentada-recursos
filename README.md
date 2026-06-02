@@ -33,8 +33,9 @@ Sem o livro, este repositório é catálogo sem mapa, com receitas que o operado
 | Pasta | Conteúdo | Capítulos relacionados |
 |---|---|---|
 | 📚 [`/prompts`](./prompts/) | 30 prompts profissionais em XML versionado, com golden set, prefill, self-critique, changelog e métrica de qualidade por prompt | Cap 9 Engenharia de Prompt · F4 Engenharia de Prompt Estendida · APX-L Biblioteca de Prompts |
-| 🔬 [`/evals`](./evals/) | Scripts de regressão executáveis, calibração de LLM-as-judge, padrões para CI/CD de prompts | Cap 39 Evals · F8 Pirâmide da Avaliação |
-| 📦 [`/datasets`](./datasets/) | Golden sets em YAML/JSONL, prontos para serem carregados pelos scripts de eval | Cap 39 Evals · Cap 41 Alignment (adversarial sets) |
+| 🏛️ [`/governance`](./governance/) | Caderno de Governança v1.0 em Camada Dupla — 6 seções fatiadas, modelo de 6 pg para imprimir e assinar, anexos clonáveis | Cap 42 Governança · F6 Governança Indelegável · APX-O Caderno de Governança |
+| 🔬 [`/evals`](./evals/) | `eval_runner.py` executável, `compile_golden_sets.py`, judges integrados, gate de CI | Cap 39 Evals · F8 Pirâmide da Avaliação |
+| 📦 [`/datasets`](./datasets/) | Golden sets em JSONL compilados a partir dos YAML originais, prontos para CI | Cap 39 Evals · Cap 41 Alignment (adversarial sets) |
 | 🤖 [`/agents`](./agents/) | Exemplos de agentes que compõem prompts da biblioteca em fluxos práticos | Cap 12 Agentes · Cap 40 LLMOps · F3 Escala de Propriedade do Agente |
 | 🔌 [`/mcp`](./mcp/) | Servidores MCP de referência, minimalistas e auditáveis | Cap 13 MCP · F5 Matriz de Cobertura de Integrações |
 | 📓 [`/notebooks`](./notebooks/) | Notebooks Python reproduzíveis para conceitos fundacionais | Cap 2 Como Modelos Funcionam · Cap 3 Tokens · Cap 4 Janela de Contexto |
@@ -87,8 +88,9 @@ Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Tempora
 
 | Pasta | Estado |
 |---|---|
-| `/evals` | Stub estrutural · script `eval_runner.py` chega na v1.1.0 |
-| `/datasets` | Stub estrutural · golden sets dos 30 prompts compilados em JSONL na v1.1.0 |
+| `/governance` | **v1.0 executável** · Caderno de Governança em Camada Dupla, 10 arquivos (artefato do APX-O) |
+| `/evals` | **v1.1.0 executável** · `eval_runner.py` rodável, `compile_golden_sets.py`, gate de CI |
+| `/datasets` | **v1.1.0 estrutura definida** · esquema JSONL documentado, compilação a partir de YAML |
 | `/agents` | Stub estrutural · primeiros agentes compostos na v1.3.0 |
 | `/mcp` | Stub estrutural · primeiro servidor de referência na v1.4.0 |
 | `/notebooks` | Stub estrutural · notebooks fundacionais na v1.2.0 |
@@ -102,7 +104,8 @@ O compromisso editorial é publicar release com nota datada **toda primeira sema
 | Release | Janela | Escopo planejado |
 |---|---|---|
 | **v1.0.0** | **jun/2026** | **Biblioteca completa: 30 prompts em qualidade plena** |
-| v1.1.0 | jul/2026 | `eval_runner.py` executável · golden sets compilados em JSONL |
+| **v1.0.1** | **jun/2026** | **Caderno de Governança v1.0 em `/governance` (artefato do APX-O)** |
+| **v1.1.0** | **jul/2026** | **`eval_runner.py` executável · `compile_golden_sets.py` · gate de CI** |
 | v1.2.0 | ago/2026 | Notebooks fundacionais (tokenização, contexto, embeddings, caching) |
 | v1.3.0 | set/2026 | Primeiros agentes compostos (triagem, due diligence, customer success) |
 | v1.4.0 | out/2026 | Primeiro servidor MCP de referência |
