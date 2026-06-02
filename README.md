@@ -3,7 +3,7 @@
 > O número que muda. A Camada Dupla aplicada na prática.
 > Companheiro executável do livro **Inteligência Aumentada · Os Invariantes da IA** (Fabio Garcia, 2026).
 
-[![Status](https://img.shields.io/badge/vers%C3%A3o-v0.1.0-orange)](#estado-atual)
+[![Status](https://img.shields.io/badge/vers%C3%A3o-v1.0.0-success)](#estado-atual)
 [![Licença código](https://img.shields.io/badge/c%C3%B3digo-MIT-blue)](#licença)
 [![Licença conteúdo](https://img.shields.io/badge/conte%C3%BAdo-CC--BY%204.0-lightgrey)](#licença)
 [![Cadência](https://img.shields.io/badge/cad%C3%AAncia-mensal-success)](#cadência-pública-de-expansão)
@@ -62,36 +62,36 @@ Três caminhos a partir daqui, conforme seu objetivo:
 
 ## Estado atual
 
-**Versão v0.1.0 · publicada em junho de 2026.** Este é o primeiro snapshot público do repositório, com qualidade desigual entre domínios por decisão editorial transparente. A cadência mensal de expansão é compromisso público declarado.
+**Versão v1.0.0 · publicada em junho de 2026.** Biblioteca completa com os 30 prompts em qualidade plena. A cadência mensal continua como compromisso público declarado, agora orientada à expansão das demais pastas (evals, datasets, agents, mcp, notebooks).
 
 ### Biblioteca de prompts — status por domínio
 
-| Domínio | Prompts | Em qualidade plena | Em expansão |
-|---|---|---|---|
-| Jurídico | 4 | ✅ 4/4 | — |
-| Saúde | 3 | ✅ 3/3 | — |
-| Financeiro | 4 | 🟡 1/4 | 3 |
-| SaaS | 4 | 🔴 0/4 | 4 |
-| Suporte | 3 | 🔴 0/3 | 3 |
-| RH | 3 | 🔴 0/3 | 3 |
-| Marketing | 3 | 🔴 0/3 | 3 |
-| Educação | 3 | 🔴 0/3 | 3 |
-| Transversais | 3 | 🔴 0/3 | 3 |
-| **Total** | **30** | **8/30** | **22** |
+| Domínio | Prompts | Em qualidade plena |
+|---|---|---|
+| Jurídico | 4 | ✅ 4/4 |
+| Saúde | 3 | ✅ 3/3 |
+| Financeiro | 4 | ✅ 4/4 |
+| SaaS | 4 | ✅ 4/4 |
+| Suporte | 3 | ✅ 3/3 |
+| RH | 3 | ✅ 3/3 |
+| Marketing | 3 | ✅ 3/3 |
+| Educação | 3 | ✅ 3/3 |
+| Transversais | 3 | ✅ 3/3 |
+| **Total** | **30** | **30/30** |
 
-**Qualidade plena** significa: golden set com 20 casos categorizados em fáceis, médios e limítrofes, prefill ancorando o início da resposta, self-critique calibrado contra a constituição, anti-padrões observados e métrica quantitativa de qualidade. Os 22 prompts em expansão têm a estrutura completa de produção, mas com golden set demonstrativo de 3 casos enquanto a calibração com especialista do domínio é concluída.
+**Qualidade plena** significa: golden set com 20 casos categorizados em fáceis, médios e limítrofes, prefill ancorando o início da resposta, self-critique calibrado contra a constituição, anti-padrões observados e métrica quantitativa de qualidade. Os 30 prompts foram calibrados pelo autor com base em prática profissional do domínio, e estão abertos a contribuição de especialistas via templates de issue.
 
-Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Temporal: melhor publicar com estado declarado do que esconder débitos. O repositório operando v0.1.0 com 8 prompts em qualidade plena é mais útil hoje do que um v1.0 estático que demoraria mais três meses para sair.
+Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Temporal: a biblioteca chega ao público em estado fechado, mas com cadência pública declarada de revisão e contribuição. Cada caso do golden set carrega data de calibração, e cada prompt tem changelog próprio para registrar a iteração.
 
 ### Outras pastas
 
 | Pasta | Estado |
 |---|---|
-| `/evals` | Stub estrutural · script de referência `eval_runner.py` em desenvolvimento |
-| `/datasets` | Stub estrutural · golden sets dos 8 prompts plenos exportados em YAML |
-| `/agents` | Stub estrutural · primeiros exemplos chegando na v0.3.0 |
-| `/mcp` | Stub estrutural · primeiro servidor de referência chegando na v0.4.0 |
-| `/notebooks` | Stub estrutural · notebooks fundacionais chegando na v0.2.0 |
+| `/evals` | Stub estrutural · script `eval_runner.py` chega na v1.1.0 |
+| `/datasets` | Stub estrutural · golden sets dos 30 prompts compilados em JSONL na v1.1.0 |
+| `/agents` | Stub estrutural · primeiros agentes compostos na v1.3.0 |
+| `/mcp` | Stub estrutural · primeiro servidor de referência na v1.4.0 |
+| `/notebooks` | Stub estrutural · notebooks fundacionais na v1.2.0 |
 
 ---
 
@@ -101,12 +101,13 @@ O compromisso editorial é publicar release com nota datada **toda primeira sema
 
 | Release | Janela | Escopo planejado |
 |---|---|---|
-| v0.1.0 | jun/2026 | 8 prompts plenos · estrutura básica das demais pastas |
-| v0.2.0 | jul/2026 | Onda 2 financeiro · primeiros notebooks fundacionais |
-| v0.3.0 | ago/2026 | Onda 3 SaaS · primeiros agentes compostos |
-| v0.4.0 | set/2026 | Onda 4 RH e suporte · primeiro servidor MCP de referência |
-| v0.5.0 | out/2026 | Onda 5 marketing, educação e transversais |
-| **v1.0.0** | **nov/2026** | **30 prompts em qualidade plena · biblioteca completa** |
+| **v1.0.0** | **jun/2026** | **Biblioteca completa: 30 prompts em qualidade plena** |
+| v1.1.0 | jul/2026 | `eval_runner.py` executável · golden sets compilados em JSONL |
+| v1.2.0 | ago/2026 | Notebooks fundacionais (tokenização, contexto, embeddings, caching) |
+| v1.3.0 | set/2026 | Primeiros agentes compostos (triagem, due diligence, customer success) |
+| v1.4.0 | out/2026 | Primeiro servidor MCP de referência |
+| v1.5.0 | nov/2026 | Adversarial sets · calibração estendida do LLM-as-judge |
+| v2.0.0 | dez/2026 | Reorganização para inclusão dos prompts do Livro 2 |
 
 Cada release vem com `CHANGELOG.md` versionado, indicando mudança item por item, motivo da mudança, e impacto observado em golden set ou em produção.
 
