@@ -1,0 +1,99 @@
+# Golden set — P-FIN-01
+# Detecção de anomalia em extrato
+# Domínio: Financeiro
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-FIN-01
+prompt_title: "Detecção de anomalia em extrato"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Transação de R$ 8.000 às 3h da manhã para chave PIX nova, perfil de ticket médio R$ 200 → suspeita alta nas quatro dimensões
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Transação de R$ 50.000 para fornecedor recorrente em horário comercial → sem suspeita, apenas observação por valor acima do ticket
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Sequência de cinco transações para a mesma chave em dez minutos → suspeita média por padrão temporal
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Pix de R$ 4.999 seguido de Pix de R$ 4.999 e mais um de R$ 4.999 em janela de cinco minutos para chaves distintas → suspeita alta, padrão clássico de smurfing abaixo do limite de revisão
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Transferência internacional via SWIFT para país listado como alto risco regulatório, sem histórico do cliente → suspeita alta nas dimensões contraparte e canal, ação revisão humana
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Saque em caixa eletrônico de R$ 1.000 fora do estado de residência habitual do cliente, em final de semana → suspeita média por canal e padrão geográfico
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Crédito recebido por boleto seguido de débito Pix de mesmo valor em menos de dois minutos → suspeita média, padrão típico de \"passagem\" de valor
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Compra com cartão em estabelecimento de combustível por R$ 6.500 quando o limite habitual de gasto em combustível do cliente é R$ 500 → suspeita média por valor, observação para confirmação humana
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Cliente que normalmente movimenta entre R$ 500 e R$ 3.000 mensais recebe entrada de R$ 70.000 por TED e devolve em duas Pix para chaves diferentes em vinte minutos → suspeita alta, padrão clássico de mula bancária, ação bloqueio preventivo humano
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Três compras em e-commerce de eletrônicos de R$ 9.000 cada, com cartão virtual, em janela de duas horas, perfil de cliente sem histórico desse tipo de compra → suspeita alta nas dimensões valor e contraparte, ação contato cliente
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Transação de débito automático recorrente que mudou abruptamente de R$ 150 para R$ 1.500 sem comunicação prévia da empresa cobradora → suspeita média por valor, ação observação com verificação documental
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Cliente com perfil estável que de repente realiza transferências para várias chaves cuja titularidade é o próprio CPF, em valores fracionados — suspeita média por padrão temporal e contraparte, possível organização de finanças mas exige verificação por mudança de comportamento
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Pagamento de boleto para CNPJ cujo segmento (apostas online ou criptoativos) está em lista de monitoramento da instituição, em valor compatível com o perfil — suspeita média por contraparte, ação observação com nota regulatória
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Saque em espécie de R$ 30.000 em agência distinta da habitual, sem agendamento prévio nem histórico de saques em espécie nos últimos vinte e quatro meses — suspeita alta por canal, valor e ausência de padrão, ação contato cliente e revisão humana
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Sequência de doze transações Pix de R$ 250 para chaves diferentes em duas horas durante a madrugada, perfil de cliente PJ pequeno comércio — suspeita alta nas dimensões temporal, valor agregado e contraparte, ação bloqueio preventivo humano
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Cliente com perfil de empresário relata viagem internacional ao gestor; transações compatíveis com viagem (saques em moeda local, compras em estabelecimentos turísticos) começam a aparecer sem que o aviso de viagem tenha sido formalmente registrado no sistema antifraude — declarar lacuna sobre aviso de viagem, classificar como observação, sem bloqueio
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Transação de valor alto para chave Pix de pessoa física que coincide com o nome de sócio declarado no QSA da empresa de mesmo CNPJ do cliente — não inferir identidade do destinatário apenas pela coincidência de nome (constituição), classificar pela materialidade da transação, observação, ação revisão humana
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Cliente sofre tentativa de phishing, troca senha do app, e no mesmo dia tenta realizar Pix de R$ 5.000 para chave nova — suspeita alta por contexto operacional (mudança de senha recente combinada com nova contraparte), ação bloqueio preventivo humano com fallback de canal autenticado para confirmação
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Padrão de microtransações (vários valores entre R$ 0,01 e R$ 5,00) recebidas de chaves diferentes em janela curta, perfil de cliente PF — suspeita média por padrão atípico, possível teste de validade de chave por terceiro malicioso, ação observação e contato cliente para verificação
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Transação retroativa: cliente reporta dois dias depois que não reconhece sequência de cinco débitos ocorridos no fim de semana — análise não preventiva mas investigativa, classificar contestação como ponto de auditoria, sem reclassificar a tentativa original já consumada, marcar como lacuna de dados para verificação de origem do dispositivo
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

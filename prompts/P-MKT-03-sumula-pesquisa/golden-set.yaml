@@ -1,0 +1,99 @@
+# Golden set — P-MKT-03
+# Súmula de pesquisa de mercado
+# Domínio: Marketing
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-MKT-03
+prompt_title: "Súmula de pesquisa de mercado"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Relatório com amostra de quinhentos respondentes em capital → súmula reflete escopo restrito, ressalva sobre extrapolação
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Relatório qualitativo com vinte entrevistas em profundidade → ressalva sobre representatividade
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Relatório com metodologia obscura → súmula com ressalva metodológica em destaque
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Relatório com amostra nacional probabilística de 2 mil respondentes com erro amostral declarado de 2,2% — súmula reproduz números com erro amostral, sem extrapolar para subgrupos sem n declarado
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Relatório com painel digital de 50 mil respondentes em recrutamento por conveniência — ressalva metodológica sobre seleção, sem extrapolar para universo populacional
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Relatório com pesquisa do tipo focus group (8 participantes por sessão, 3 sessões) — ressalva sobre escopo qualitativo, sem usar percentuais como se fossem estatística inferencial
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Relatório com pesquisa em onda única sem comparação temporal — marcar em \"Perguntas que ficam abertas\" a ausência de série histórica, sem inferir tendência
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Relatório com pesquisa em painel de clientes da própria empresa — marcar viés de seleção (não-clientes excluídos), sem extrapolar para mercado total
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Relatório com pesquisa híbrida (parte quanti, parte quali) e cruzamento de dados — segmentar súmula entre as duas metodologias, sem fundir estatísticas quanti com insights quali sem distinção
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Relatório com pergunta de \"intenção de compra\" sem validação contra comportamento real — ressalva metodológica sobre conhecida diferença entre intenção declarada e comportamento revelado
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Relatório com cross-tabulação por subgrupo (gênero, faixa etária, região) com n pequeno em algumas células — alertar para n insuficiente em células específicas, sem reportar percentual com erro amostral acima do aceitável
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Relatório com pergunta aberta (qualitativa) codificada em categorias com critério não publicado — ressalva sobre transparência metodológica, sem questionar a codificação no mérito
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Relatório com dados ponderados por demografia (peso amostral) sem detalhar a metodologia de ponderação — marcar em lacunas, reportar resultados ponderados como o próprio relatório declara
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Relatório com pesquisa global cuja seção Brasil tem amostra reduzida — segmentar súmula entre achados globais e achados específicos do Brasil, com ressalva sobre representatividade nacional
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Relatório com pergunta sensível (renda, religião) com alta taxa de não-resposta — ressalva sobre não-resposta como possível viés, sem ignorar nem inflar
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Relatório que apresenta resultados como \"tendência crescente\" baseado em duas ondas únicas — ressalva metodológica sobre interpretação de tendência com n=2 pontos, sem repetir a expressão \"tendência\" sem qualificação
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Relatório patrocinado por empresa do setor pesquisado — registrar o patrocínio em \"Ressalvas metodológicas\" sem questionar a integridade, mas tornando transparente o vínculo de interesse
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Relatório com mudança metodológica entre ondas (instrumento diferente do anterior) — alertar para a quebra de comparabilidade, sem reportar variação como movimento real do mercado
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Relatório com achados contraintuitivos sem teste de robustez declarado (sensibilidade a outliers, análise por subgrupo) — marcar em \"Perguntas que ficam abertas\" a necessidade de validação, sem questionar o resultado no mérito
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Relatório com previsão de mercado em horizonte longo (5+ anos) baseado em pesquisa do momento — ressalva forte sobre extrapolação temporal, marcar como achado de momento, sem usar como prognóstico estável
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

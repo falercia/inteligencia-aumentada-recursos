@@ -1,0 +1,99 @@
+# Golden set — P-MED-02
+# Súmula de prontuário
+# Domínio: Saúde
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-MED-02
+prompt_title: "Súmula de prontuário"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Prontuário de paciente em pós-operatório com evolução estável → súmula com situação, background cirúrgico, sem ambiguidade relevante
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Prontuário com registros parciais e medicação sem posologia documentada → súmula com seções preenchidas e lacuna explícita em medicações
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Prontuário com dois diagnósticos conflitantes em dias diferentes → súmula marca ambiguidade em avaliação registrada
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Prontuário de paciente em pós-IAM com prescrição de dupla antiagregação claramente registrada → súmula completa com medicações detalhadas, sem lacunas
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Prontuário de paciente oncológico em quimioterapia com registro de toxicidade grau 2 sem detalhamento de conduta subsequente → súmula com avaliação clara e lacuna explícita em recomendação registrada
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Prontuário de paciente idoso polimedicado (mais de dez medicações) com lista completa mas alguns medicamentos sem indicação registrada → súmula com lista íntegra e lacuna explícita por medicação sem indicação documentada
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Prontuário com alergia documentada como \"alergia a antibióticos\" sem especificação da classe ou do princípio ativo → súmula registra alergia conforme documentada, marca ambiguidade na precisão
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Prontuário de paciente sob investigação com hipótese diagnóstica registrada como \"a esclarecer\" e exames pendentes → súmula com seção de avaliação registrando hipótese pendente, sem fechamento diagnóstico
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Prontuário com handoff de UTI para enfermaria, com múltiplas comorbidades e suspensão recente de drogas vasoativas, especialidade destino clínica → súmula com situação atual estável, background detalhado, e nota explícita sobre suspensão recente como evento relevante no período
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Prontuário de paciente psiquiátrico com registro de uso de medicação off-label sem justificativa documentada — súmula reproduz a prescrição conforme registrada, marca a ausência de justificativa como lacuna, sem juízo de adequação
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Prontuário de paciente obstétrica com diagnóstico de pré-eclâmpsia e registros conflitantes de pressão arterial entre turnos — súmula em SBAR adaptado para obstétrica, com ambiguidade explícita nas medidas registradas
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Prontuário com letra ilegível parcialmente transcrita em sistema, com trechos como \"(trecho ilegível)\" no registro original — súmula preserva os trechos ilegíveis como ambiguidade declarada, sem tentar reconstruir o conteúdo
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Prontuário de paciente em programa de cuidados paliativos com diretiva antecipada de vontade documentada e mudança recente de plano terapêutico — súmula registra a diretiva e a mudança como itens explícitos em recomendação registrada e em eventos relevantes
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Prontuário com nome de medicamento registrado por marca comercial em alguns dias e por princípio ativo em outros, para o mesmo paciente — súmula cita literalmente como aparece no registro, marca a inconsistência como ambiguidade
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Prontuário de paciente pediátrico com peso variando entre dois registros próximos (ajuste de dose dependente) — súmula reproduz ambos os registros de peso, marca como ambiguidade e sinaliza implicação para cálculo de dose se aplicável
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Prontuário com registro de evento adverso medicamentoso suspeito mas sem confirmação formal de notificação ANVISA documentada — súmula registra o evento adverso conforme descrito, sem afirmar nem negar notificação, marca lacuna sobre documentação da notificação
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Prontuário transferido de outra instituição com seções em formato estruturado diferente do padrão SBAR esperado, com lacuna sobre exames anteriores — súmula reorganiza no padrão SBAR adaptado, preservando integridade do conteúdo original, marca explicitamente o que veio da outra instituição e o que está pendente de acesso
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Prontuário de paciente em UTI multissistêmica com sete folhas de evolução em vinte e quatro horas e mudanças de plano terapêutico a cada turno — súmula prioriza cronologia em \"eventos relevantes\" e reflete o plano vigente no final do período, marca como ambíguo quando o \"plano vigente\" muda dentro do mesmo turno
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Prontuário em que o médico anterior registrou \"considerar suspensão de anticoagulante por sangramento\" sem ato posterior de suspensão documentado — súmula registra a consideração como item explícito em recomendação registrada, sem assumir que houve suspensão, marca a ambiguidade
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Prontuário com discrepância entre o prescrito eletrônico e o anotado em evolução manuscrita (medicação que aparece em um e não em outro) — súmula registra ambas as fontes, marca a discrepância como ambiguidade estruturada, sinaliza necessidade de reconciliação por farmácia
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

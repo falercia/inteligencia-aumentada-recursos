@@ -1,0 +1,99 @@
+# Golden set — P-SAAS-02
+# Súmula de NPS qualitativo
+# Domínio: SaaS e Produto
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SAAS-02
+prompt_title: "Súmula de NPS qualitativo"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Conjunto com cinquenta comentários, vinte e cinco sobre lentidão → tema lentidão como dominante negativo, com causa hipotética em backend
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Conjunto com dez comentários sobre suporte excelente → tema suporte como dominante positivo
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Conjunto com dois comentários sobre integração com ERP → sinal fraco em integração
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Conjunto com trinta comentários, doze citando \"interface confusa\" → tema usabilidade como dominante negativo, causa hipotética em redesenho recente
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Conjunto com vinte comentários muito curtos (poucas palavras, sem detalhe) — sumário com lacuna explícita sobre profundidade qualitativa baixa, sem inflar temas
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Conjunto com quinze comentários sobre tempo de resposta do suporte (positivos) e sete sobre lentidão do produto (negativos) — temas distintos, com tom predominante por tema, sem fundir suporte e produto
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Conjunto com cinquenta comentários, oito mencionando preço acima do valor percebido — tema preço como negativo médio, causa hipotética em valor entregue versus expectativa
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Conjunto com nota 9-10 majoritária e comentários positivos genéricos (\"muito bom\", \"tudo certo\") — tema satisfação geral dominante positivo, sem causa hipotética substancial pela genericidade dos comentários, marcar em lacunas
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Conjunto com quarenta comentários, dez positivos sobre relatórios e cinco negativos sobre o mesmo módulo de relatórios — tema dividido com tom misto, registrar ambos os subtemas com volume e exemplos literais, sem média ponderada autoral
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Conjunto com comentários em três idiomas (português, inglês, espanhol) em cliente Enterprise multinacional — sintetizar por tema independente do idioma, marcar em lacunas observadas se houver tema que apareça apenas em um idioma e possa indicar segmentação geográfica
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Conjunto com comentários longos, narrativos, descrevendo workflows específicos — preservar os exemplos literais mais representativos por tema, sem condensar em síntese excessiva
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Conjunto com forte concentração de comentários sobre uma feature específica recém-lançada — tema feature nova como dominante, com tom misto declarado, causa hipotética em curva de adoção
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Conjunto com poucos detratores mas detratores muito específicos sobre incidente recente — tema incidente como negativo concentrado, causa hipotética em evento operacional declarado, marcar tom como concentrado mas não generalizado
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Conjunto com tom emocional alto em comentários sobre suporte (\"salvou meu dia\", \"atendeu tudo\") — preservar o tom literal sem amplificar, registrar como tema positivo com observação sobre intensidade
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Conjunto com comentários que mencionam concorrente nominalmente, comparando funcionalidades — preservar a citação literal com a mesma redação do respondente, sem editorialização sobre o concorrente
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Conjunto com tema emergente (citação em três comentários recentes que não apareciam em pesquisas anteriores) — registrar como sinal fraco emergente em destaque, sem elevar a tema dominante apenas pela novidade, marcar em lacunas como \"monitorar próxima janela\"
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Conjunto pequeno (oito comentários) com cinco citações de tom negativo sobre o mesmo aspecto — limite metodológico de volume insuficiente declarado, mas marcar a concentração negativa como sinal a investigar com pesquisa direcionada
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Conjunto com aparente contradição interna (comentário do mesmo respondente dando nota alta mas mencionando problema sério) — preservar ambos os pontos como observação, sem reconciliar, marcar como ponto para investigação qualitativa adicional
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Conjunto com comentários que mencionam expectativa de funcionalidade futura prometida — registrar como sinal sobre comunicação ou roadmap, não como tema de satisfação atual, com nota explícita
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Conjunto com comentários potencialmente identificáveis por contexto (cargo específico, nome de empresa, evento detalhado) — citações literais que permitam identificação devem ser substituídas por descrição genérica preservando o sentido, mantendo o tom mas removendo o identificador, marcar em lacunas a anonimização aplicada
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

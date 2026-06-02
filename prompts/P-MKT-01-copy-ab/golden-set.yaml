@@ -1,0 +1,99 @@
+# Golden set — P-MKT-01
+# Geração de copy A/B testável
+# Domínio: Marketing
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-MKT-01
+prompt_title: "Geração de copy A/B testável"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Briefing de produto financeiro com restrição de promessa de retorno → variantes sem promessa, com prova social adaptada
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Briefing de SaaS B2B para teste de headline → quatro variantes com hipóteses distintas, dentro do limite
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Briefing com brand voice formal → variantes sem coloquialismo
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Briefing de e-commerce de moda com limite de noventa caracteres em headline e cento e oitenta no corpo → quatro variantes dentro do limite, com cta distinta, sem promessa de exclusividade injustificada
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Briefing de SaaS para teste de conversão em página de pricing com brand voice descontraída → variantes com tom alinhado, hipóteses distintas (benefício/prova/escassez/fricção), sem superlativo vazio
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Briefing de produto educacional com restrição de promessa de \"garantia de aprovação\" — variantes sem promessa de resultado, prova social via depoimentos compatíveis com a restrição
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Briefing de produto B2B com limite de quarenta caracteres em headline para ad de search — quatro variantes curtas com mesma hipótese arquitetural mas direção semântica distinta, todas dentro do limite
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Briefing de campanha de retenção (clientes existentes) — variantes ajustadas a contexto pós-compra, sem soar como aquisição, hipóteses sobre re-engajamento, upgrade, lealdade e remoção de fricção em renovação
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Briefing de produto de saúde (suplemento) com restrições rigorosas da Anvisa contra alegação terapêutica — variantes sem alegação terapêutica, hipóteses sobre conveniência, qualidade do ingrediente, recorrência e fricção logística
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Briefing de banco digital para campanha de cartão de crédito sem restrição de promessa de cashback no contexto, mas com brand voice institucional — variantes com tom institucional, hipóteses sobre prova social, redução de fricção (sem anuidade), benefício funcional (cashback) e escassez (primeiros usuários)
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Briefing com brand voice altamente coloquial e canal LinkedIn (formal por contexto de plataforma) — variantes que negociam tensão entre brand e canal, com nota em \"recomendacoes_de_setup_teste\" sobre a tensão
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Briefing de campanha de B2C com persona muito segmentada (idosos com afinidade por tecnologia simplificada) — variantes em linguagem clara, fontes mentais correspondentes (sem gírias jovens, sem complexidade técnica), hipóteses adaptadas
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Briefing com prova social baseada em número que não pode ser publicado em alguns canais (NPS interno não auditado) — variantes que omitem o número específico, prova social qualitativa, marcar em \"riscos_de_compliance_identificados\"
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Briefing com escassez factual (\"últimas vagas da turma de outubro\") — variante de escassez usa o fato literal, sem inflação retórica, sem inventar urgência
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Briefing com brand voice que proíbe uso de pontuação enfática e emojis em canais corporativos — variantes em tom seco, sem emoji, sem ponto de exclamação, mesmo nas hipóteses que tradicionalmente usam
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Briefing em setor regulado (financeiro, com cláusula de risco) cujo limite de canal (Google Ads) é incompatível com o disclaimer obrigatório — registrar a incompatibilidade em \"riscos_de_compliance_identificados\", marcar para escalação a jurídico antes do go-live, sugerir formato alternativo se viável
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Briefing com restrição de tom impositivo (\"não use imperativos\") para canal historicamente dependente de cta direta — variantes com cta em tom interrogativo ou convidativo, marcar em recomendações de setup a expectativa de impacto reduzido em conversão imediata
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Briefing solicita \"tom irreverente\" em contexto que recentemente teve crise de imagem — variantes contidas, com nota em recomendações de setup sobre o trade-off entre brand voice e contexto, sugerindo revisão executiva antes do go-live
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Briefing com persona alvo em luto declarado (campanha de cobrança a clientes que perderam familiar) — variantes em tom respeitoso, sem urgência, sem escassez, hipóteses adaptadas (empatia, fricção, prova social de sensibilidade), marcar revisão obrigatória por sensibilidade
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Briefing solicita comparação direta com concorrente nomeado, com restrição legal de publicidade comparativa em setor — variantes sem nomear concorrente, prova social por categoria, marcar em \"riscos_de_compliance_identificados\" o ponto comparativo solicitado mas suprimido
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

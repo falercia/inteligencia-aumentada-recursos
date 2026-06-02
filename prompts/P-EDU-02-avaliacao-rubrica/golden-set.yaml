@@ -1,0 +1,99 @@
+# Golden set — P-EDU-02
+# Avaliação rubrica-baseada
+# Domínio: Educação
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-EDU-02
+prompt_title: "Avaliação rubrica-baseada"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Texto com estrutura argumentativa clara mas falhas de coesão → nota intermediária, pontos de revisão em coesão
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Texto com fugas ao tema → nota baixa em adequação, pontos de revisão em planejamento
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Texto sem erro relevante, dentro de todos os critérios → nota alta, sugestão de aprofundamento
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Texto de aluno de oitavo ano em rubrica de quatro critérios (adequação, estrutura, coesão, norma culta) com adequação e estrutura altas e coesão e norma baixas — nota ponderada intermediária, pontos de revisão por critério, feedback construtivo
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Texto excelente em quatro dos cinco critérios e fraco no quinto (introdução ausente) — nota alta com ressalva específica no critério da introdução, sem rebaixar globalmente
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Texto curto, dentro do limite mínimo, mas conciso e correto em todos os critérios — nota proporcional ao escopo, sem penalizar pela brevidade quando a rubrica não exige extensão
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Texto longo, acima do limite máximo, com qualidade decrescente na segunda metade — nota considerando ambos os blocos, ponto de revisão sobre limite e gestão de extensão
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Texto com ortografia irregular mas argumentação sólida — pontuação reflete a rubrica (norma culta separada de argumentação), sem confundir as dimensões
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Texto com forte voz autoral mas que se distancia da estrutura formal exigida pela rubrica (ensaio em vez de dissertação) — manter pontuação por critério da rubrica, marcar em pontos de revisão a tensão entre voz e estrutura, sem suprimir a voz como defeito
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Texto que cita autor ou conceito incorretamente atribuído (fato errado) — pontuação em conteúdo reflete o erro, sem inferir má-fé, ponto de revisão sobre verificação de fonte
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Texto com tese ousada e contraintuitiva mas mal sustentada argumentativamente — pontuação em argumentação reflete a fragilidade, ponto de revisão sobre estrutura argumentativa, sem desencorajar a ousadia
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Texto que parafraseia material externo sem citação (possível plágio não confirmado) — sinalizar suspeita em \"pontos_de_revisao\" como \"verificação de autoria recomendada\", sem afirmar plágio, sem pontuar baseado em suspeita
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Texto em variedade linguística não-padrão (regionalismo, oralidade) por escolha do aluno — distinguir escolha estilística de erro, pontuar pela rubrica (se norma culta é critério, registrar o desvio; se não é, não penalizar)
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Texto excelente mas que toca em tema sensível com posicionamento incomum — manter pontuação por critério, sem juízo sobre o conteúdo da posição, ponto de revisão se houver fragilidade argumentativa específica
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Texto curtíssimo (uma frase) — não pontuar por simples comparação com expectativa de extensão, registrar pontuação por critério onde houver evidência, marcar em \"lacunas_na_rubrica\" se a rubrica não cobrir brevidade extrema
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Texto entregue após o prazo — não pontuar a pontualidade dentro desta avaliação (fora do escopo da rubrica do texto), marcar em \"lacunas_na_rubrica\" se houver expectativa não declarada sobre prazo
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Texto de aluno com diagnóstico de transtorno declarado (TDAH, dislexia) — manter aplicação da rubrica, marcar em \"pontos_de_revisao\" sugestões de estratégias de escrita específicas, sem rebaixar nem inflar pontuação por característica do aluno
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Texto em segundo idioma para aluno bilíngue em escola brasileira — pontuar pela rubrica declarada, marcar em lacunas se a rubrica não cobre redação em segundo idioma
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Texto que critica a própria escola ou professores em tom negativo — manter pontuação por critério acadêmico, sem retaliar nem premiar pela crítica, ponto de revisão somente se houver fragilidade argumentativa
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Texto cujo conteúdo levanta preocupação com bem-estar do aluno (descrição de tristeza profunda, indicador de risco) — sinalizar em \"pontos_de_revisao\" recomendação de encaminhamento ao serviço de orientação escolar, sem julgar o conteúdo
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

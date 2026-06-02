@@ -1,0 +1,99 @@
+# Golden set — P-EDU-01
+# Geração de plano de aula
+# Domínio: Educação
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-EDU-01
+prompt_title: "Geração de plano de aula"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Aula de matemática sobre função afim para ensino médio em 50 minutos → plano com sequência coerente, avaliação alinhada
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Aula sobre leitura crítica para ensino fundamental em 90 minutos → sequência com mais tempo em leitura, avaliação adequada
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Aula com recursos limitados e perfil heterogêneo → ponto que necessita adaptação destacado
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Aula de ciências sobre fotossíntese para sexto ano em 50 minutos com data show e quadro — sequência didática com etapas de exposição, atividade prática e fechamento, soma 48 minutos, dois minutos para chegada
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Aula de história sobre revolução industrial para nono ano em 90 minutos com biblioteca acessível — sequência com leitura guiada, debate estruturado e produção textual, soma 88 minutos
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Aula de geografia sobre relevo brasileiro em 50 minutos sem internet — sequência usando mapa físico impresso, exposição e atividade em grupo, soma 48 minutos
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Aula de português sobre coesão e coerência em 90 minutos para terceiro ano do médio — sequência com análise de texto modelo, produção e revisão entre pares, avaliação por rubrica anexa
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Aula de filosofia sobre ética em 50 minutos para primeiro ano do médio — sequência com problematização, discussão dirigida e síntese, sem entregar conclusão única
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Aula em turma com forte heterogeneidade de nível em mesma série — sequência com atividade central comum mas com pontos de adaptação para dois grupos (mais avançado e mais inicial), marcado em \"Pontos que necessitam adaptação\"
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Aula de educação física teórica em sala (excepcional) sobre fisiologia do esforço em 50 minutos — adaptar metodologia para conteúdo conceitual mantendo característica prática da disciplina
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Aula em formato de revisão pré-prova para disciplina de matemática em 90 minutos — sequência com mapeamento de dúvidas, resolução guiada e exercício de fixação, avaliação formativa em vez de somativa
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Aula com perfil de turma incluindo alunos com necessidades específicas (TDAH, dislexia declarados) — pontos que necessitam adaptação com indicações concretas (instruções visuais, etapas curtas, tempo flexível), sem prescrever conduta clínica
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Aula de matemática que pressupõe conhecimento de geometria básica não confirmado no input — marcar pré-requisito explícito com sinalização para confirmação antes da aula
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Aula de história sobre conflito político recente brasileiro — manter rigor pedagógico com pluralidade de perspectivas, sem opinião do plano de aula sobre a controvérsia
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Aula de literatura sobre obra com conteúdo sensível (violência, sexualidade explícita) — pontos que necessitam adaptação para conversa com responsáveis quando a faixa etária exigir, marcar no plano
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Aula em escola com restrição religiosa declarada sobre tópico específico (ex: ensino de evolução em escola confessional) — manter aderência ao currículo declarado, marcar em \"Pontos que necessitam adaptação\" a sensibilidade contextual sem editar o conteúdo científico
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Aula em currículo que mistura competências da BNCC com competências adicionais da escola não publicamente padronizadas — citar cada competência literalmente como declarada, marcar em lacunas a heterogeneidade de origem
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Aula em formato remoto síncrono em vez de presencial — adaptar sequência didática para dinâmicas remotas (anotação compartilhada, breakout room, votação ao vivo), marcar mudanças no plano
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Aula com tempo declarado em formato incomum (35 minutos por bloco em grade alternativa) — respeitar o tempo declarado, adaptar profundidade sem cortar etapa de avaliação
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Aula que combina dois temas em curto tempo (por exemplo, equação de primeiro grau e função afim em 50 minutos) — alertar em \"Pontos que necessitam adaptação\" sobre o risco de superficialidade, sugerir priorização sem decidir pelo professor
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

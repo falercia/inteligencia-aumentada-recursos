@@ -1,0 +1,99 @@
+# Golden set — P-RH-02
+# Análise de feedback 360
+# Domínio: Recursos Humanos
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-RH-02
+prompt_title: "Análise de feedback 360"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Conjunto com vinte respostas equilibradas → síntese balanceada com três forças e três pontos a desenvolver
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Conjunto com cinco respostas apenas, com tom muito negativo → tema marcado como volume insuficiente, sem amplificar negativo
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Conjunto com divergência clara entre gestor e pares sobre comunicação → divergência destacada, sem juízo
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Conjunto com quinze respostas, oito convergindo em força sobre liderança técnica e seis convergindo em ponto a desenvolver sobre comunicação não-técnica — síntese balanceada com exemplos literais não-identificáveis, sem ampliar nenhum lado
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Conjunto onde gestor e pares destacam força sobre execução mas subordinados destacam ponto a desenvolver sobre disponibilidade — divergência por origem registrada explicitamente, sem reconciliar
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Conjunto com vinte respostas em que o feedback positivo é majoritariamente genérico (\"bom profissional\", \"ótima pessoa\") e o feedback negativo é mais específico — síntese registra a assimetria de profundidade, sem inflar nenhum lado, marca em lacunas
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Conjunto com tema recorrente sobre \"presença\" sem clareza se é presença física ou disponibilidade — registrar tema com nota sobre ambiguidade, sem resolver por inferência
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Conjunto com quatro respondentes anônimos e dois respondentes identificáveis por contexto óbvio — anonimizar todos os trechos das duas respostas identificáveis, mesmo que cresça o esforço editorial
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Conjunto com tema sensível (problema interpessoal entre pessoa avaliada e respondente específico) que apareça em uma única resposta — não destacar como tema, marcar em \"Cuidados para a conversa de devolutiva\" como ponto que pode emergir de forma indireta
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Conjunto com forte concentração de feedback de um único nível (apenas pares, sem gestor nem subordinados) — síntese declara o viés de origem em \"sumário equilibrado\" e em \"Lacunas\", sem extrapolar para visão completa
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Conjunto com resposta detalhada de um único stakeholder externo (cliente) que diverge das respostas internas — preservar a divergência por origem (interno x externo), sem usar a resposta única do cliente como sinal forte para tema
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Conjunto com forte uso de superlativos (\"excelente\", \"incrível\", \"péssimo\") sem evidência comportamental específica — preservar o tom literal sem amplificar nem amenizar, marcar em lacunas a falta de evidência comportamental
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Conjunto com tema que emergiu em pesquisa anterior e voltou a aparecer com mesma intensidade — registrar como tema com nota de recorrência, sem assumir falha de evolução
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Conjunto com tema que emergiu agora e não existia em pesquisas anteriores — registrar como tema emergente, com nota explícita
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Conjunto com feedback contraditório sobre o mesmo comportamento (um diz \"muito direto\", outro diz \"passivo\" sobre comunicação) — registrar como divergência sem reconciliar, marcar como possível variação de contexto
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Conjunto com forte tom positivo em vinte respostas e uma resposta detalhada extremamente negativa — preservar a maioria como tom predominante, registrar o outlier como sinal a investigar qualitativamente, sem fundir nem ignorar, sem identificar o outlier
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Conjunto com nome próprio aparecendo em três respostas (em referência a evento ou projeto comum) — anonimizar para descrição genérica (\"evento em determinado projeto\"), preservando o sentido sem identificar
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Conjunto com referência a evento isolado de impacto alto que polarizou avaliações — registrar a polarização como sinal por evento específico, marcar em \"Cuidados para a conversa de devolutiva\" a recomendação de explorar o evento sem assumir tendência
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Conjunto com tema que toca em característica protegida (idade, gênero, orientação) — remover o tema da síntese pública, marcar em log interno para tratamento por canal apropriado, sem incluir na devolutiva
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Conjunto com respostas escritas em registros diferentes (alguns muito formais, outros coloquiais) — preservar o tom literal em exemplos por origem, marcar a heterogeneidade em lacunas, sem normalizar autorialmente
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

@@ -1,0 +1,99 @@
+# Golden set — P-RH-03
+# Descritivo de vaga em linguagem inclusiva
+# Domínio: Recursos Humanos
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-RH-03
+prompt_title: "Descritivo de vaga em linguagem inclusiva"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Briefing claro para desenvolvedor pleno backend → descritivo com requisitos obrigatórios enxutos e desejáveis distintos
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Briefing com exigência de \"inglês fluente\" sem justificativa para função doméstica → requisito a validar com gestor
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Briefing com exigência de idade não declarada explicitamente → bloqueio na escrita, sinalização para gestor
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Briefing claro para analista de dados pleno em empresa de varejo, com responsabilidades técnicas e contexto operacional → descritivo com seções nomeadas, requisitos obrigatórios curtos, desejáveis claros
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Briefing com requisito \"experiência no mesmo setor\" para cargo de marketing → requisito a validar com gestor, motivo \"experiência setorial pode não ser justificada para função transversal\"
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Briefing com requisito \"boa apresentação pessoal\" para função interna sem interação com cliente externo → requisito a validar com gestor, motivo \"termo subjetivo e potencialmente discriminatório\"
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Briefing para vaga remota com requisito de residência em uma cidade específica → requisito a validar com gestor, motivo \"incoerência entre modelo remoto e localidade\"
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Briefing com lista de quinze requisitos obrigatórios todos com justificativa fraca → reorganização com requisitos obrigatórios estritos (três a cinco), demais movidos para desejáveis, motivo registrado
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Briefing com requisito \"disponibilidade para viagens frequentes\" sem detalhar percentual ou periodicidade — descritivo registra requisito com pedido de validação do percentual em \"Requisitos a validar com gestor\"
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Briefing com termo \"dinamismo\" como exigência — substituir por descrição concreta da expectativa comportamental (ex: \"capacidade de gerenciar múltiplos projetos em paralelo\") ou marcar como ambíguo
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Briefing que cita ferramenta proprietária interna (\"conhecimento em sistema X interno\") como obrigatória — desejável com nota de que o sistema é interno e será treinado, exceto se a função exigir manutenção do próprio sistema
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Briefing com requisito de senioridade que conflita com faixa salarial autorizada (sênior pedido com faixa de pleno) — descritivo mantém faixa autorizada e marca a inconsistência em \"Requisitos a validar com gestor\"
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Briefing com termo \"ambiente jovem\" ou \"espírito jovem\" — substituir por descrição concreta do ambiente (ex: \"time pequeno e ágil\") ou remover, marcar como linguagem potencialmente discriminatória
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Briefing com requisito de \"boa comunicação\" sem especificar canal (escrita, falada, técnica) — refinar para canal específico ou marcar como ambíguo para validação
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Briefing com lista detalhada de comportamentos esperados (\"proativo, autônomo, comunicativo, organizado, resiliente, foco em resultado\") sem priorização — selecionar três a quatro como desejáveis com tradução comportamental, marcar a redução em log
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Briefing com requisito de \"estado civil estável\" ou \"sem compromissos pessoais\" — bloqueio total na escrita, marcar como requisito discriminatório vedado, registrar comunicação a ser feita ao gestor sobre o bloqueio
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Briefing com mistura de função técnica avançada e função administrativa básica para o mesmo cargo, sem clareza de prioridade — registrar a ambiguidade em \"Requisitos a validar com gestor\" sobre escopo do cargo, sem inflar requisitos obrigatórios
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Briefing com requisito de \"histórico ininterrupto de trabalho\" — bloqueio na escrita, marcar como requisito potencialmente discriminatório (penaliza licenças, transições) com pedido de justificativa ou retirada
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Briefing com referência a \"diversidade\" como meta de contratação — descritivo afirma compromisso com diversidade em \"Sobre a oportunidade\" em linguagem que convide candidatos de grupos sub-representados, sem impor cota explícita nem invocar quota com base em característica protegida
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Briefing com solicitação de \"salário negociável\" sem faixa autorizada — descritivo mantém o campo \"Faixa salarial\" com a nota literal \"a negociar conforme entrevista\", e marca em \"Requisitos a validar com gestor\" a recomendação de transparência salarial conforme PL Brasileiro de igualdade salarial em vigor
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

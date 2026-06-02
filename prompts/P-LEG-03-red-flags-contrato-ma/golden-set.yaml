@@ -1,0 +1,99 @@
+# Golden set — P-LEG-03
+# Red flags em contrato M&A
+# Domínio: Jurídico societário
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-LEG-03
+prompt_title: "Red flags em contrato M&A"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      SPA com cap de indenização em 10% do preço, sem escrow, earn-out de três anos sem mecanismo claro → múltiplas cláusulas bloqueantes do lado comprador
+  - numero: 2
+    categoria: facil
+    descricao: |
+      SPA com declarações abrangentes, escrow de 15%, condições precedentes claras, sem earn-out → poucos alertas, deal saudável do lado comprador
+  - numero: 3
+    categoria: facil
+    descricao: |
+      SPA com cap de 100% do preço sem limite temporal, lado vendedor → cláusula bloqueante do lado vendedor
+  - numero: 4
+    categoria: facil
+    descricao: |
+      SPA com basket (de minimis) muito baixo de 0,1% do preço sem deductible, lado vendedor → ponto de negociação, basket exequível mas atípico, exigirá administração de claims minoritários
+  - numero: 5
+    categoria: facil
+    descricao: |
+      SPA com survival period de declarações de 18 meses, exceto fundamentals e tax (sete anos) e ambientais (dez anos), lado comprador → alerta informativo, estrutura padrão de mercado
+  - numero: 6
+    categoria: facil
+    descricao: |
+      SPA com cláusula MAC redigida em termos genéricos (\"qualquer evento que possa afetar materialmente\") sem carve-outs típicos, lado vendedor → cláusula bloqueante, MAC sem carve-outs vira opção gratuita do comprador
+  - numero: 7
+    categoria: facil
+    descricao: |
+      SPA com sandbagging permitido explicitamente, lado vendedor → ponto de negociação, expõe vendedor a claims sobre o que comprador já sabia em due diligence
+  - numero: 8
+    categoria: facil
+    descricao: |
+      SPA prevê condição precedente de obtenção de aprovação do CADE sem prazo máximo (long stop date), ambos os lados → cláusula bloqueante, deal pode ficar suspenso indefinidamente
+  - numero: 9
+    categoria: medio
+    descricao: |
+      SPA com earn-out atrelado a EBITDA dos próximos três anos sem definição clara dos princípios contábeis aplicáveis nem governança da empresa adquirida no período → cláusula bloqueante do lado vendedor, earn-out sem rules virá em arbitragem
+  - numero: 10
+    categoria: medio
+    descricao: |
+      SPA com cláusula de anti-sandbagging \"pro-buyer\" implícita (sem menção explícita ao tema), lado comprador → ponto de negociação, exige reescrita para clareza
+  - numero: 11
+    categoria: medio
+    descricao: |
+      SPA com cláusula de non-compete pós-fechamento de cinco anos em escopo nacional aplicável aos fundadores, lado vendedor → ponto de negociação, prazo limítrofe na jurisprudência brasileira, exige ajuste para três anos com contraprestação
+  - numero: 12
+    categoria: medio
+    descricao: |
+      SPA prevê assunção pelo comprador de passivos trabalhistas pré-fechamento sem cap específico, lado comprador → cláusula bloqueante, exige limite e escrow dedicado
+  - numero: 13
+    categoria: medio
+    descricao: |
+      SPA com declarações de \"fundamentals\" (validade societária, propriedade das quotas, capacidade) sem distinção de cap em relação às demais declarações, lado comprador → ponto de negociação, fundamentals devem ter cap separado (100% do preço)
+  - numero: 14
+    categoria: medio
+    descricao: |
+      SPA com cláusula de tag-along em rodadas subsequentes mas sem drag-along recíproco, lado investidor majoritário → ponto de negociação, assimetria pode travar saída futura
+  - numero: 15
+    categoria: medio
+    descricao: |
+      SPA com cláusula de regularidade fiscal limitada ao período pré-fechamento sem provisão para autuações posteriores referentes a fatos anteriores, lado comprador → ponto de negociação, exige reabertura do prazo de survival para tax
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      SPA em operação cross-border com vendedor brasileiro e comprador estrangeiro, com cláusula de governing law inglesa mas ativos integralmente no Brasil — controvérsia jurisprudencial relevante sobre eficácia da escolha de lei estrangeira para disputas envolvendo bens situados no território nacional, sinalizar com nome de tribunal sem inventar acórdão
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      SPA com locked-box mechanism mas data de locked-box há quinze meses do signing previsto, sem indexação ou ticking fee, lado comprador → ponto de negociação, locked-box envelhecido transfere risco operacional sem contrapartida econômica clara
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      SPA com cláusula de earn-out atrelado a métrica não-GAAP definida por consultoria a ser contratada pelo comprador após fechamento, lado vendedor → cláusula bloqueante, vendedor perde controle sobre a definição da métrica que define seu pagamento futuro
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      SPA prevê opção de compra de minoritários remanescentes a preço justo \"a ser definido por avaliador independente em comum acordo\" sem critério objetivo de seleção do avaliador nem de metodologia — ponto de negociação alto, pode produzir disputa de avaliação prolongada, exige protocolo objetivo
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      SPA em setor regulado (telecom, energia, financeiro) sem cláusula expressa que vincule o fechamento à manutenção das autorizações regulatórias relevantes pela target — cláusula bloqueante implícita, transfere ao comprador risco de perda regulatória pré-fechamento sem cobertura
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

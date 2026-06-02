@@ -1,0 +1,99 @@
+# Golden set — P-TR-01
+# Extração estruturada com schema JSON
+# Domínio: Transversal
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-TR-01
+prompt_title: "Extração estruturada com schema JSON"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Documento de proposta comercial com campos claros → extração completa, sem nulo
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Documento com data ausente para um campo → null para a data, demais preenchidos
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Documento com dois valores para preço, um inicial e um revisto → preço revisto, ambiguidade marcada
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Documento de NF-e com CNPJ, razão social, valor total e itens — extração estrita sem conversão de moeda nem formato
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Documento de contrato com prazo \"trinta dias\" por extenso e schema pede número inteiro — extração mantém \"trinta\" como string até \"instrucoes_conversao\" autorizar conversão
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Documento PDF escaneado com OCR de qualidade baixa em um campo específico — null para o campo com OCR ruim, marcar em \"_auditoria\" o motivo \"qualidade de OCR insuficiente\"
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Documento com nome próprio aparecendo em duas grafias diferentes (com e sem acento) — selecionar a grafia mais frequente, marcar ambiguidade no \"_auditoria\"
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Documento com email aparecendo em rodapé mas campo \"email_principal\" não está delimitado pelo schema — preencher conforme o rodapé apenas se houver indicação clara de uso principal; caso contrário, null
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Documento com tabela de itens em formato livre (sem cabeçalho explícito) — extração de cada linha com confiança proporcional à clareza, campos não localizáveis ficam null sem inventar coluna
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Documento bilingue (português e inglês) com mesmos campos em ambos os idiomas — usar a versão em português conforme padrão do schema brasileiro, marcar a versão em inglês em \"_auditoria\" como ocorrência alternativa
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Documento que cita data em formato textual ambíguo (\"primeira segunda-feira de março\") — null para a data, marcar em \"_auditoria\" o motivo \"formato textual ambíguo sem dia explícito\"
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Documento que omite zero à esquerda em CEP ou CPF (formato numérico cru sem zero inicial) — preencher conforme literal do documento, marcar em \"_auditoria\" se o schema espera formato com zero, sem completar sem autorização
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Documento com erro tipográfico claro em campo crítico (CNPJ com um dígito ilegível) — null para o campo, marcar em \"_auditoria\" o motivo \"erro tipográfico em campo crítico\"
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Documento com referência cruzada a outro documento (\"conforme proposta P-2024-001\") — preencher conforme literal, sem buscar o outro documento, marcar dependência se o schema exige resolução
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Documento com campo opcional preenchido com placeholder visível (\"xxx-xxx-xxx\", \"[a preencher]\") — null para o campo, marcar em \"_auditoria\" o conteúdo do placeholder
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Documento com texto em duas colunas e OCR misturando colunas — null para campos onde a sequência não pode ser reconstruída com confiança, marcar em \"_auditoria\" o motivo, sem inferir layout
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Documento com texto manuscrito legível parcialmente — extração apenas dos trechos legíveis com alta confiança, null para os ilegíveis, sem completar palavras parciais
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Documento com schema fechado mas texto fonte contém campo claramente importante não previsto no schema — extração respeita schema (não cria campo novo), marcar em \"_auditoria\" o conteúdo perdido para revisão humana
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Documento que aparenta ter sido editado (campos sobrescritos visivelmente) — selecionar a versão mais recente, marcar em \"_auditoria\" o histórico aparente
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Documento cuja fonte declarada conflita com o conteúdo (cabeçalho diz \"versão 3\" mas conteúdo é da versão 1) — preencher conforme conteúdo efetivo, marcar a inconsistência em \"_auditoria\" para revisão humana, sem corrigir o cabeçalho
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

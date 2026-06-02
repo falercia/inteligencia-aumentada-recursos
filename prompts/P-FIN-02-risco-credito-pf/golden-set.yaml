@@ -1,0 +1,99 @@
+# Golden set — P-FIN-02
+# Classificação de risco de crédito PF
+# Domínio: Financeiro
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-FIN-02
+prompt_title: "Classificação de risco de crédito PF"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Proposta de R$ 5.000 em 24 meses, renda de R$ 8.000, comprometimento de 25%, score 750 → classificação A, encaminhar para aprovação
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Proposta de R$ 20.000 em 36 meses, renda de R$ 3.500, comprometimento de 55%, score 580 → classificação C, ajuste de valor recomendado
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Proposta com histórico recente de atraso 60 dias, score 480 → classificação D, encaminhar para negativa
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Proposta de R$ 3.000 em 12 meses, renda de R$ 12.000, comprometimento de 10%, score 820, sem histórico de inadimplência → classificação AA, encaminhar para aprovação
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Proposta de R$ 10.000 em 24 meses, renda de R$ 5.000, comprometimento de 35%, score 680 → classificação B, encaminhar com ressalvas
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Proposta de R$ 15.000 em 48 meses, renda de R$ 4.000, comprometimento de 60%, score 540 → classificação D, encaminhar para negativa
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Proposta de R$ 8.000 em 36 meses, renda de R$ 6.000, comprometimento de 30%, score 710 → classificação A, encaminhar para aprovação com pontos de atenção
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Proposta de R$ 25.000 em 60 meses, renda de R$ 4.500, comprometimento de 45%, score 620 → classificação C, ajuste de valor e prazo recomendado
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Proposta de R$ 12.000 em 36 meses, renda variável com média de R$ 7.000 (faixa entre R$ 3.000 e R$ 12.000), comprometimento médio de 40%, score 690 → classificação B com ponto de atenção sobre volatilidade de renda e ajuste de prazo
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Proposta com renda comprovada de R$ 9.000 mas histórico de inadimplência em produto de pequeno ticket há quatro anos, sem novos eventos → classificação B com observação sobre antecedente, encaminhar com ressalvas
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Proposta de R$ 18.000 com tempo de relacionamento de oito anos, score 650 estável, comprometimento de 50% por aumento recente de dívida em outra instituição → classificação C, ajuste de valor, sem usar tempo de relacionamento como compensação suficiente
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Proposta de R$ 6.000 em 24 meses, score 600 com tendência de queda nos últimos seis meses → classificação C, reanalisar com mais dados sobre tendência
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Proposta com score 720 mas comprometimento de 65% — classificação C, ajuste de valor recomendado, com fator de comprometimento dominante sobre score
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Proposta de R$ 30.000 com renda comprovada de R$ 15.000 e comprometimento de 30%, mas finalidade declarada genérica e canal de origem fora do perfil habitual → classificação B com pontos de atenção operacionais, encaminhar com ressalvas
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Proposta de profissional autônomo com renda declarada de R$ 8.000 sem comprovação documental anexa → reanalisar com mais dados, lacuna sobre comprovação de renda
+  - numero: 16
+    categoria: medio
+    descricao: |
+      Proposta com score elevado, comprometimento baixo, mas variáveis comportamentais indicando padrão de uso de crédito atípico nos últimos noventa dias → classificação B, encaminhar com ressalvas, lacuna sobre origem do padrão atípico
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Proposta de cliente com perfil historicamente AA mas sinalização recente em bureau por contestação não conclusiva — declaração de lacuna sobre natureza da contestação, reanalisar com mais dados antes de classificar
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Proposta cujos dados de entrada contêm referência a categoria vedada para análise (por exemplo, religião ou orientação política inferível em variável comportamental) — classificação deve ignorar a variável vedada e declarar a remoção explicitamente em pontos de atenção para a mesa
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Proposta limítrofe entre B e C, com score 660, comprometimento de 42%, renda estável — escolher a faixa mais conservadora e justificar com critério observável, sem usar tempo de relacionamento ou expectativa subjetiva como tiebreaker
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Proposta de pessoa em primeiro acesso ao crédito formal, sem score de bureau disponível, com renda comprovada e baixo comprometimento — declarar lacuna sobre histórico, reanalisar com mais dados ou classificar conservadoramente em B com pontos de atenção explícitos sobre ausência de histórico
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

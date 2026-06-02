@@ -1,0 +1,99 @@
+# Golden set — P-SUP-02
+# Resposta empática a reclamação
+# Domínio: Suporte técnico
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SUP-02
+prompt_title: "Resposta empática a reclamação"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Cliente reclama de instabilidade com impacto, ação aprovada é extensão de prazo → resposta com reconhecimento, status e oferta de extensão
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Cliente pede reembolso, ação não aprovada → resposta com reconhecimento, encaminhamento interno, sem promessa de reembolso
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Cliente em tom hostil sobre falha que não foi do produto → resposta empática, sem culpar cliente nem terceiros
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Cliente reporta downtime de quatro horas com impacto operacional, ação aprovada é crédito proporcional conforme SLA contratual — resposta com reconhecimento do impacto declarado, status do incidente, oferta literal do crédito conforme SLA
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Cliente reclama de demora de resposta no canal de suporte, ação não aprovada de SLA mais agressivo — resposta com reconhecimento, status sobre fila atual, sem prometer SLA novo, pontos não tratados listam o pedido de SLA
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Cliente reclama de problema que foi causado por configuração do próprio cliente (uso fora do esperado) — resposta empática, descrição neutra da situação, oferta de sessão de configuração assistida se aprovada, sem culpar o cliente
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Cliente solicita migração para plano superior com desconto não previsto — resposta com reconhecimento do interesse, encaminhamento interno para Account Manager, sem prometer desconto fora dos limites
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Cliente pede falar com gerente após resposta inicial — resposta empática reconhecendo o pedido, encaminhamento interno conforme política, sem comprometer prazo do contato sem aprovação
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Cliente Enterprise faz reclamação formal por carta, com cópia para diretoria, sobre incidente com impacto reputacional declarado — resposta com reconhecimento explícito do impacto reputacional, status sobre investigação, encaminhamento interno para liderança, sem prometer compensação reputacional
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Cliente envia múltiplas reclamações em janela curta com tom escalando — resposta única consolidada, reconhecimento do conjunto, status atualizado, sem repetir reconhecimentos vazios, sem prometer atenção exclusiva
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Cliente reclama de comportamento de pessoa específica do time de suporte — resposta com reconhecimento do desconforto declarado, encaminhamento interno para área de qualidade ou RH conforme política, sem julgar a pessoa em primeira mão na resposta pública
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Cliente reclama de problema que está aberto há mais de trinta dias sem resolução — resposta com reconhecimento da duração, status honesto sobre causa do atraso (em linguagem clara), próxima ação concreta com responsável interno, sem prometer prazo se não houver
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Cliente reclama via rede social e abre ticket interno em paralelo — responder apenas ao ticket interno conforme política, marcar em pontos não tratados o canal social como ponto para área de comunicação
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Cliente reclama de fatura cobrada além do contratado, ação aprovada é crédito após auditoria — resposta com reconhecimento, status sobre auditoria em andamento, oferta condicional ao resultado da auditoria, sem prometer crédito antes da auditoria fechar
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Cliente reclama em e-mail em segundo idioma (inglês) — responder no mesmo idioma do cliente quando o time tenha capacidade, manter o conteúdo equivalente ao padrão, sem omitir partes da resposta
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Cliente faz ameaça velada de processo judicial — resposta com reconhecimento neutro do impacto declarado, status sobre investigação, encaminhamento interno para jurídico, sem se posicionar sobre o mérito da ameaça, sem prometer nada além das ações aprovadas
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Cliente faz reclamação genuína sobre incidente que foi falha clara da empresa — resposta com reconhecimento explícito do erro, descrição neutra da causa, oferta dentro dos limites aprovados, sem minimizar a falha, sem culpar terceiros ou cliente
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Cliente faz reclamação que toca em ponto regulatório (LGPD, ANPD, defesa do consumidor) — resposta com reconhecimento, status sobre análise pela área legal, encaminhamento interno explícito, sem se posicionar sobre o mérito regulatório, sem omitir o ponto
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Cliente faz reclamação em tom emocional alto descrevendo prejuízo financeiro material — resposta com reconhecimento específico do prejuízo declarado, status sobre investigação, encaminhamento para conciliação se aprovada, sem aceitar nem refutar o valor do prejuízo, sem prometer ressarcimento fora dos limites
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Cliente faz reclamação que mistura insatisfação com produto, problema com fatura e desejo de feature futura — resposta foca no que está dentro do escopo aprovado, lista cada demanda em pontos não tratados com motivo e encaminhamento, sem responder de forma genérica que minimize as três frentes
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

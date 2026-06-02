@@ -1,0 +1,99 @@
+# Golden set — P-FIN-04
+# Análise de carteira recomendada
+# Domínio: Financeiro
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-FIN-04
+prompt_title: "Análise de carteira recomendada"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Carteira moderada com 60% renda fixa, 30% multimercado, 10% ações, com premissas claras → descrição com adequação ao perfil moderado
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Carteira agressiva sem premissa macro declarada → descrição com lacuna explícita em premissa macro
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Carteira que mistura instrumentos ilíquidos sem aviso de prazo → descrição com risco de liquidez como material declarado se mencionado, ou como lacuna
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Carteira conservadora com 90% em CDB e Tesouro Selic, 10% em fundo DI, com premissa de manutenção da taxa Selic em patamar elevado por doze meses — descrição com adequação ao perfil conservador, premissas literais, sem juízo
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Carteira moderada-arrojada com 40% renda fixa, 25% multimercado, 25% ações Brasil, 10% ações exterior, com horizonte de cinco anos declarado — descrição com adequação ao horizonte e perfil, riscos materiais listados conforme relatório
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Carteira que inclui debêntures incentivadas com horizonte de dez anos sem nota explícita sobre liquidez no secundário — descrição com lacuna sobre liquidez, sem inferir prejuízo, sinalizar como ponto não tratado
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Carteira que aloca 5% em criptoativos via ETF brasileiro, em perfil declarado moderado — descrição literal com risco material conforme relatório, sem opinar sobre adequação adicional
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Carteira com COE estruturado de capital protegido nominal — descrição com expectativa declarada literal, ressalva sobre proteção apenas nominal conforme texto do COE quando o relatório fornece, lacuna quando o relatório omite
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Carteira com fundo multimercado macro com vesting de três anos e taxa de performance de 20%, sem detalhamento de benchmark — descrição literal com lacuna sobre benchmark de performance, sem inferir índice de referência
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Carteira com previdência VGBL atrelada a fundo de ações, sem declaração explícita sobre regime de tributação escolhido (progressivo ou regressivo) — descrição literal e marcação da omissão como lacuna em premissa esperada
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Carteira com fundo de investimento em direitos creditórios (FIDC) classificado como \"high yield\" pelo relatório, sem rating de agência mencionado — descrição literal com risco material declarado, lacuna sobre rating e sobre histórico de inadimplência da carteira do FIDC
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Carteira com fundo imobiliário em segmento de logística com vacância recente registrada no relatório mas sem premissa explícita sobre absorção do espaço vago — descrição literal com vacância como risco material declarado, marca a lacuna em premissa
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Carteira com participação em fundos exclusivos com taxas customizadas, sem detalhe da estrutura no relatório resumido — descrição literal e marca como lacuna a falta de detalhamento de taxas e custos
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Carteira com hedge cambial parcial declarado em 40% da posição de exterior, sem premissa sobre cenário de câmbio que justifica o nível — descrição literal e lacuna em premissa de câmbio
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Carteira que recomenda private equity ilíquido com horizonte de sete a dez anos para perfil declarado moderado — descrição literal com risco material e adequação ao perfil em descritiva, sem reclassificar o perfil
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Relatório que oscila entre \"carteira recomendada\" e \"carteira sugerida apenas para clientes elegíveis\" sem definição clara do critério de elegibilidade — descrição literal com lacuna sobre critério de elegibilidade, sem inferir suitability
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Relatório com simulação de cenários (otimista, base, pessimista) mas sem probabilidade atribuída a cada cenário — descrição literal dos cenários conforme texto, sem inferir probabilidade, sem usar média ponderada autoral
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Relatório com inclusão de ativos estruturados (CRA, CRI) com lastro em operação específica, sem documentação de risco do tomador anexada — descrição literal com risco material declarado conforme texto e lacuna explícita sobre análise de tomador
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Relatório que recomenda rebalanceamento periódico (\"revisar semestralmente\") sem critério objetivo de rebalanceamento — descrição literal da diretriz e marca como lacuna em premissa, sem prescrever ação concreta
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Relatório que utiliza linguagem que sugere garantia (\"performance histórica de 0,3% a 0,4% ao mês, esperada em 2026\") — reproduzir literal com marcação explícita de \"expectativa declarada\" e \"sem garantia futura\", e listar como ponto para investigação adicional em \"lacunas em premissas esperadas\"
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

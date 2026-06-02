@@ -1,0 +1,99 @@
+# Golden set — P-SAAS-03
+# Geração de release notes
+# Domínio: SaaS e Produto
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SAAS-03
+prompt_title: "Geração de release notes"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Lista com cinco novas funcionalidades, duas melhorias, três bugs corrigidos → release notes nas três seções, sem breaking change
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Lista com mudança em endpoint de API que quebra integração existente → atenção necessária em destaque
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Lista com correção de bug crítico de cálculo → correção descrita com clareza de impacto
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Lista com mudança em campo obrigatório de cadastro (campo de telefone passa a aceitar formato internacional) — atenção necessária leve, com instrução clara de migração para clientes que automatizaram cadastro
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Lista com nova funcionalidade gated por feature flag para clientes Enterprise — descrição clara da funcionalidade e nota explícita sobre disponibilidade restrita por plano
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Lista com remoção de funcionalidade obsoleta sinalizada como deprecated há três releases — atenção necessária com referência à comunicação anterior, sem reabrir discussão sobre depreciação
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Lista que inclui correção de bug que altera resultado retroativo de relatório (cálculo errado por seis meses) — correção em destaque com nota sobre impacto retroativo e orientação para reexecução de relatórios afetados
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Lista com atualização de dependência interna sem impacto observável para o usuário — não incluir nas release notes públicas, marcar como mudança técnica não publicável em nota ao gestor
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Lista que mistura mudanças de pelo menos três módulos distintos do produto (faturamento, relatórios, integrações) — release notes organizadas com agrupamento por módulo dentro de cada categoria, mantendo a categorização funcionalidade nova, melhoria, correção
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Lista com correção de bug que estava em workaround público no fórum de comunidade — release notes mencionam a correção sem referenciar o workaround público, sem prometer suporte futuro ao caso edge
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Lista com mudança em terminologia interna (\"operador\" passa a ser \"agente\") visível em interface — atenção necessária leve, com nota sobre mudança terminológica e impacto em documentação, treinamento, automações que dependiam do termo
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Lista com mudança de comportamento em campo opcional (passou a ter valor default diferente quando omitido) — atenção necessária com nota sobre comportamento anterior versus novo, instrução de revisão para clientes que não declaravam o campo explicitamente
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Lista com nova integração nativa com produto de terceiro (por exemplo, Slack ou Teams) — novidade descrita com instrução de ativação, sem prometer integração futura com outros terceiros não listados
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Lista com inclusão de webhook novo, sem retirada de webhooks antigos — novidade com nota sobre payload, sem alterar comportamento dos webhooks existentes, sem prometer mudança neles
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Lista que contém duas mudanças semanticamente parecidas (duas correções em pontos diferentes do mesmo módulo) — release notes registram ambas as correções de forma distinta, com escopo claro, sem fundir
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Lista com mudança de comportamento em SLA contratual (\"tempo de resposta de webhook reduzido de cinco para três segundos\") — atenção necessária com nota explícita sobre revisão de SLA, sem prometer SLA futura, marcar para alinhamento jurídico antes da publicação
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Lista com mudança em política de retenção de dados (\"logs de auditoria passam a ser retidos por dois anos em vez de cinco\") — atenção necessária com nota explícita, instrução de exportação para clientes que precisam de retenção maior, marcar para alinhamento jurídico LGPD
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Lista com correção que fecha uma vulnerabilidade de segurança previamente reportada por bug bounty — descrição genérica da correção sem detalhar o vetor da vulnerabilidade, conforme prática de segurança, com agradecimento ao pesquisador quando autorizado
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Lista com mudança em UX que altera fluxo do onboarding de novos clientes — melhoria com nota sobre impacto em material de treinamento, sem reescrever o fluxo nas próprias notes
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Lista que inclui mudança ainda em ramp-up gradual (rollout escalonado por região ou plano) — release notes com nota explícita sobre rollout em janela, sem comunicar disponibilidade imediata universal, sem prometer datas futuras de expansão
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

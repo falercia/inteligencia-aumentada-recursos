@@ -1,0 +1,99 @@
+# Golden set — P-LEG-02
+# Análise de NDA brasileiro LGPD-compliant
+# Domínio: Jurídico contratual e proteção de dados
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-LEG-02
+prompt_title: "Análise de NDA brasileiro LGPD-compliant"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      NDA mútuo com prazo de cinco anos, sem menção a LGPD, sem definição de finalidade → status ausente para base legal e finalidade, ponto de atenção LGPD em ambas
+  - numero: 2
+    categoria: facil
+    descricao: |
+      NDA unilateral com prazo de dois anos, com cláusula de devolução clara e finalidade declarada → status presente para maioria, ponto de atenção em transferência internacional não tratada
+  - numero: 3
+    categoria: facil
+    descricao: |
+      NDA com prazo perpétuo, sem cláusula de destruição, com transferência internacional sem salvaguarda → múltiplos pontos de atenção LGPD, risco alto
+  - numero: 4
+    categoria: facil
+    descricao: |
+      NDA com transferência internacional para os EUA sem menção a cláusulas-padrão ANPD ou decisão de adequação → ponto de atenção crítico em transferência internacional, recomendação de cláusulas contratuais específicas
+  - numero: 5
+    categoria: facil
+    descricao: |
+      NDA prevê compartilhamento de dados sensíveis (saúde, biometria) sob base de \"execução contratual\" → status presente com risco, base legal incorreta para dado sensível, exige consentimento específico do art. 11 LGPD
+  - numero: 6
+    categoria: facil
+    descricao: |
+      NDA com prazo determinado de dois anos mas sem cláusula de sobrevida da obrigação de confidencialidade pós-término → status ausente para sobrevida, lacuna estrutural típica de NDA mal redigido
+  - numero: 7
+    categoria: facil
+    descricao: |
+      NDA com cláusula penal de cem mil reais por incidente, sem critério objetivo de aferição ou gradação → status presente com risco, cláusula penal exequível mas desproporcional sem critério
+  - numero: 8
+    categoria: facil
+    descricao: |
+      NDA bilateral mas com obrigações assimétricas de devolução (uma parte devolve em trinta dias, a outra em cento e oitenta) → status presente com risco, assimetria injustificada pode gerar contestação
+  - numero: 9
+    categoria: medio
+    descricao: |
+      NDA prevê compartilhamento com \"afiliadas e subsidiárias\" sem definição explícita do perímetro do grupo econômico → status presente com risco, ponto de atenção LGPD por falta de definição de operadores
+  - numero: 10
+    categoria: medio
+    descricao: |
+      NDA com cláusula de auditoria por terceiro independente, mas sem extensão das obrigações de confidencialidade ao auditor → lacuna de flow-down, ponto de atenção LGPD adicional
+  - numero: 11
+    categoria: medio
+    descricao: |
+      NDA autoriza uso anonimizado de dados para \"fins estatísticos ou de pesquisa interna\" sem rigor metodológico sobre anonimização → status presente com risco, exige especificação técnica do processo de anonimização sob o art. 12 LGPD
+  - numero: 12
+    categoria: medio
+    descricao: |
+      NDA com cláusula de retenção redigida como \"enquanto durar a relação comercial entre as partes\" → status presente com risco, prazo indeterminado contraria princípio da necessidade do art. 6º, II LGPD
+  - numero: 13
+    categoria: medio
+    descricao: |
+      NDA usa \"execução contratual\" como base legal genérica para todo o tratamento, incluindo dados sensíveis → status presente com risco, base legal insuficiente para tratamento de dados sensíveis
+  - numero: 14
+    categoria: medio
+    descricao: |
+      NDA exige comunicação de incidente \"em prazo razoável\" sem prazo objetivo → status presente com risco, ponto de atenção LGPD, recomendação de prazo em 48 horas ao controlador e 72 horas à ANPD
+  - numero: 15
+    categoria: medio
+    descricao: |
+      NDA autoriza subcontratação sem flow-down explícito das obrigações de proteção de dados ao subcontratado → status presente com risco, ponto de atenção LGPD, exige cláusula expressa de extensão das obrigações
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      NDA com foro de Nova York mas com execução das obrigações integralmente no território brasileiro e dados pessoais de brasileiros — lacuna sobre lei aplicável, sinalização de extraterritorialidade da LGPD (art. 3º) e risco de inaplicabilidade de cláusula de foro estrangeiro
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      NDA específico para data room de due diligence em M&A, sem encerramento explícito do acesso quando a operação não se concretiza — lacuna estrutural de sunset clause, ponto de atenção LGPD com risco de retenção indevida
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      NDA pós-fechamento de aquisição com previsão de transferência integral do banco de dados de clientes da empresa adquirida — controvérsia jurisprudencial relevante sobre transferência de base de dados pessoais entre controladores em sucessão empresarial, exige consentimento ou base legal específica
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      NDA com referência genérica a \"registros e logs operacionais\" sem detalhar o que entra no escopo da confidencialidade nem ligar com o Registro das Operações de Tratamento (ROPA) do art. 37 LGPD — status presente com risco, ponto de atenção LGPD, recomendação de mapeamento explícito
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      NDA autoriza uso de IA generativa para \"anonimização ou pseudonimização automatizada\" sem comprovação técnica de irreversibilidade — status presente com risco crítico, anonimização sem prova metodológica não isenta da LGPD conforme posição da ANPD em Notas Técnicas recentes
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

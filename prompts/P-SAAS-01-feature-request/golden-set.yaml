@@ -1,0 +1,99 @@
+# Golden set — P-SAAS-01
+# Classificação de feature request por persona
+# Domínio: SaaS e Produto
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SAAS-01
+prompt_title: "Classificação de feature request por persona"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Pedido de exportação de relatório em XLSX vindo de operador → persona operador, melhoria, severidade média, potencial médio
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Pedido genérico \"queria que fosse melhor\" → necessita refinamento
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Pedido de configuração de filtro padrão → fora de escopo de produto
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Pedido de exportação de relatório em CSV de cliente plano Pro com cinco mil usuários e auditoria pendente → persona administrador, melhoria, severidade média com indicador objetivo (auditoria pendente), potencial alto pelo plano
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Pedido de integração SSO via SAML vindo de cliente Enterprise com data de renovação em três meses → persona administrador segurança, funcionalidade nova, severidade alta com indicador contratual, potencial alto
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Pedido de modificação de cor do botão de exportar enviado por usuário final → persona usuário final, melhoria, severidade baixa, potencial baixo
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Pedido de feature já existente no produto mas que o cliente não localizou → fora de escopo de produto, motivo treinamento ou descoberta, sem entrada em backlog
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Pedido de remoção de campanha promocional em e-mail transacional → fora de escopo de produto, motivo configuração de comunicação
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Pedido que descreve três demandas distintas no mesmo texto (export, integração, novo papel de usuário) — necessita refinamento por aglomeração, motivo \"três demandas funcionais distintas\", desmembrar antes de classificar
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Pedido de \"melhorar a velocidade do dashboard\" sem métrica nem reprodutível — necessita refinamento por falta de indicador objetivo, motivo \"ausência de métrica de latência e de cenário reproduzível\"
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Pedido de API pública para consulta de dados de leitura, vindo de cliente plano starter sem cláusula de API no contrato — funcionalidade nova, severidade média, potencial médio com nota sobre upgrade contratual necessário, fora de escopo do plano atual
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Pedido recebido em segundo idioma (inglês) por cliente Enterprise global, descrevendo funcionalidade já no backlog mas com nuance diferente — funcionalidade nova com duplicidade aparente sinalizada, marcar id do similar e relatar a nuance distintiva
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Pedido de relatório de pegada de carbono dos servidores que processam dados do cliente, em RFP em curso — funcionalidade nova, severidade alta com indicador comercial (RFP), persona compliance, potencial alto
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Pedido de \"modo escuro\" como bloqueador de adoção, vindo de single point of contact em cliente médio — melhoria, severidade média, potencial baixo a médio (nicho), sem inflar por reclamação enfática isolada
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Pedido de campo customizado em cadastro vindo de operador sem aprovação de administrador, com nota de que outros operadores do mesmo cliente não solicitaram — melhoria, severidade baixa, potencial baixo, marcar para validação com administrador antes de subir prioridade
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Pedido de \"white-label completo\" vindo de cliente Enterprise em negociação contratual que prevê esse termo — funcionalidade nova de grande porte, severidade alta, potencial alto, mas necessita refinamento por escopo aberto, motivo \"white-label cobre N subfuncionalidades, exige documento de escopo do gestor de contas\"
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Pedido de adequação a regulação setorial recém-publicada (por exemplo, novo PIX programado da BACEN ou requisito CVM) — funcionalidade nova, severidade alta com indicador regulatório, potencial alto pela obrigatoriedade legal, marcar como prioridade de roadmap independente da persona
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Pedido que descreve workflow contornando funcionalidade nativa do produto (o cliente está usando o produto fora do uso esperado) — fora de escopo de produto enquanto não houver redesenho, motivo \"uso fora do desenho atual, exige avaliação de produto\"
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Pedido idêntico recebido de três clientes distintos do mesmo segmento em uma semana — duplicidade aparente entre os três, severidade alta por padrão de segmento, potencial alto, sinalizar agrupamento em registro mestre com referência aos três pedidos originais
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Pedido de cliente que cancelou contrato no trimestre anterior, retornando como prospect e pedindo funcionalidade que motivou a saída — funcionalidade nova com nota histórica, persona prospect, severidade média (sem contrato ativo), potencial médio, marcar para validação se a funcionalidade resolve a objeção original
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

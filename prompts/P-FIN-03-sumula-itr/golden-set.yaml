@@ -1,0 +1,99 @@
+# Golden set — P-FIN-03
+# Súmula de relatório trimestral ITR
+# Domínio: Financeiro corporativo
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-FIN-03
+prompt_title: "Súmula de relatório trimestral ITR"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Release com queda de receita explicada por sazonalidade e expansão de margem → súmula reflete drivers conforme texto, sem juízo
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Release sem guidance e com evento extraordinário de venda de ativo → súmula marca ausência de guidance e isola evento
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Release com discrepância entre carta otimista e números fracos → súmula apresenta ambos sem reconciliar
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Release com receita crescendo 25% A/A e EBITDA crescendo 8% A/A, com explicação de pressão de custo em insumos → súmula reflete ambos os crescimentos com variação literal, drivers conforme texto, sem juízo de margem
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Release com guidance revisado para baixo no trimestre, com motivos declarados (câmbio e novo segmento) → súmula registra revisão literal com motivos do release, sem inferir surpresa para o mercado
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Release com mudança recente em CFO destacada na carta da administração mas sem impacto declarado em resultado → súmula menciona troca como evento não recorrente sem atribuir consequência
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Release de empresa em estágio de turnaround com prejuízo líquido reduzido pela metade A/A, com plano de recuperação descrito → súmula reproduz métricas literais e descreve plano conforme carta, sem opinar sobre viabilidade
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Release com alavancagem dívida líquida sobre EBITDA passando de 2,1x para 3,4x sem explicação direta no texto principal → súmula registra variação literal e marca como \"sem explicação no release\" para o ponto
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Release com forte expansão de margem bruta porém compressão de margem EBITDA, com explicação parcial de despesas com pessoal e marketing — súmula reproduz ambas as margens com período de comparação e reconstrói o ponto onde o release explica e onde não explica
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Release com receita reportada em \"moeda funcional\" (USD para subsidiária) e \"moeda de apresentação\" (BRL) com diferença material por câmbio — súmula preserva ambas as bases conforme declaradas e marca a diferença, sem normalizar para uma única base
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Release com nova segmentação operacional adotada no trimestre, sem republicação de série histórica comparável — súmula reporta novo segmento conforme novo critério, marca explicitamente a quebra de comparabilidade e a ausência de série restated
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Release com one-off positivo (créditos tributários reconhecidos) que infla o lucro líquido reportado — súmula apresenta lucro reportado e lucro ex-eventos conforme calculado pelo próprio release, sem inventar normalização própria
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Release com guidance qualitativo (\"expectativa de crescimento mid-single-digit\") sem range numérico — súmula reproduz a expressão literal e marca como \"guidance qualitativo sem range\" para Q&A
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Release com transcript de call destacando comentário do CEO sobre concorrência sem dado no release principal — súmula registra o comentário literal com fonte (carta ou call), sem extrapolar implicação para fatia de mercado
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Release com ESG metrics destacadas no relatório integrado mas com pegada parcial (escopo 1 e 2 sem escopo 3) — súmula reproduz números literais e marca o escopo 3 como ausente, sem inferir valor
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Release com cálculo de NPS, churn ou ARR sem definição metodológica clara no rodapé — súmula reporta os números, registra a ausência de definição metodológica como ponto para Q&A, sem usar o número como evidência de tendência sem a definição
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Release de empresa pré-operacional (ainda em ramp-up) com métricas operacionais (usuários, ativações) mas sem receita material — súmula prioriza bloco de destaques operacionais, declara explicitamente que top line e bottom line não são representativos no estágio atual
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Release que apresenta \"ajustes pro-forma\" para refletir aquisição recente como se tivesse ocorrido no início do ano comparativo — súmula reproduz os números reportados e os ajustes pro-forma como blocos separados, marca a metodologia conforme nota explicativa
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Release com mudança recente de norma contábil (IFRS 16, por exemplo) com impacto material em métricas comparativas — súmula reporta números pós-norma e ajuste para base comparável quando o próprio release fornecer, sem reconstrução autoral, marca lacuna se a base comparável não estiver no texto
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Release que omite informação contratada pelo regulador (por exemplo, formulário de referência incompleto, segmento sem reporte) — súmula declara a omissão como lacuna no release, sem inferir motivo, e adiciona ponto para Q&A sobre cumprimento regulatório
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

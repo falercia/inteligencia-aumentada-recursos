@@ -1,0 +1,99 @@
+# Golden set — P-MED-03
+# Alerta de interação medicamentosa
+# Domínio: Saúde
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-MED-03
+prompt_title: "Alerta de interação medicamentosa"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Varfarina associada a AINE em paciente idoso → interação maior, sangramento, necessita validação farmacêutica
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Sinvastatina em uso com claritromicina → interação contraindicada, risco de miopatia e rabdomiólise, necessita validação farmacêutica
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Omeprazol e levotiroxina sem espaçamento entre administrações → interação menor, redução de absorção, conduta de espaçamento de quatro horas
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Amiodarona e varfarina em paciente com FA → interação maior, potencialização do efeito anticoagulante, necessita validação e ajuste de INR
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Metformina mantida em paciente que receberá contraste iodado venoso, sem suspensão pré-procedimento documentada → interação maior por contexto clínico, risco de acidose lática, necessita validação
+  - numero: 6
+    categoria: facil
+    descricao: |
+      IECA (enalapril) associado a espironolactona em paciente com função renal limítrofe → interação moderada, risco de hipercalemia, conduta de monitoramento de potássio
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Carbamazepina iniciada em paciente que usa contraceptivo oral combinado → interação maior por indução enzimática, falha contraceptiva, necessita validação e revisão do método
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Tramadol associado a ISRS em paciente em dor crônica → interação moderada, risco de síndrome serotoninérgica, conduta de monitoramento clínico
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Atorvastatina, amlodipino e ciclosporina em paciente transplantado → múltiplas interações com a ciclosporina por inibição de CYP3A4 e P-gp, severidade maior para estatina, necessita validação farmacêutica e ajuste de dose
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Fluconazol oral em uso prolongado e tacrolimo em paciente transplantado → interação maior por inibição de CYP3A4, elevação dos níveis de tacrolimo, necessita validação e monitoramento de nível sérico
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Furosemida, espironolactona, IECA e AINE prescritos juntos em paciente com insuficiência cardíaca descompensada — \"quádrupla nefrotóxica\", interação maior global por contexto, risco de injúria renal aguda, necessita validação
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Metoprolol e verapamil EV em paciente com taquicardia supraventricular → interação contraindicada, risco de bradiarritmia e bloqueio AV, necessita validação imediata
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Linezolida iniciada em paciente que usa fluoxetina há meses → interação contraindicada, risco alto de síndrome serotoninérgica, necessita validação imediata e washout
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Digoxina e amiodarona em paciente idoso com função renal reduzida → interação maior por inibição de P-gp e clearance renal, exige ajuste de dose de digoxina e monitoramento de nível sérico, necessita validação
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Clopidogrel e omeprazol em paciente pós-stent coronariano → interação moderada por inibição de CYP2C19, redução do efeito antiagregante, sinalização para substituição por pantoprazol como conduta clínica esperada sem indicar o substituto específico
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Paciente idoso polimedicado (treze medicamentos) com hipóteses múltiplas de interações em cascata, sem dados claros de função renal — necessita validação farmacêutica global ativada como true, lista de interações pares prioritárias, lacuna explícita em função renal sinalizada como bloqueio para avaliação completa
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Apixabana e amiodarona iniciadas simultaneamente em paciente com FA paroxística e disfunção renal moderada — interação moderada com evidência heterogênea, exige redução de dose conforme bula brasileira do apixabano e monitoramento clínico, sinalização explícita de \"necessita validação farmacêutica\" pela complexidade
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Pediatria: ceftriaxona e cálcio EV simultâneos em neonato → interação contraindicada apenas em neonatos pelo risco de precipitação tissular, requer especificação etária na justificativa, sem extrapolar para adultos
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Paciente em uso crônico de imunossupressor para doença autoimune com inclusão recente de antifúngico azólico para infecção fúngica oportunista — interação maior por CYP3A4, dose do imunossupressor exige redução proporcional, marcar como necessita validação, mas reconhecer que conduta clínica final depende do balanço risco-benefício documentado pela equipe assistente
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Paciente que recebeu dose única de medicamento órfão para doença rara (sem perfil farmacocinético amplamente publicado) associado a três medicações usuais — interação não estabelecida com evidência consolidada, classificar como \"lacuna de informação\" com marcação \"necessita validação farmacêutica global\", sem inventar mecanismo
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

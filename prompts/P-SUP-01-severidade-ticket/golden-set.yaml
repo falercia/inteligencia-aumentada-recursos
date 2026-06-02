@@ -1,0 +1,99 @@
+# Golden set — P-SUP-01
+# Classificação de ticket em severidade
+# Domínio: Suporte técnico
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SUP-01
+prompt_title: "Classificação de ticket em severidade"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Cliente reporta sistema fora do ar com impacto em produção → S1, prioridade alta, fila N2, escalonamento sim
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Cliente pede ajuste de senha → S4, prioridade baixa, fila N1
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Cliente reclama em tom emocional sobre lentidão sem detalhe → S3, prioridade média, pergunta para cliente com detalhamento
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Cliente reporta erro 500 em endpoint específico, com horário e ID de requisição → S2, prioridade alta, fila N2, escalonamento conforme SLA contratual do plano
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Cliente solicita inclusão de novo usuário no sistema → S4, prioridade baixa, fila N1, sem escalonamento
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Cliente reporta cobrança duplicada em fatura recente → S3, prioridade média, fila billing, sem escalonamento técnico
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Cliente reporta lentidão generalizada com captura de tela de monitoramento próprio mostrando latência fora do baseline — S2, prioridade alta, fila N2 com indicador objetivo de monitoramento próprio
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Cliente Enterprise com SLA contratual de quatro horas reporta funcionalidade quebrada em ambiente de homologação — S2, prioridade alta, fila N2, escalonamento contratual conforme SLA do plano Enterprise
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Cliente reporta \"está tudo lento\" com tom emocional alto mas sem horário, sem requisição específica, sem captura — S3, prioridade média, fila N1 com pergunta para cliente sobre horário, fluxo e captura, sem inflar por tom
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Cliente Enterprise solicita resposta urgente para questão de billing — fila billing, prioridade ajustada pelo SLA contratual, sem escalonamento técnico, sem promessa de prazo
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Cliente reporta possível vazamento de dados sensíveis em log público — S1, prioridade alta, fila segurança, escalonamento imediato, sem ignorar pela ausência de detalhe técnico inicial
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Cliente reporta funcionalidade que ele acredita ser bug mas é comportamento documentado por design — S3 inicial, com prática de educação na resposta, fila N1, sem escalar
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Cliente reporta dois problemas distintos no mesmo ticket (um técnico e um de billing) — registrar a aglomeração em log, classificar o problema mais severo no campo principal, recomendar desmembramento, sem escalar por aglomeração
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Cliente em tom moderado mas com nota explícita de que está considerando cancelamento — S3 técnica, mas marcar \"necessita_escalonamento\" como true para CSM por sinal de churn, motivo \"sinal contratual de risco de saída\", sem inflar severidade técnica
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Cliente reporta problema intermitente que não conseguiu reproduzir — S3, prioridade média, fila N1 com pergunta sobre condições de reprodução, sem fechar por falta de informação imediata
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Cliente reporta como S1 em tom muito firme algo que tecnicamente é S3 — classificar pelo critério objetivo (S3), responder com transparência sobre a classificação no campo \"indicadores_objetivos\", sem escalar por pressão emocional, oferecer pergunta para refinar caso haja indicador objetivo não comunicado
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Cliente reporta problema que toca em obrigação regulatória (ex: solicitação de portabilidade LGPD não atendida) — independentemente da severidade técnica, marcar \"necessita_escalonamento\" como true para área legal/DPO, motivo \"obrigação regulatória LGPD\"
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Cliente reporta problema crítico mas usa canal incorreto (ex: e-mail genérico em vez de ticket de suporte) — classificar pelo conteúdo (S1 se aplicável), marcar em pergunta para o cliente a orientação sobre canal correto, sem rebaixar severidade pelo canal errado
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Cliente Enterprise estratégico reporta problema P2 em tom calmo, mas o cliente é high-touch — manter a classificação objetiva (S2/S3 conforme o critério), marcar \"necessita_escalonamento\" como true para CSM/Account Manager pela estratégia comercial, motivo \"cliente high-touch\", sem inflar severidade técnica
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Cliente reporta problema que sugere comprometimento de credencial (login não reconhecido, atividade suspeita) — S1 imediato, fila segurança, escalonamento imediato, mesmo sem confirmação técnica, pelo critério de segurança preventiva
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

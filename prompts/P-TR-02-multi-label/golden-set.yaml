@@ -1,0 +1,99 @@
+# Golden set — P-TR-02
+# Classificação multi-label
+# Domínio: Transversal
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-TR-02
+prompt_title: "Classificação multi-label"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Conteúdo claramente multi-tema → múltiplos rótulos com confiança alta
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Conteúdo ambíguo sem evidência forte → fallback indeterminado
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Conteúdo com tema fora da taxonomia → fallback indeterminado, sem inventar rótulo
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Conteúdo curto com tema único óbvio (ex: \"como cancelar minha conta\") em taxonomia de suporte → um único rótulo \"cancelamento\" com confiança alta
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Conteúdo longo cobrindo três temas relacionados (faturamento, plano, downgrade) — três rótulos com confiança correspondente à proporção da evidência por tema
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Conteúdo cujo tema mais próximo na taxonomia tem confiança apenas marginalmente acima do mínimo — atribuição com confiança real, sem inflar
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Conteúdo em tom irônico ou sarcástico que pode confundir interpretação literal — rótulos por conteúdo factual citado, sem inferir sentimento como rótulo se não está na taxonomia
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Conteúdo em segundo idioma com taxonomia em português — atribuição baseada no significado, marcar em \"rotulos_considerados_e_descartados\" se algum sinônimo no idioma original confundiu
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Conteúdo cujo tema cruza duas categorias adjacentes da taxonomia (\"faturamento\" e \"billing\" como rótulos diferentes que poderiam significar o mesmo) — atribuir conforme a definição literal de cada categoria, marcar o outro em descartados com motivo
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Conteúdo com mistura de evidência forte para um tema e evidência fraca para outro — atribuir ambos com confianças distintas, sem nivelar artificialmente
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Conteúdo que descreve experiência completa de cliente (touchpoints múltiplos) — selecionar os rótulos cuja evidência efetivamente aparece no texto, sem inferir touchpoints não mencionados
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Conteúdo com termo técnico ambíguo (ex: \"conta\" pode ser conta bancária, conta de usuário, conta a pagar) — usar contexto textual para classificar, marcar o termo ambíguo em \"rotulos_considerados_e_descartados\" para auditoria
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Conteúdo cuja taxonomia tem rótulo \"outros\" como sink — usar \"outros\" apenas quando nenhum rótulo específico se aplica com confiança mínima, e marcar nos descartados todos os rótulos avaliados
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Conteúdo em que o usuário pede uma coisa mas descreve outra (intenção declarada divergente do conteúdo) — classificar conforme o conteúdo objetivo do texto, marcar a divergência em \"rotulos_considerados_e_descartados\"
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Conteúdo cujo tema dominante é claramente fora da taxonomia mas tem mencão lateral a tema da taxonomia — atribuir o tema lateral com confiança proporcional à evidência (provavelmente baixa), marcar o tema dominante como fora da taxonomia em \"motivo_fallback\" se aplicável
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Conteúdo que toca em tema sensível com rótulo na taxonomia (ex: rótulo \"saúde mental\" em sistema de suporte ao cliente) — atribuir o rótulo conforme evidência, e marcar em \"motivo_fallback\" se a confiança ficou exatamente no limiar para revisão humana
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Conteúdo escrito por bot ou com padrão de geração artificial (texto gerado) — classificar pelo conteúdo objetivo independentemente da origem, marcar em descartados o padrão automatizado para auditoria
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Conteúdo cujos rótulos válidos seriam mutuamente exclusivos em outras taxonomias mas não nesta — atribuir todos os rótulos válidos conforme a taxonomia declarada, sem importar regra externa
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Conteúdo com referência a sistema, produto ou pessoa nomeada que não está na taxonomia — classificar apenas pelos rótulos da taxonomia, marcar o termo nomeado em \"rotulos_considerados_e_descartados\" para registro
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Conteúdo cujo único rótulo aplicável tem confiança exatamente igual a \"confianca_minima\" declarada — atribuir o rótulo (regra inclusiva no limiar), sem inflar nem rebaixar para outro
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

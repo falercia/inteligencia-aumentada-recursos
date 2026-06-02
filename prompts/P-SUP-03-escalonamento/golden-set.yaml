@@ -1,0 +1,99 @@
+# Golden set — P-SUP-03
+# Decisão sobre escalonamento
+# Domínio: Suporte técnico
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SUP-03
+prompt_title: "Decisão sobre escalonamento"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Ticket S1 sem resposta há tempo acima de SLA contratual → escalar para N3, urgência imediata
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Ticket S3 com cliente impaciente mas sem critério objetivo → manter no nível, ação intermediária de comunicação proativa
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Ticket com risco regulatório citado pelo cliente → escalar para liderança e segurança
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Ticket S2 em N2 há quatro tentativas sem resolução, com SLA dentro do prazo mas próximo do limite — ação intermediária de envolver pareamento N2-engenharia, sem escalar formalmente ainda
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Ticket que envolve possível incidente de segurança (credenciais expostas em log) — escalar imediato para segurança, urgência imediata, independente do tempo de fila
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Ticket de cliente Enterprise high-touch sem critério técnico de escalonamento — manter no nível com ação intermediária de comunicação proativa do Account Manager, sem escalar tecnicamente
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Ticket que tocou em ponto regulatório (solicitação de portabilidade LGPD não atendida em prazo) — escalar para liderança e legal, urgência mesmo dia
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Ticket S4 com cliente em tom muito firme mas sem critério objetivo — manter no nível, ação intermediária de comunicação proativa, sem escalar por pressão
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Ticket que cruza dois domínios (técnico e billing) sem responsável claro — ação intermediária de definir responsável primário antes de escalar, sem escalar para múltiplas áreas simultaneamente
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Ticket de cliente que abriu seis tickets sobre temas distintos em uma semana — manter cada ticket no nível atual, ação intermediária de Account Manager para entender padrão, sem escalar tecnicamente
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Ticket onde o cliente solicita explicitamente falar com diretor ou liderança — avaliar critério objetivo independente do pedido; se houver critério, escalar pela razão correta; se não houver, ação intermediária com explicação ao cliente sobre o canal, sem escalar por demanda direta
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Ticket S2 com cliente que está em processo de renovação contratual em curso — manter no nível, ação intermediária com Account Manager em paralelo, sem confundir risco de churn com critério técnico de escalonamento
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Ticket cuja causa raiz foi identificada como bug recorrente — escalar para produto/engenharia com motivo \"bug recorrente\", urgência conforme severidade do bug, sem escalar para liderança
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Ticket de cliente em ambiente de homologação (sem impacto em produção) que reporta funcionalidade quebrada — manter no nível com prioridade ajustada, sem escalar por ausência de impacto produtivo, exceto se SLA contratual cobrir homologação
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Ticket que ficou em pausa por solicitação do próprio cliente (\"estou ocupado, retorne semana que vem\") — manter no nível, sem escalar, sem reabrir contador de SLA conforme política
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Ticket S1 cujo cliente declarou que não há mais impacto operacional (problema autorresolvido durante a fila) — revisar severidade para S3, sem escalar pelo critério original, marcar em ação intermediária a confirmação técnica do encerramento
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Ticket que aparenta ser ataque coordenado (vários clientes do mesmo segmento reportando o mesmo problema em janela curta) — escalar imediato para segurança e engenharia com motivo \"padrão de ataque ou incidente sistêmico\", urgência imediata
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Ticket com risco reputacional declarado pelo cliente (ameaça de exposição pública negativa) — manter o tratamento técnico no nível, escalar em paralelo para comunicação e liderança com motivo \"risco reputacional declarado\", sem deixar o ticket técnico subir só pela ameaça
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Ticket onde o cliente apresenta erro recorrente em uso fora do padrão (workaround interno do cliente que sempre falha) — manter no nível com ação intermediária educacional, marcar em log para avaliação de produto se padrão se repetir, sem escalar pelo critério técnico isolado
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Ticket cujo escalonamento foi recomendado em manual interno mas não consta nas regras explícitas do contexto fornecido — registrar a ambiguidade em \"justificativa_resumida\", optar por ação intermediária com nota para revisão das regras, sem inventar critério que não está no contexto
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

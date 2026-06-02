@@ -1,0 +1,99 @@
+# Golden set — P-SAAS-04
+# Análise de churn signal
+# Domínio: SaaS e Produto
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-SAAS-04
+prompt_title: "Análise de churn signal"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Cliente com queda de 60% em DAU, NPS 4, ticket aberto sem resposta há 10 dias → risco crítico, plano com contato imediato e escalonamento
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Cliente estável em uso mas com renovação em 30 dias sem QBR agendado → risco de atenção, plano com agendamento de QBR
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Cliente com aumento de uso, NPS 9, sem ticket → risco baixo, plano com QBR de upsell
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Cliente com inadimplência de duas faturas recentes, uso operacional normal, NPS recente positivo → risco alto pela inadimplência, plano com contato imediato do CSM com escalada para financeiro em prazo de dois dias
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Cliente que sofreu mudança de patrocinador interno (saída do executive sponsor) sem novo sponsor identificado, uso estável — risco de atenção, plano de mapeamento de novo sponsor em até cinco dias
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Cliente com adoção de feature nova zerada após noventa dias do release, sem sinalização de bug — risco de atenção, plano de touchpoint educacional em até três dias
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Cliente em onboarding atrasado (sete dias além do plano de ativação) sem causa documentada — risco alto pelo atraso de ramp, plano de revisão de bloqueios em até dois dias
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Cliente Enterprise com queda de logins de usuário admin por mais de quatorze dias sem viagem ou férias comunicadas — risco de atenção por ausência operacional do decisor, plano de check-in em até três dias
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Cliente com renovação em quarenta e cinco dias, NPS estável em sete, mas com aumento de tickets sobre módulo específico de relatórios — risco de atenção, plano com diagnóstico em até cinco dias e envolvimento de produto em paralelo (responsável produto, fora dos cinco dias do CSM)
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Cliente que reduziu MRR por downgrade voluntário no último renewal, mantém uso na nova faixa — risco baixo, plano com QBR para entender estratégia interna do cliente
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Cliente com queda de adoção em time-membro específico (ex: time financeiro do cliente parou de usar) — risco de atenção, plano de mapeamento da causa local em até quatro dias, sem assumir churn global
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Cliente com NPS estável mas com aumento de pedidos de exportação massiva de dados — risco de atenção por sinal de migração potencial, plano de QBR antecipado com pergunta direta sobre planos
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Cliente cujo champion interno foi promovido e mudou de área dentro da empresa-cliente — risco de atenção, plano de identificação de novo champion no time atual em até cinco dias
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Cliente em ramp positivo mas com NPS recente baixo de respondente único (n=1) — risco baixo apesar do NPS, plano de follow-up qualitativo com o respondente sem usar a nota como sinal forte
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Cliente com renovação automática prevista em sessenta dias, sem interação com CSM nos últimos noventa dias — risco de atenção, plano de QBR proativo em até cinco dias, sem reduzir o risco pela \"ausência de problema\"
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Cliente com sinais mistos — alta adoção mas NPS baixo e tickets críticos abertos — risco alto, plano com diagnóstico estruturado priorizando a causa hipotética principal e mantendo prazos do CSM
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Cliente em estado de M&A (sendo adquirido por terceiro) com comunicação pública mas sem orientação interna sobre continuidade do contrato — risco crítico por evento externo, plano com escalada ao executivo da plataforma e contato com o novo sponsor pós-aquisição, ações em até cinco dias
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Cliente com sinal de uso anormalmente alto seguido de queda abrupta (padrão de teste de exportação e saída) — risco crítico, plano com contato imediato e oferta de retenção dentro do alcance do CSM, marcando responsabilidade comercial em paralelo para discussão de plano
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Cliente com NPS alto mas histórico recente de comentário escrito mencionando concorrente nominalmente — risco de atenção, plano de QBR antecipado com pergunta direta sobre o comparativo, sem oferecer desconto preventivo sem indicador de objeção de preço
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Cliente com renovação em duzentos dias, sinais operacionais ainda saudáveis, mas com mudança de strategy interna do cliente noticiada publicamente que afeta o caso de uso — risco baixo no curto prazo mas alto no horizonte da renovação, plano com touchpoint estratégico e monitoramento em cadência mensal, ações dentro dos cinco dias do CSM para o touchpoint inicial
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

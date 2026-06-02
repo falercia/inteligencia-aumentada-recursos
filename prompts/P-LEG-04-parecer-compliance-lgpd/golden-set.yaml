@@ -1,0 +1,99 @@
+# Golden set — P-LEG-04
+# Parecer sobre compliance LGPD em processamento de dados
+# Domínio: Jurídico de proteção de dados
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-LEG-04
+prompt_title: "Parecer sobre compliance LGPD em processamento de dados"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Operação de marketing direto com base legal \"legítimo interesse\", sem teste de balanceamento documentado → risco regulatório material em base legal e governança
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Operação de RH com base legal \"execução de contrato\", finalidades coerentes, segurança documentada → majoritariamente conforme, com observação sobre retenção
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Operação de cessão de base de clientes em fusão sem comunicação ao titular → risco regulatório material em direitos do titular
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Coleta de dados biométricos para controle de ponto com base legal \"execução de contrato\" sem consentimento específico → não conforme em base legal, dado sensível exige art. 11 LGPD, risco regulatório material
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Tratamento de dados de menores de idade em plataforma educacional sem consentimento parental verificável → não conforme em base legal, art. 14 LGPD exige consentimento específico e destacado de pelo menos um dos pais ou responsáveis
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Operação de cobrança com compartilhamento de inadimplência a bureaus de crédito sob base \"exercício regular de direitos em processo\" → conforme em base legal, art. 7º VI LGPD, com observação sobre transparência
+  - numero: 7
+    categoria: facil
+    descricao: |
+      CRM com retenção indeterminada de leads \"para futuras campanhas\" sem cadência de revisão → não conforme em princípio da necessidade, art. 6º III LGPD, exige política de retenção objetiva
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Operação que invoca \"consentimento\" como base legal mas sem mecanismo de revogação acessível ao titular → não conforme em direitos do titular, art. 8º §5º LGPD garante revogação a qualquer tempo
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Plataforma de saúde que trata dados clínicos sob base \"tutela da saúde\" mas com finalidade secundária de pesquisa não declarada ao titular → parcialmente conforme em compatibilidade entre finalidades, art. 6º I e II LGPD, exige nova base legal para pesquisa
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Operação de scoring de crédito automatizado sem oferta de revisão por pessoa natural ao titular impactado → não conforme em direitos do titular, art. 20 LGPD assegura direito à revisão, risco regulatório material
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Tratamento de dados de orientação política coletados via \"preenchimento de perfil profissional\" para fins de RH → não conforme, art. 11 LGPD veda tratamento de dado sensível fora das hipóteses específicas, finalidade declarada não autoriza coleta
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Programa de fidelidade com tratamento baseado em \"execução de contrato\" mas com perfilamento publicitário inserido nos termos sem destaque → parcialmente conforme, base legal correta para execução mas perfilamento exige base própria, princípio da transparência comprometido
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Operação de gestão de fornecedores que compartilha dados de funcionários com auditores terceirizados sem cláusula de operador no contrato → parcialmente conforme em governança de compartilhamento, art. 39 LGPD exige relação contratual explícita controlador-operador
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Sistema de monitoramento de produtividade que registra captura de tela e teclas digitadas com base \"legítimo interesse do empregador\" → não conforme, balanceamento de legítimo interesse não justifica monitoramento de baixa proporcionalidade sobre dado sensível indireto, risco regulatório material
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Aplicação de IA generativa em atendimento ao cliente que retém prompts contendo dados pessoais para \"melhoria do modelo\" sem informação ao titular → parcialmente conforme, exige base legal específica para uso secundário e transparência sobre tratamento por IA conforme Nota Técnica ANPD recente
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Empresa brasileira contrata operador estrangeiro que processa dados pessoais em jurisdição sem decisão de adequação da ANPD, com cláusulas-padrão ainda não publicadas em definitivo — controvérsia atual sobre status de cláusulas-padrão da ANPD, classificar como parcialmente conforme com sinalização explícita de risco regulatório material por transferência internacional sem mecanismo consolidado
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Operação que invoca \"anonimização\" de dados pessoais para pesquisa interna sem prova metodológica de irreversibilidade nem teste contra reidentificação — controvérsia jurisprudencial sobre ônus da prova de anonimização efetiva, classificar como indeterminado com solicitação de evidência técnica, risco regulatório material em potencial conforme posicionamento ANPD
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Pessoa jurídica de educação superior que processa dados de alunos sob base de \"execução de políticas públicas\" sem ser instituição pública nem operar contrato com Poder Público — não conforme em base legal, art. 7º III LGPD é restrito ao Poder Público, exige reenquadramento integral
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Sistema de gestão hospitalar com pseudonimização parcial de prontuários para acesso de equipe não-clínica, sem segregação técnica auditável da chave de reidentificação — parcialmente conforme em segurança, pseudonimização sem segregação técnica robusta retém o status de dado pessoal sensível, art. 11 LGPD, exige reforço técnico
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Operação de tratamento descrita em ROPA antigo (versão 2022) mas operação efetiva atual usa finalidades expandidas adicionadas em rotina de produto sem atualização do registro nem comunicação ao DPO — não conforme em princípio da prestação de contas, art. 6º X LGPD, sinaliza falha sistêmica de governança, risco regulatório material por divergência entre operação real e documentação
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

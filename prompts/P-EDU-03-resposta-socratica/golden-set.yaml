@@ -1,0 +1,99 @@
+# Golden set — P-EDU-03
+# Resposta socrática a dúvida do aluno
+# Domínio: Educação
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-EDU-03
+prompt_title: "Resposta socrática a dúvida do aluno"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Dúvida sobre como resolver função quadrática → cinco passos socráticos sem entregar resposta
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Dúvida sobre conceito factual elementar permitido → resposta direta conforme política
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Dúvida com erro conceitual persistente → pista mais explícita no passo 4
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Dúvida sobre interpretação de texto literário → passos socráticos focados em pistas textuais, sem entregar leitura única
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Dúvida sobre fórmula básica de física (E=mc²) classificada como \"definição factual elementar\" pela política — resposta direta com explicação da fórmula, sem socratizar conceito factual permitido
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Dúvida sobre conceito histórico amplamente conhecido (data de evento), classificado como factual — resposta direta, sem alongar processo socrático
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Dúvida sobre como começar a resolver problema sem ideia inicial nenhuma — primeiro passo socrático orienta a identificação dos dados do enunciado, sem entregar estratégia completa
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Dúvida que vem com tentativa errada explícita do aluno — primeiro passo reconhece a tentativa, pede ao aluno que descreva o raciocínio que o levou ali, sem corrigir imediato
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Dúvida sobre tópico em que o aluno demonstra erro de base (pré-requisito não dominado) — passos socráticos primeiro restabelecem o pré-requisito, depois abordam a dúvida original, sem assumir que o aluno tem o pré-requisito
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Dúvida que mistura dois conceitos (aluno pede ajuda em problema cuja solução envolve dois temas) — passos socráticos separam os dois temas explicitamente, abordando um por vez
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Dúvida em que o aluno parece estar certo mas sem confiança — passos socráticos validam a linha de raciocínio do aluno, sem entregar resposta como sancionada de cima, levando o aluno a confirmar por si
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Dúvida em que o aluno está convencido de uma resposta errada — passos socráticos pedem ao aluno que aplique o método ou a definição em caso de teste, expondo a inconsistência sem corrigir frontalmente
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Dúvida com pergunta excessivamente ampla (\"não entendi nada de função\") — primeiro passo pede ao aluno que aponte ponto específico de confusão, sem responder à pergunta ampla diretamente
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Dúvida formulada com presença de gírias e linguagem informal — passos socráticos respeitam o registro do aluno, sem corrigir linguagem como prioridade, focando em conteúdo
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Dúvida que pressupõe que existe uma resposta única quando há múltiplas perspectivas legítimas (filosofia, literatura, história) — passos socráticos expõem a multiplicidade, sem reduzir à resposta única
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Dúvida sobre tema fora do tema declarado em estudo — recusar gentilmente em mensagem do tutor, redirecionar ao tema atual, sem socratizar sobre conteúdo fora do escopo declarado
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Dúvida em que o aluno demonstra frustração ou desânimo no texto da pergunta — primeiro passo acolhe brevemente a frustração sem prolongar, e procede ao processo socrático com pista mais acessível desde o passo 1
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Dúvida cuja resposta envolve cálculo numérico longo — passos socráticos guiam a estrutura do cálculo (definição de variáveis, montagem da equação, sequência de operações), sem executar os cálculos no lugar do aluno
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Dúvida sobre tópico sensível em ciências (evolução, cosmologia em contextos com restrição) — passos socráticos focam na pergunta científica conforme o currículo declarado, sem entrar em debate fora do plano de aula, marcar para professor em \"Sinalizações\" se a tensão aparecer
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Dúvida cujo texto contém suspeita de cola (\"preciso da resposta urgente, prova daqui a uma hora\") — passos socráticos seguem o método, sem entregar resposta apenas pela pressão de tempo, marcar para professor em \"Sinalizações\" o padrão de uso pré-prova
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

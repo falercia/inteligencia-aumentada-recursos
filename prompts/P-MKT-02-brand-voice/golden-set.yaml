@@ -1,0 +1,99 @@
+# Golden set — P-MKT-02
+# Análise de brand voice
+# Domínio: Marketing
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-MKT-02
+prompt_title: "Análise de brand voice"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Peça com tom muito coloquial em marca formal → desvio grave em tom, leve em vocabulário
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Peça aderente em tom mas com vocabulário evitado → desvio moderado em vocabulário
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Peça em marca com brand voice incompleta → sumário com lacuna explícita
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Peça que respeita tom e vocabulário mas tem ritmo entrecortado em brand que pede frases longas e fluidas → desvio moderado em ritmo, leve nas demais dimensões
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Peça de e-mail marketing aderente em todas as dimensões, sem desvio — sumário com aderência alta, sem desvio listado
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Peça que usa palavra explicitamente listada em \"vocabulário evitado\" — desvio grave em vocabulário com citação literal do termo, demais dimensões aderentes
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Peça com tom institucional em brand voice que pede tom de proximidade — desvio moderado em tom, com direção de ajuste para aproximação
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Peça com persona de marca clara mas peça suprime a persona — desvio moderado em persona, lacuna se a brand voice não detalhar como a persona aparece textualmente
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Peça com mistura de tons (parte formal, parte coloquial) na mesma comunicação — desvio moderado em tom por inconsistência interna, direção de ajuste para uniformização
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Peça aderente em texto mas com cta que destoa do tom geral (cta em imperativo agressivo em brand voice convidativa) — desvio moderado localizado em cta, demais aderentes
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Peça em rede social usando vocabulário de marca, mas formato (emojis, hashtags) não previsto em brand voice — lacuna na brand voice sobre formato, desvio indeterminado em ritmo/persona pela ausência de critério
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Peça com humor de marca em contexto sensível (luto público, crise sanitária) — não classificar como desvio de brand voice, marcar em \"Lacunas na brand voice declarada\" como necessidade de diretriz de contexto sensível
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Peça de tom formal em brand voice formal mas com palavra antiquada (\"outrora\", \"destarte\") sem precedente na marca — desvio leve em vocabulário, direção de ajuste para vocabulário contemporâneo
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Peça de campanha sazonal (Natal) usando vocabulário sazonal não declarado na brand voice — lacuna na brand voice sobre adaptações sazonais, não classificar como desvio
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Peça em formato longo (whitepaper) cuja brand voice foi declarada principalmente para social/curtas — desvio indeterminado em ritmo, lacuna sobre extensão de texto
+  - numero: 16
+    categoria: limitrofe
+    descricao: |
+      Peça em segundo idioma (inglês) de marca brasileira cuja brand voice foi declarada em português — não classificar desvios de tradução, marcar em \"Lacunas na brand voice declarada\" a ausência de orientação internacional
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Peça co-criada com creator/parceiro externo cuja voz pessoal é parte do contrato — distinguir voz do parceiro da brand voice da marca, classificar apenas elementos atribuíveis à marca, marcar em lacunas a tensão criativa
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Peça com termo técnico do setor (jargão necessário para clareza com persona técnica) — não classificar como desvio mesmo se \"vocabulário evitado\" listar o termo em contexto leigo, marcar em recomendações de ajuste a contextualização
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Peça com inside joke da comunidade da marca (referência a meme ou evento próprio) — não classificar como desvio mesmo se sair do vocabulário formal, marcar em recomendações como elemento de identidade comunitária
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Peça que aparenta seguir brand voice antiga (versão anterior à declarada no input) — registrar em \"Sumário de aderência\" a possibilidade de defasagem editorial, classificar pelos pilares da brand voice declarada atual, marcar em recomendações a revisão de templates ou material de referência usado pelo redator
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX

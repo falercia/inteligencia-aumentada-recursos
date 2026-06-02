@@ -1,0 +1,99 @@
+# Golden set — P-LEG-01
+# Revisão de cláusula de não-concorrência CLT
+# Domínio: Jurídico trabalhista
+#
+# 20 casos categorizados em fáceis (1-8), médios (9-15)
+# e difíceis / limítrofes (16-20).
+#
+# Para usar em eval_runner.py: cada caso vira um par
+# (input, saída_esperada). A descrição combina ambos.
+
+prompt_id: P-LEG-01
+prompt_title: "Revisão de cláusula de não-concorrência CLT"
+version: 1.0.0
+language: pt-BR
+
+casos:
+  - numero: 1
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 24 meses, sem contraprestação, cargo de analista → classificação crítica por ausência de contraprestação e prazo excessivo
+  - numero: 2
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 12 meses, contraprestação de 50% do salário, cargo de diretor comercial → classificação baixa, com observação sobre limitação geográfica
+  - numero: 3
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 6 meses, contraprestação genérica sem valor, cargo de pesquisador → classificação alta por contraprestação indeterminada
+  - numero: 4
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 36 meses, contraprestação de 30% do salário, cargo de gerente comercial → classificação crítica por prazo excessivo apesar da contraprestação
+  - numero: 5
+    categoria: facil
+    descricao: |
+      Cláusula sem limitação geográfica explícita, cargo de vendedor regional → classificação alta por ausência de limitação material razoável
+  - numero: 6
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 12 meses, contraprestação de 100% do salário durante o período, cargo de CTO → classificação baixa, com observação sobre escopo material amplo
+  - numero: 7
+    categoria: facil
+    descricao: |
+      Cláusula prevê multa de dez vezes o salário em caso de descumprimento, sem contraprestação → classificação crítica por desequilíbrio das obrigações
+  - numero: 8
+    categoria: facil
+    descricao: |
+      Cláusula com prazo de 24 meses, contraprestação parcelada de 50% do salário, cargo de diretor jurídico → classificação média, com observação sobre prazo limítrofe
+  - numero: 9
+    categoria: medio
+    descricao: |
+      Cláusula vincula contraprestação ao recebimento de variável remuneratória não garantida → classificação alta por incerteza sobre efetividade da contraprestação
+  - numero: 10
+    categoria: medio
+    descricao: |
+      Cláusula prevê obrigação durante e após o contrato, sem distinção clara dos períodos → classificação alta por confusão entre obrigação contratual e pós-contratual
+  - numero: 11
+    categoria: medio
+    descricao: |
+      Cláusula prevê não-concorrência em todo o território nacional, cargo de analista regional → classificação alta por limitação geográfica desproporcional ao alcance da atividade
+  - numero: 12
+    categoria: medio
+    descricao: |
+      Cláusula com prazo de 18 meses, contraprestação de 50% do salário, mas com possibilidade de o empregador renunciar à cláusula a qualquer tempo sem ônus → classificação média por assimetria do direito de renúncia
+  - numero: 13
+    categoria: medio
+    descricao: |
+      Cláusula que define como atividade vedada qualquer atividade do mesmo setor, cargo de profissional especializado → classificação alta por limitação material excessivamente abrangente
+  - numero: 14
+    categoria: medio
+    descricao: |
+      Cláusula com cláusula penal cumulativa à devolução da contraprestação em caso de descumprimento → classificação alta por bis in idem na sanção
+  - numero: 15
+    categoria: medio
+    descricao: |
+      Cláusula prevê não-concorrência indireta, alcançando familiares e empresas controladas pelo ex-empregado → classificação crítica por estender obrigação a terceiros
+  - numero: 16
+    categoria: medio
+    descricao: |
+      Cláusula com prazo de 12 meses, contraprestação adequada, mas sem definição clara de qual é o interesse legítimo protegido → classificação média por lacuna no elemento de interesse legítimo
+  - numero: 17
+    categoria: limitrofe
+    descricao: |
+      Cláusula em contrato de alta direção em que o cargo deixou de existir antes do término do contrato; obrigação pós-contratual remanesce — controvérsia jurisprudencial relevante sobre subsistência da cláusula sem cargo correspondente
+  - numero: 18
+    categoria: limitrofe
+    descricao: |
+      Cláusula com remissão a \"atividades equivalentes ou similares\" sem definição objetiva, em cargo técnico de alta especialização — classificação alta com nota sobre tendência jurisprudencial recente de exigir definição objetiva
+  - numero: 19
+    categoria: limitrofe
+    descricao: |
+      Cláusula em contrato de trabalhador remoto cujo empregador é estrangeiro mas cuja prestação ocorre integralmente no Brasil — declaração de lacuna sobre lei aplicável, com sinalização de risco de inaplicabilidade da cláusula sob CLT
+  - numero: 20
+    categoria: limitrofe
+    descricao: |
+      Cláusula com contraprestação adimplida apenas em parte pelo empregador após o término — controvérsia sobre se o inadimplemento parcial libera totalmente o ex-empregado ou exige proporcionalidade, com sinalização explícita
+
+# Total: 20 casos
+# Última revisão: 2026-06-XX
