@@ -29,10 +29,10 @@ A escolha de implementação é deliberada: **Python puro com o SDK oficial da A
 |---|---|---|---|
 | [`a01-react-simples`](./a01-react-simples/) | ReAct (Reasoning + Acting em loop) | Co-piloto (executa com confirmação) | ✅ Completo |
 | [`a02-escala-propriedade`](./a02-escala-propriedade/) | Mesmo agente em 4 níveis F3 | Assistente → Co-piloto → Supervisionado → Autônomo regulado | ✅ Completo |
-| [`a03-orquestrador-especialistas`](./a03-orquestrador-especialistas/) | Multiagente em estrela, reusa prompts de `/prompts` | Supervisionado | 🚧 Stub |
-| [`a04-multiagente-debate`](./a04-multiagente-debate/) | Dois agentes argumentam, juiz decide | Supervisionado | 🚧 Stub |
+| [`a03-orquestrador-especialistas`](./a03-orquestrador-especialistas/) | Multiagente em estrela cooperativa, reusa prompts de `/prompts` como especialistas | Supervisionado | ✅ Completo |
+| [`a04-multiagente-debate`](./a04-multiagente-debate/) | Multiagente adversarial — proponente × oponente com juiz integrável a `/evals` | Supervisionado | ✅ Completo |
 
-A separação entre **completo** e **stub** é declarada, conforme Princípio 5 (Honestidade Temporal). Cada stub tem `README.md` explicando o problema que resolve e o que vai entrar quando for implementado.
+Os quatro agentes formam uma curva pedagógica: A01 ensina o loop em UM agente; A02 mostra o mesmo agente em quatro níveis F3 lado a lado; A03 sobe para multiagente cooperativo (estrela); A04 fecha com multiagente adversarial (debate com arbitragem).
 
 ---
 
@@ -40,15 +40,17 @@ A separação entre **completo** e **stub** é declarada, conforme Princípio 5 
 
 ```
 agente-nome/
-├── README.md           ← O que é, qual padrão, qual nível F3, como rodar
-├── agent.py            ← Implementação Python (~100-200 LOC, comentada)
-├── system_prompt.md    ← Constituição do agente em linguagem natural
-├── tools/              ← Schemas das tools, com permissão por nível
-├── exemplos/           ← Casos rodáveis de entrada e saída esperada
-└── kill_switch.py      ← Como desligar o agente em menos de 30 segundos
+├── README.md                ← Que problema resolve, ficha técnica, como rodar
+├── agent.py                 ← Entry point (CLI + chamada ao loop)
+├── system_prompt*.md        ← Constituição(ões) do(s) agente(s)
+├── exemplos/                ← Casos rodáveis com entrada e saída esperada
+├── kill_switch.py           ← Switch testável em <30s
+└── requirements.txt         ← Dependências mínimas (anthropic>=0.40.0)
 ```
 
-A estrutura é a mesma para todos os agentes desta pasta. Quem entendeu um, leu o esqueleto dos outros. Quem está construindo o próprio agente da empresa copia o esqueleto e adapta.
+A03 adiciona `especialistas.py` (wrappers de prompts como tools). A04 adiciona `eval_config.json` (rubrica de arbitragem). A02 adiciona `gates.py`, `rollback.md`, `tools_simuladas.py` (mecânica dos 4 níveis lado a lado).
+
+Quem entendeu A01 leu o esqueleto dos outros três. Quem está construindo o próprio agente da empresa copia o esqueleto e adapta.
 
 ---
 

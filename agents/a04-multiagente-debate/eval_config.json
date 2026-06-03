@@ -1,0 +1,56 @@
+{
+  "rubrica_id": "A04-DEBATE-v1.0",
+  "descricao": "Rubrica de arbitragem do debate adversarial A04, integrável ao /evals do repositório acompanhante via judge LLM-as-judge calibrado.",
+  "criterios": [
+    {
+      "nome": "Solidez técnica do argumento",
+      "peso": 30,
+      "descricao": "O argumento se sustenta sob exame técnico de profissional sênior? Usa evidência verificável (paper, métrica, padrão arquitetural)? Não inventa fato nem confunde hipótese com conclusão?",
+      "escala": "0=infundado / 5=razoável com lacunas / 10=defensável em comitê técnico sênior"
+    },
+    {
+      "nome": "Steel-manning do adversário",
+      "peso": 20,
+      "descricao": "O argumento ataca a versão FORTE da tese oposta, ou só uma versão fraca (espantalho)? Reconhece o que o oponente acerta?",
+      "escala": "0=só espantalho / 5=ataque misto / 10=ataque consistente à versão mais forte do oponente"
+    },
+    {
+      "nome": "Honestidade sobre limites",
+      "peso": 20,
+      "descricao": "Reconhece pontos fracos da própria tese antes de ser atacado? Declara hipótese como hipótese?",
+      "escala": "0=esconde fragilidade / 5=admite quando pressionado / 10=admite proativamente com refinamento"
+    },
+    {
+      "nome": "Conexão com consequência prática",
+      "peso": 20,
+      "descricao": "O argumento aterriza em decisão acionável para o leitor descrito na pergunta? Mostra trade-off concreto?",
+      "escala": "0=puro princípio / 5=meio caminho / 10=decisão acionável com trade-off explícito"
+    },
+    {
+      "nome": "Higiene retórica",
+      "peso": 10,
+      "descricao": "Ausência de falácias (ad hominem, falsa dicotomia, autoridade pura, whataboutismo). Linguagem técnica sem inflação retórica.",
+      "escala": "0=panfletário / 5=limpo / 10=executivo sênior em comitê"
+    }
+  ],
+  "peso_total": 100,
+  "decision_rules": {
+    "vitoria_simples": "diferença >= 8 pontos no somatório ponderado",
+    "empate_tecnico": "diferença < 8 pontos OU ambos abaixo de 50 no total",
+    "vitoria_decisiva": "diferença >= 20 pontos"
+  },
+  "anti_paddings": [
+    "Não premiar volume de texto. Argumento curto e denso ganha de argumento longo e diluído.",
+    "Não premiar uso de jargão sem ancoragem em consequência prática.",
+    "Penalizar parecer arbitral que decide sem nota por critério.",
+    "Penalizar empate que não justifica a paridade em pelo menos 3 critérios."
+  ],
+  "integracao_evals": {
+    "judge_externo_compativel": [
+      "classification (decisão final: Proponente / Oponente / Empate)",
+      "llm-as-judge (sustenta a nota por critério com calibração contra humano sênior)"
+    ],
+    "golden_set_minimo": "20 debates calibrados por humano sênior em 3 verticais distintos",
+    "metrica_de_qualidade": "concordância com humano sênior >= 0.75 em decisão final, >= 0.60 em nota por critério"
+  }
+}

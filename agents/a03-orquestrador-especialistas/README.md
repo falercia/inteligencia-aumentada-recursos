@@ -1,89 +1,150 @@
-# A03 — Orquestrador-Especialistas (🚧 STUB)
+# A03 — Orquestrador-Especialistas
 
-> **Status atual: stub estrutural.** Implementação completa prevista para um release futuro. Este README declara o que vai entrar e por quê, conforme Princípio 5 — Honestidade Temporal.
-
----
-
-## Que problema este agente vai resolver
-
-Existe uma família inteira de tarefas executivas que **excede a capacidade de um único agente**, não porque o modelo é fraco, mas porque a tarefa exige especialização em domínios diferentes ao mesmo tempo. Análise de viabilidade de aquisição precisa de leitura jurídica de contrato, análise financeira de balanço e análise comercial de carteira de clientes — três disciplinas que, em humanos, ficam em três cargos distintos com cinco a quinze anos de trabalho focado cada um.
-
-Forçar um único agente generalista a fazer as três análises produz três respostas medianas. A solução clássica é **multiagente em estrela**: um coordenador decompõe a tarefa, delega cada parte a um sub-agente especialista, e consolida no final. **A03 vai resolver isso usando os próprios prompts profissionais já versionados em `/prompts`** como cérebros dos especialistas, sem reescrever cada um do zero.
-
-**Caso de uso canônico que vai estar implementado:** parecer executivo de uma página para o conselho avaliar aquisição de uma empresa-alvo, com decomposição em três análises paralelas. **Para quem vai ser útil:** time de M&A, jurídico corporativo, FP&A, qualquer área que precise produzir parecer integrado a partir de múltiplas leituras especialistas em prazo curto.
+> **Multiagente em estrela.** Um orquestrador classifica a consulta do usuário, despacha para o especialista certo, e consolida a resposta. Cada especialista é UM prompt versionado de [`/prompts`](../../prompts/) carregado como tool. Quem entendeu A01 entende este em uma sentada — é o mesmo loop, com tools que internamente fazem outra chamada LLM.
 
 ---
 
-## O que este agente será
+## Que problema este agente resolve
 
-Sistema multiagente em padrão **estrela** (orquestrador-especialistas): um agente coordenador recebe uma tarefa complexa, decompõe em subtarefas, delega cada subtarefa a um sub-agente especializado, e consolida as respostas em uma saída final coesa. Os sub-agentes especializados reusam, sem reescrever, os prompts profissionais da pasta [`/prompts`](../../prompts/) deste mesmo repositório.
+Toda central de atendimento sofisticada esbarra no mesmo limite arquitetural: **uma consulta de cliente pode envolver domínios distintos, e nenhum operador humano único cobre todos com a mesma profundidade**. A clínica que recebe "torci o tornozelo no trabalho e meu chefe não quer abrir CAT" precisa de competência clínica E trabalhista. O SaaS que recebe "fui cobrado errado e a fatura não bate com meu contrato" precisa de competência técnica E jurídica.
 
-A demonstração canônica vai ser uma análise jurídico-financeira combinada:
+A solução amadora é construir UM agente generalista enorme, com prompt de cinco páginas tentando cobrir todos os domínios — e o resultado é o mesmo: respostas medianas em tudo, ótimas em nada. A solução madura é **multiagente em estrela**: um coordenador que reconhece o domínio e despacha para o especialista certo, com cada especialista profundamente calibrado em UM domínio. **A03 resolve isso na prática**, reusando os prompts profissionais já versionados em [`/prompts`](../../prompts/) (P-LEG-01 cláusula CLT, P-MED-01 triagem clínica, P-SUP-01 suporte técnico SaaS) como cérebros dos especialistas — sem reescrever cada um do zero.
 
-> Cliente solicitou análise de viabilidade para aquisição de empresa-alvo. Avalie em paralelo: (1) cláusulas críticas do contrato de aquisição [especialista jurídico, reusa P-LEG-02], (2) saúde financeira da empresa-alvo a partir do balanço anexo [especialista financeiro, reusa P-FIN-01], (3) risco de continuidade contratual com clientes-chave [especialista comercial, reusa P-SAA-02]. Consolide em parecer executivo de uma página para o conselho.
+**Para quem é útil:** o time de produto que está construindo central de atendimento multidomínio e não sabe se deve treinar um modelo único ou orquestrar vários; o CTO que precisa decidir entre prompt monolítico e arquitetura modular; o auditor que precisa entender por que despacho explícito é mais defensável do que classificação implícita dentro de um único prompt; o time de M&A, jurídico corporativo ou FP&A que precisa produzir parecer integrado a partir de múltiplas leituras especialistas.
 
----
-
-## Por que padrão estrela e por que reusar prompts
-
-A escolha de padrão estrela em vez de pipeline sequencial é deliberada: permite **paralelismo real** quando as subtarefas são independentes, e centraliza a consolidação em um único ponto auditável (o orquestrador). Padrões mais sofisticados — debate (A04), grafos com ciclos, hierarquia profunda — ficam para releases futuros.
-
-A escolha de reusar prompts profissionais da pasta `/prompts` em vez de definir prompts ad hoc dentro do agente é a aplicação da **Camada Dupla** ao código: o prompt é ativo durável versionado em `/prompts/P-LEG-02/`; o agente é o consumidor descartável. Mudar a versão do prompt não exige refatorar o agente, e o golden set associado ao prompt continua valendo como eval.
+**O que você sai sabendo após rodar:** como funciona o padrão estrela em código real, por que reusar prompts versionados é aplicação direta da Camada Dupla ao próprio agente, como instrumentar fan-out para conter custo composto (F7), e por que recusar atender fora de escopo é uma das competências mais importantes (e mais subestimadas) em sistemas multiagente.
 
 ---
 
-## Estrutura prevista
+## Ficha técnica
+
+| Campo | Valor |
+|---|---|
+| **Padrão** | Multiagente em estrela (orquestrador + N especialistas) |
+| **Especialistas reusados** | P-LEG-01 (jurídico trabalhista), P-MED-01 (triagem clínica), P-SUP-01 (suporte técnico) |
+| **Nível F3 declarado** | Supervisionado (sem gate por subtarefa, com kill switch + fan-out limit + trace consolidado) |
+| **Modelo do orquestrador** | Sonnet (decisão de classificação + consolidação) |
+| **Modelo dos especialistas** | Haiku (resposta especialista, custo otimizado) |
+| **Dono nominal** | O leitor que está executando |
+| **Tracing** | Ativo por padrão em `../_common/traces/` |
+| **Kill switch** | `kill_switch.py` testável (mesmo padrão de A01/A02) |
+| **Fan-out limit** | 3 especialistas por execução (configurável via `--max-fan-out`) |
+| **Custo estimado** | Tarefa de UM despacho: ~0,01 USD; multidomínio com 2 despachos: ~0,02 USD |
+
+---
+
+## Como rodar
+
+### Pré-requisitos
+
+```bash
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="sua-chave"   # ou use --dry-run
+```
+
+### Modo seco (sem token, ideal para estudar a mecânica)
+
+```bash
+python agent.py --dry-run
+```
+
+A saída mostra cada iteração do orquestrador, qual especialista seria chamado, e qual consulta seria despachada. Use com `agent.py` e `especialistas.py` abertos em paralelo para acompanhar o fluxo.
+
+### Modo real — caso default (consulta jurídica CLT)
+
+```bash
+python agent.py
+```
+
+O agente recebe um caso ilustrativo embutido (cláusula de não-concorrência abusiva) e despacha automaticamente.
+
+### Modo real — caso multidomínio
+
+```bash
+python agent.py --task "Tive um acidente em horário de trabalho e meu chefe não quer abrir CAT. Posso forçar?" --verbose
+```
+
+O orquestrador identifica clínico + jurídico, despacha duas vezes e consolida em parecer único.
+
+### Apertando o orçamento
+
+```bash
+python agent.py --task "..." --max-fan-out 1
+```
+
+Limita a UMA chamada de especialista por execução. Em multidomínio, força o orquestrador a escolher o domínio mais crítico OU devolver parecer parcial.
+
+---
+
+## Exemplos prontos
+
+| Exemplo | O que demonstra |
+|---|---|
+| [`exemplos/exemplo-01-juridico.md`](./exemplos/exemplo-01-juridico.md) | Despacho único ao especialista jurídico trabalhista (caso de cláusula CLT) |
+| [`exemplos/exemplo-02-multidominio.md`](./exemplos/exemplo-02-multidominio.md) | Despacho duplo (clínico + jurídico) numa consulta integrada de acidente de trabalho |
+| [`exemplos/exemplo-03-fora-de-escopo.md`](./exemplos/exemplo-03-fora-de-escopo.md) | Recusa explícita sem despacho (consulta sobre investimento financeiro, fora dos domínios atendidos) |
+
+---
+
+## Anatomia da pasta
 
 ```
 a03-orquestrador-especialistas/
-├── README.md                          ← este arquivo
-├── agent.py                           ← entry point com CLI
-├── system_prompt_orquestrador.md      ← constituição do coordenador
-├── especialistas/
-│   ├── juridico.py                    ← wrapper que carrega P-LEG-02 e expõe como tool
-│   ├── financeiro.py                  ← wrapper que carrega P-FIN-01 e expõe como tool
-│   └── comercial.py                   ← wrapper que carrega P-SAA-02 e expõe como tool
-├── consolidador.py                    ← lógica de merge das respostas dos especialistas
+├── README.md                       ← este arquivo
+├── agent.py                        ← entry point (CLI + loop do orquestrador)
+├── especialistas.py                ← wrappers que viram prompts em tools
+├── system_prompt_orquestrador.md   ← constituição do coordenador
 ├── exemplos/
-│   ├── caso-aquisicao.md              ← caso completo, com input e saída esperada
-│   └── caso-due-diligence.md          ← variação para due diligence simplificada
-├── eval/
-│   └── golden-set.jsonl               ← compilação dos golden sets dos prompts reusados
-└── kill_switch.py
+│   ├── exemplo-01-juridico.md
+│   ├── exemplo-02-multidominio.md
+│   └── exemplo-03-fora-de-escopo.md
+├── kill_switch.py                  ← parada testável em <30s
+└── requirements.txt                ← anthropic>=0.40.0
 ```
 
 ---
 
-## Nível F3 esperado
+## A escolha arquitetural: estrela, não pipeline
 
-**Supervisionado.** Operação em lote, sem gate por subtarefa, mas com:
-- Trace consolidado por subtarefa (cada especialista produz um span)
-- Eval automatizado contra o golden set unificado
-- Kill switch que aborta toda a operação a qualquer momento
-- Limite de fan-out para proteger custo (máx. 5 especialistas por execução)
+A escolha de padrão **estrela** em vez de pipeline sequencial é deliberada:
 
----
+- **Estrela** = um orquestrador no centro chamando N especialistas em paralelo (ou sequência curta), com consolidação centralizada num único ponto auditável.
+- **Pipeline** = fluxo linear A→B→C→D em que cada etapa só vê o output da anterior.
 
-## Por que NÃO está pronto em v1.2.0
+Estrela ganha quando as subtarefas são **independentes** (clínico não depende de jurídico para responder), quando o consolidador precisa **comparar respostas** (e não apenas encadear), e quando se quer **paralelismo real**. Pipeline ganha quando há dependência sequencial forte (e o output de B é input de C). Em produção, é comum compor — pipeline interno em cada especialista, estrela no orquestrador.
 
-A implementação exige decisões adicionais que merecem sessão dedicada de design, em vez de serem improvisadas:
-
-1. **Como passar contexto do orquestrador para o especialista sem inflar tokens** (uso de IDs de referência em vez de duplicar conteúdo — aplicação direta do C18 Economia de Tokens)
-2. **Como o consolidador identifica contradições entre especialistas** (sinaliza para revisão humana em vez de mascarar)
-3. **Como o golden set unificado combina os golden sets individuais** dos prompts reusados (sem inflar nem perder cobertura)
-4. **Como o kill switch propaga para sub-agentes em execução** (cancelamento limpo vs. interrupção abrupta)
-
-Cada decisão acima vale uma seção do README final, e cada decisão tomada às pressas vira anti-padrão didático em vez de exemplo de referência. Estamos seguindo a regra do livro: melhor stub honesto declarado do que implementação rasa com aparência de completa.
+**Padrões mais sofisticados** — debate adversarial, grafos com ciclos, hierarquia profunda — ficam para o A04 (debate) e expansões futuras. Cada nível de sofisticação compra capacidade, mas custa observabilidade. Começar simples e subir quando o ROI justificar é a regra dura do F3.
 
 ---
 
-## Conexão com o livro (a ser ampliada no release final)
+## Por que reusar prompts em vez de definir inline
 
-- 🔗 [Capítulo 12 — Agentes de IA](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C12-agentes.md), seção sobre padrões multiagente
-- 🔗 [Framework F3 — Escala de Propriedade](../../../Livro-1-Os-Invariantes/03-frameworks/L1-F3-agente-prop.md)
-- 🔗 [Pasta `/prompts`](../../prompts/) — fonte dos especialistas reusados
-- 🔗 [Capítulo 18 — Economia de Tokens](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C18-economia-tokens.md) — disciplina obrigatória para padrão estrela
+A escolha de reusar prompts profissionais de `/prompts/<id>/` em vez de definir prompts ad hoc dentro do agente é a aplicação da **Camada Dupla** ao código:
+
+- **O prompt é ativo durável** versionado em `/prompts/<id>/`, com golden set, eval config, changelog e calibração editorial. Sobrevive à troca de modelo.
+- **O agente é o consumidor descartável** que orquestra os ativos. Pode ser refatorado, reescrito ou substituído sem perda.
+
+Mudar a versão do prompt (P-LEG-01 v1.0 → v1.1) **não exige refatorar este arquivo**. O golden set associado ao prompt continua valendo como eval, e a calibração editorial registrada em `/prompts/<id>/golden.yaml` continua sendo a fonte de verdade.
+
+A simplificação assumida nesta versão pedagógica: `especialistas.py` carrega uma **constituição resumida** de cada prompt em código, em vez de carregar o XML completo de `/prompts/<id>/prompt.xml` (que pode ter centenas de linhas). Essa separação é deliberada — o agente foca no padrão estrela; o pipeline de regressão foca no eval completo. As duas camadas vivem em paralelo.
 
 ---
 
-> *Stub é declaração honesta do que existe e do que ainda não existe. Quando a implementação ficar pronta, este README é substituído por documentação completa do agente em operação.*
+## Conexão com o livro
+
+- 🔗 [**Capítulo 12 — Agentes de IA**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C12-agentes.md) — seção sobre padrões multiagente
+- 🔗 [**Capítulo 14C — Spec-Driven Development**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C14C-spec-driven-development.md) — o system prompt do orquestrador é, em essência, uma spec executável
+- 🔗 [**Framework F3 — Escala de Propriedade**](../../../Livro-1-Os-Invariantes/03-frameworks/L1-F3-agente-prop.md) — este agente opera em nível Supervisionado
+- 🔗 [**Framework F7 — Custo Composto**](../../../Livro-1-Os-Invariantes/03-frameworks/L1-F7-custo-composto.md) — fan-out limit aplica a alavanca de Tier ao multiplicador de chamadas
+- 🔗 [**Pasta `/prompts`**](../../prompts/) — fonte dos especialistas reusados (P-LEG-01, P-MED-01, P-SUP-01)
+- 🔗 [**A01 ReAct Simples**](../a01-react-simples/) — fundação que este agente herda
+
+---
+
+## Próximo passo
+
+Depois de rodar A03 nos três exemplos, vá para [**A04 — Multiagente Debate**](../a04-multiagente-debate/), onde dois agentes adversariais defendem teses opostas e um juiz, integrado ao pipeline de `/evals`, decide. Você sai sabendo a diferença entre o padrão **cooperativo** deste A03 (todos remam pro mesmo lado) e o padrão **adversarial** do A04 (a tensão entre os agentes é o produto).
+
+---
+
+> *"Multiagente não é um modelo melhor; é um modelo estruturado em conversa entre agentes com competências distintas. Quem entender essa diferença para de comprar 'o agente que faz tudo' e começa a construir o sistema que separa o que sabe do que não sabe — e despacha cada parte para quem efetivamente pode responder."*

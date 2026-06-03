@@ -34,7 +34,7 @@ Sem o livro, este repositório é catálogo sem mapa, com receitas que o operado
 | 🏛️ [`/governance`](./governance/) | Caderno de Governança v1.0 em Camada Dupla — 6 seções fatiadas, modelo de 6 pg para imprimir e assinar, anexos clonáveis | Cap 24 Governança · F6 Governança Indelegável · APX-O Caderno de Governança |
 | 🔬 [`/evals`](./evals/) | `eval_runner.py` executável, `compile_golden_sets.py`, judges integrados, gate de CI | Cap 21 Evals · F8 Pirâmide da Avaliação |
 | 📦 [`/datasets`](./datasets/) | Golden sets em JSONL compilados a partir dos YAML originais, prontos para CI | Cap 21 Evals · Cap 23 Alignment (adversarial sets) |
-| 🤖 [`/agents`](./agents/) | Agentes educacionais em Python puro — A01 ReAct e A02 Escala de Propriedade nos 4 níveis F3 lado a lado, com tracing, gates, kill switch e rollback | Cap 12 Agentes · Cap 14C SDD · Cap 22 LLMOps · F3 Escala de Propriedade do Agente |
+| 🤖 [`/agents`](./agents/) | Quatro agentes educacionais em Python puro — A01 ReAct Simples, A02 Escala de Propriedade nos 4 níveis F3 lado a lado, A03 Orquestrador-Especialistas (multiagente cooperativo em estrela reusando `/prompts`) e A04 Multiagente Debate (adversarial com juiz integrável a `/evals`), com tracing, gates, kill switch e exemplos rodáveis | Cap 12 Agentes · Cap 14C SDD · Cap 21 Evals · Cap 22 LLMOps · Cap 25 Trade-offs · F3 Escala de Propriedade · F8 Pirâmide da Avaliação |
 | 🔌 [`/mcp`](./mcp/) | Servidores MCP educacionais — M01 Hello World e M02 Biblioteca Interna que expõe `/prompts` e `/governance` para qualquer cliente MCP | Cap 13 MCP · F5 Matriz de Cobertura de Integrações |
 | 📓 [`/notebooks`](./notebooks/) | 4 notebooks fundacionais executáveis — tokenização, janela de contexto/Lost in the Middle, embeddings com visualização 2D, prompt caching | Cap 3 Tokens · Cap 4 Janela de Contexto · Cap 5 Embeddings · Cap 18 Economia de Tokens |
 
@@ -89,7 +89,7 @@ Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Tempora
 | `/governance` | **Executável** · Caderno de Governança em Camada Dupla, 10 arquivos (artefato do APX-O) |
 | `/evals` | **Executável** · `eval_runner.py` rodável, `compile_golden_sets.py`, judges integrados, gate de CI |
 | `/datasets` | **Estrutura definida** · esquema JSONL documentado, compilação a partir de YAML, 60 golden sets calibrados em 3 domínios |
-| `/agents` | **Executável** · A01 ReAct Simples e A02 Escala de Propriedade (4 níveis F3 lado a lado) completos; A03 Orquestrador-Especialistas e A04 Multiagente Debate como stubs estruturais declarados |
+| `/agents` | **Executável — 4 agentes completos** · A01 ReAct Simples, A02 Escala de Propriedade nos 4 níveis F3 lado a lado, A03 Orquestrador-Especialistas (cooperativo em estrela, reusando `/prompts` como especialistas) e A04 Multiagente Debate (adversarial proponente × oponente com juiz integrável a `/evals`) |
 | `/mcp` | **Executável** · M01 Hello World e M02 Biblioteca Interna completos, com `claude_desktop_config.example.json` e cliente de teste local |
 | `/notebooks` | **Executáveis** · 4 notebooks fundacionais (tokenização, janela de contexto, embeddings, prompt caching) com narrativa didática célula a célula |
 

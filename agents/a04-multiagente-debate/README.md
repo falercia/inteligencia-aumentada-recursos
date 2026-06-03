@@ -1,88 +1,141 @@
-# A04 — Multiagente Debate (🚧 STUB)
+# A04 — Multiagente Debate
 
-> **Status atual: stub estrutural.** Implementação completa prevista para um release futuro. Este README declara o que vai entrar e por quê, conforme Princípio 5 — Honestidade Temporal.
-
----
-
-## Que problema este agente vai resolver
-
-Toda decisão executiva de alto risco — adotar IA em domínio sensível, conceder ou negar crédito automaticamente, escolher diagnóstico em medicina assistida, contratar ou demitir com auxílio de algoritmo — sofre do mesmo viés operacional: **a primeira resposta plausível tende a ser aceita**. O segundo argumento, o contraditório, o ponto cego, raramente aparece com força suficiente para mudar a decisão. Em humanos, isso é o que justifica órgão colegiado, comitê de risco, segunda opinião médica.
-
-**A04 vai resolver isso em agentes** com o padrão debate adversarial: dois agentes argumentam de lados opostos (pró e contra), e um terceiro agente atua como juiz, decidindo com base na qualidade dos argumentos apresentados pelos dois lados. O resultado é uma recomendação com nuance, não com confiança vazia, e com auditabilidade de qual argumento ganhou peso.
-
-**Caso de uso canônico que vai estar implementado:** decisão de adoção de triagem automatizada de currículos por IA, com pró-adoção argumentando ganho operacional, contra-adoção argumentando viés algorítmico e responsabilidade indelegável, e juiz consolidando a recomendação executiva. **Para quem vai ser útil:** comitês de IA, áreas de governança e compliance, conselhos de ética em IA, qualquer decisão que pareça óbvia mas mereça contraditório antes de virar política. Custa três vezes mais em tokens do que uma consulta simples — e por isso só vale para decisões em que o custo do erro paga essa conta com folga.
+> **Multiagente adversarial.** Proponente defende tese A, oponente defende tese B, juiz decide contra rubrica estruturada integrável a `/evals`. A tensão entre os agentes é o produto — não há cooperação, e essa é a fonte da qualidade.
 
 ---
 
-## O que este agente será
+## Que problema este agente resolve
 
-Padrão **debate adversarial**: dois agentes argumentam de lados opostos sobre uma mesma questão de alto risco, e um terceiro agente (juiz) decide com base na qualidade dos argumentos apresentados. O padrão é especialmente útil quando o custo do erro é alto e o ganho de uma segunda perspectiva crítica supera o custo extra de tokens.
+Toda decisão arquitetural não-trivial em IA tem mais de uma resposta razoável, e a escolha entre elas depende de exposição honesta dos trade-offs. **Quando o operador pergunta "qual a melhor opção?" para UM agente, recebe a resposta enviesada pelo treinamento do modelo** — RAG vence quase sempre, fine-tuning é apresentado como complemento, deploy próprio é descrito como "para quem tem capacidade". A pergunta certa quase nunca é "qual a melhor"; é "quais os trade-offs concretos no MEU contexto, e qual posição sustenta o escrutínio adversarial".
 
-A demonstração canônica vai ser uma decisão de adoção de IA em domínio sensível:
+A solução amadora é "pesquisar mais" — ler dois artigos, ouvir um podcast, perguntar a um colega. A solução madura é **debate adversarial estruturado**: um proponente defende a tese A com o máximo de rigor, um oponente defende a tese B com o mesmo rigor, um juiz arbitra contra rubrica explícita. A qualidade da decisão sobe materialmente, porque os pontos fracos de cada tese aparecem sob ataque honesto, e os pontos cegos comuns aos dois aparecem no parecer do juiz.
 
-> A diretoria está avaliando substituir a triagem manual de currículos por um sistema de IA. Argumente a favor [agente Pró-adoção], argumente contra [agente Contra-adoção], e decida a recomendação executiva [juiz], considerando viés algorítmico, custo composto, responsabilidade indelegável e ganho operacional.
+**A04 resolve isso na prática.** Três agentes com system prompts distintos, integração ao pipeline de `/evals` via rubrica em `eval_config.json`, transcript completo gravado em `outbox/` para auditoria posterior.
 
----
+**Para quem é útil:** o CTO que precisa decidir RAG vs fine-tuning para um produto crítico; o comitê de arquitetura que está dividido entre deploy próprio e API e quer instrumentar a discussão; o time de produto que precisa apresentar trade-off honesto ao conselho em vez de pitch enviesado; o auditor interno que precisa documentar por que UMA opção foi escolhida sobre a outra com critério defensável.
 
-## Por que debate em vez de orquestrador
-
-Debate é mais caro que orquestrador (no mínimo 3x o custo de tokens em comparação com uma chamada simples), e por isso só compensa quando:
-
-1. **A questão é genuinamente controversa** — não tem resposta óbvia
-2. **O custo do erro é alto** — decisão que afeta pessoas, balanço, compliance, direito de terceiros
-3. **A organização tem capacidade de absorver a recomendação** — debate gera nuance, e nuance só ajuda quem decide com critério; quem decide por instinto vai ignorar a nuance e usar só a conclusão do juiz
-
-O padrão é coberto na literatura por Du et al. (2023) *Improving Factuality and Reasoning in Language Models through Multiagent Debate* e ganhou tração na prática para decisões de alta consequência. A implementação aqui vai mostrar o padrão funcionando e os limites operacionais que ele tem.
+**O que você sai sabendo após rodar:** como funciona o padrão adversarial em código, por que steel-manning (atacar a versão FORTE do adversário) é critério editorial não-negociável, como integrar judge LLM a uma rubrica em JSON, e por que empate técnico honesto é decisão legítima do juiz — mais defensável do que vitória forçada.
 
 ---
 
-## Estrutura prevista
+## Ficha técnica
+
+| Campo | Valor |
+|---|---|
+| **Padrão** | Multiagente adversarial (proponente × oponente + juiz) |
+| **Nível F3 declarado** | Supervisionado (sem efeito colateral; output é parecer escrito) |
+| **Modelo dos três agentes** | Sonnet (default) — debate exige raciocínio, juiz exige calibração |
+| **Dono nominal** | O leitor que está executando |
+| **Tracing** | Ativo por padrão em `../_common/traces/` |
+| **Kill switch** | `kill_switch.py` testável (padrão A01/A02/A03) |
+| **Persistência do debate** | Transcript JSON em `outbox/debate-*.json` por execução |
+| **Rubrica de arbitragem** | `eval_config.json` (5 critérios ponderados; integrável a `/evals`) |
+| **Custo estimado** | 1 rodada: ~0,04 USD com Sonnet; 2 rodadas: ~0,08 USD |
+
+---
+
+## Como rodar
+
+### Pré-requisitos
+
+```bash
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY="sua-chave"
+```
+
+### Modo seco
+
+```bash
+python agent.py --dry-run
+```
+
+Em dry-run, cada agente devolve resposta simulada. Use com `agent.py` aberto para entender o fluxo proponente → oponente → juiz sem gastar token.
+
+### Modo real — caso default (RAG vs fine-tuning, escritório jurídico de M&A)
+
+```bash
+python agent.py --verbose
+```
+
+O agente carrega a pergunta default (M&A com 50 advogados, 20 mil docs, citação verificável), tese A pró-RAG, tese B pró-fine-tuning. Em ~30 segundos o debate inteiro acontece em 1 rodada com parecer arbitral.
+
+### Modo real — caso customizado
+
+```bash
+python agent.py \
+  --question "Sua pergunta aqui" \
+  --thesis-a "Tese A" \
+  --thesis-b "Tese B" \
+  --rounds 2 \
+  --verbose
+```
+
+`--rounds 2` adiciona uma rodada extra de réplica + tréplica. Cada rodada extra adiciona ~50% de custo; o ganho marginal cai rápido depois da segunda.
+
+---
+
+## Exemplos prontos
+
+| Exemplo | O que demonstra |
+|---|---|
+| [`exemplos/exemplo-01-rag-vs-finetuning.md`](./exemplos/exemplo-01-rag-vs-finetuning.md) | Debate canônico em contexto bem definido — caso em que o proponente tende a vencer com folga |
+| [`exemplos/exemplo-02-modelo-proprio-vs-api.md`](./exemplos/exemplo-02-modelo-proprio-vs-api.md) | Caso borderline em fintech regulada — empate técnico honesto com recomendação prática faseada |
+| [`exemplos/exemplo-03-agente-autonomo-vs-supervisionado.md`](./exemplos/exemplo-03-agente-autonomo-vs-supervisionado.md) | Decisão de promoção F3 com gates próximos do limiar — exemplo de quando o "ponto cego" do juiz importa mais que a decisão final |
+
+---
+
+## Anatomia da pasta
 
 ```
 a04-multiagente-debate/
-├── README.md                       ← este arquivo
-├── agent.py                        ← entry point com CLI
-├── system_prompt_pro.md            ← constituição do agente pró
-├── system_prompt_contra.md         ← constituição do agente contra
-├── system_prompt_juiz.md           ← constituição do juiz
-├── debate_loop.py                  ← lógica de turnos e parada
+├── README.md                            ← este arquivo
+├── agent.py                             ← orquestra o debate (proponente → oponente → juiz)
+├── system_prompt_proponente.md          ← constituição do defensor da tese A
+├── system_prompt_oponente.md            ← constituição do contraditor (tese B)
+├── system_prompt_juiz.md                ← constituição do árbitro editorial
+├── eval_config.json                     ← rubrica com 5 critérios ponderados (integrável a /evals)
 ├── exemplos/
-│   ├── caso-triagem-cv.md          ← decisão de adoção de IA em RH
-│   ├── caso-medico-diagnostico.md  ← decisão clínica de alto risco
-│   └── caso-credito.md             ← negação automática de crédito
-├── eval/
-│   └── golden-set.jsonl            ← validação contra decisões revisadas por humano
-└── kill_switch.py
+│   ├── exemplo-01-rag-vs-finetuning.md
+│   ├── exemplo-02-modelo-proprio-vs-api.md
+│   └── exemplo-03-agente-autonomo-vs-supervisionado.md
+├── outbox/                              ← transcripts gravados por execução
+├── kill_switch.py
+└── requirements.txt
 ```
 
 ---
 
-## Nível F3 esperado
+## Por que adversarial, não cooperativo
 
-**Supervisionado.** O resultado do debate é recomendação, não execução; a decisão final permanece com o humano em todos os exemplos. O kill switch existe para abortar o debate em qualquer rodada se o trace mostrar argumentação descambando para retórica vazia.
+A diferença entre **estrela cooperativa** (A03) e **debate adversarial** (A04) é a fonte da qualidade:
 
----
+- **Cooperativa** = especialistas em domínios DIFERENTES, somando competências para um resultado integrado. O orquestrador consolida sem tensão. Caso típico: triagem multidomínio (jurídico + clínico + suporte).
+- **Adversarial** = agentes no MESMO domínio com posições OPOSTAS, expondo trade-offs sob pressão. O juiz arbitra. Caso típico: decisão arquitetural com mais de uma resposta razoável (RAG vs fine-tuning, API vs deploy, promover vs manter nível).
 
-## Por que NÃO está pronto em v1.2.0
-
-Quatro decisões de design precisam ser tomadas com cuidado:
-
-1. **Quantas rodadas de debate antes de parar** (limites de qualidade vs. custo composto)
-2. **Como evitar que os agentes se "alinhem" no meio do debate** (problema documentado: agentes que veem o argumento do outro tendem a convergir, perdendo o valor adversarial)
-3. **Como o juiz declara que a decisão é insuficientemente clara** (em vez de forçar veredicto quando os dois lados têm mérito)
-4. **Como capturar a nuance no resultado final** (sem virar relatório de 10 páginas que ninguém lê)
-
-A integração com a pasta `/evals` deste repositório também vai exigir um eval de **calibração do juiz** — golden set onde a decisão correta é conhecida (por humano revisor) e o juiz é avaliado pela taxa de concordância. Isso é trabalho próprio, com cadência própria.
+Tentar usar A03 onde A04 é certo (forçar consenso quando há trade-off real) esconde o conflito, e o conflito escondido reaparece em incidente depois. Tentar usar A04 onde A03 é certo (forçar adversarialidade onde há colaboração legítima) gera teatro retórico em vez de output útil. Saber qual padrão usar quando é parte da disciplina arquitetural que separa o operador maduro do entusiasta de multiagente.
 
 ---
 
-## Conexão com o livro (a ser ampliada no release final)
+## Integração com /evals
 
-- 🔗 [Capítulo 12 — Agentes de IA](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C12-agentes.md), seção sobre debate
-- 🔗 [Capítulo 21 — Evals](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C21-evals.md) — calibração do juiz
-- 🔗 [Capítulo 18 — Economia de Tokens](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C18-economia-tokens.md) — debate é caro; quando vale
-- 🔗 Du, Y., Li, S., Torralba, A., Tenenbaum, J. B., Mordatch, I. *Improving Factuality and Reasoning in Language Models through Multiagent Debate* (2023)
+O `eval_config.json` deste agente é **compatível com o motor de evals** do repositório (`evals/eval_runner.py`):
+
+1. **Judge `classification`** sobre decisão final ("Proponente vence" / "Oponente vence" / "Empate") permite medir concordância com humano sênior.
+2. **Judge `llm-as-judge` calibrado** pode avaliar a nota por critério do parecer arbitral contra rubrica externa, com gate de qualidade em 0,75 de concordância.
+3. **Golden set mínimo** de 20 debates calibrados por humano sênior em 3 verticais distintos (jurídico, financeiro, técnico) habilita a aceitação editorial do juiz como instrumento auditável.
+
+A construção do golden set é o caminho natural de evolução do A04 — quem usar o agente em produção contribui debates calibrados de volta ao golden set público, e a qualidade do juiz sobe com a comunidade.
 
 ---
 
-> *Stub é declaração honesta do que existe e do que ainda não existe. Debate adversarial é padrão útil em domínio certo; sem instrumentação de eval calibrado, é teatro caro. Por isso a implementação espera o ciclo que comporta o eval junto.*
+## Conexão com o livro
+
+- 🔗 [**Capítulo 12 — Agentes de IA**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C12-agentes.md) — fundação de padrões multiagente
+- 🔗 [**Capítulo 21 — Evals**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C21-evals.md) — rubrica de arbitragem como caso de uso de LLM-as-judge
+- 🔗 [**Capítulo 25 — Trade-offs Estratégicos**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C25-trade-offs.md) — o exercício do C25 é EXATAMENTE o que A04 instrumenta
+- 🔗 [**Framework F8 — Pirâmide de Avaliação**](../../../Livro-1-Os-Invariantes/03-frameworks/L1-F8-piramide-aval.md) — `eval_config.json` aplica os três níveis da pirâmide
+- 🔗 [**A03 Orquestrador-Especialistas**](../a03-orquestrador-especialistas/) — o par cooperativo deste padrão adversarial
+
+---
+
+> *"Decisão arquitetural sem debate é decisão por inércia. O proponente sozinho fala bem demais; o oponente sozinho ataca demais. Os dois juntos, sob arbitragem de critério explícito, expõem o trade-off real e devolvem ao operador a base para decidir como adulto — ou para reconhecer honestamente que faltam dados para decidir."*
