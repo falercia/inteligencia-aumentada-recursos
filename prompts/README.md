@@ -1,74 +1,55 @@
-# Biblioteca de Prompts Profissionais — v1.0.0
+# PROMPTS — BIBLIOTECA DE PROMPTS TESTADOS
 
-Trinta prompts profissionais em qualidade plena, organizados por domínio.
+> Espelho rodável do Apêndice L do Livro 1. Cada prompt aqui está estruturado segundo o **F4 PROMPT-EXT** (Persona/Constituição/Contexto/Instrução/Pergunta viva) e vem acompanhado de golden set mínimo em `/evals`.
 
-## Padrão de adoção
+---
 
-1. **Clone o repositório.**
-2. **Identifique o prompt mais próximo do seu domínio.**
-3. **Copie o diretório inteiro** para seu repositório interno.
-4. **Adapte a constituição** ao seu contexto.
-5. **Construa seu golden set próprio** com pelo menos 20 casos do seu tráfego real.
-6. **Rode `eval.py`** (a partir da release v1.1.0) antes de cada release.
+## CATEGORIAS
 
-## Estrutura de cada pasta
+| Categoria | Status v0.1 | Caso de uso típico |
+|-----------|--------------|---------------------|
+| `analise-juridica/` | Stub | Due diligence, extração de cláusula, parecer estruturado |
+| `due-diligence-mna/` | Stub | M&A (referência EC3 Vianna Castro) |
+| `escrita-executiva/` | Stub | Memo para conselho, sumário executivo, deck de 10 slides |
+| `classificacao-estruturada/` | Stub | Triagem por tier, roteamento por categoria, extração |
+| `extracao-de-campos/` | Stub | OCR + extração, normalização de PII, scoring |
+| `agentes-supervisionados/` | Stub | Co-piloto com confirmação humana |
+
+---
+
+## ESTRUTURA DE CADA PROMPT
 
 ```
-P-XXX-NN-slug/
-├── README.md          ← ficha conceitual e instruções de uso
-├── prompt.xml         ← XML completo
-├── golden-set.yaml    ← 20 casos com input + saída esperada
-├── anti-padroes.md    ← antipadrões observados
-├── changelog.md       ← histórico do prompt
-└── exemplos-saida/    ← outputs reais anonimizados
+nome-do-prompt/
+├── prompt.txt              ← prompt aplicando F4 PROMPT-EXT
+├── README.md               ← objetivo, Invariante-mãe, quando usar
+├── exemplos.md             ← 3-5 exemplos de input/output esperado
+└── eval-link.md            ← link para golden set em /evals
 ```
 
-## Índice por domínio
+---
 
-### Jurídico (LEG)
-- `P-LEG-01-clausula-nao-concorrencia-clt` — Revisão de cláusula de não-concorrência CLT
-- `P-LEG-02-nda-lgpd-compliant` — Análise de NDA brasileiro LGPD-compliant
-- `P-LEG-03-red-flags-contrato-ma` — Red flags em contrato M&A
-- `P-LEG-04-parecer-compliance-lgpd` — Parecer sobre compliance LGPD
+## REGRAS DE ESTRUTURA — F4 PROMPT-EXT
 
-### Saúde (MED)
-- `P-MED-01-triagem-sintomas` — Triagem de sintomas com recusa por escopo
-- `P-MED-02-sumula-prontuario` — Súmula de prontuário
-- `P-MED-03-interacao-medicamentosa` — Alerta de interação medicamentosa
+Todo prompt aqui segue 5 blocos posicionais:
 
-### Financeiro (FIN)
-- `P-FIN-01-anomalia-extrato` — Detecção de anomalia em extrato
-- `P-FIN-02-risco-credito-pf` — Classificação de risco de crédito PF
-- `P-FIN-03-sumula-itr` — Súmula de relatório trimestral ITR
-- `P-FIN-04-analise-carteira` — Análise de carteira recomendada
+1. **Persona e missão** (topo) — 1-3 linhas
+2. **Constituição** (logo após persona) — regras invioláveis em bullets curtos
+3. **Contexto** (meio) — documentos, exemplos, dados
+4. **Instrução operacional + formato** (antes da pergunta) — reitera o crítico
+5. **Pergunta viva** (última posição) — input sanitizado do usuário
 
-### SaaS e Produto (SAAS)
-- `P-SAAS-01-feature-request` — Classificação de feature request por persona
-- `P-SAAS-02-sumula-nps` — Súmula de NPS qualitativo
-- `P-SAAS-03-release-notes` — Geração de release notes
-- `P-SAAS-04-churn-signal` — Análise de churn signal
+---
 
-### Suporte (SUP)
-- `P-SUP-01-severidade-ticket` — Classificação de ticket em severidade
-- `P-SUP-02-resposta-empatica` — Resposta empática a reclamação
-- `P-SUP-03-escalonamento` — Decisão sobre escalonamento
+## ROADMAP
 
-### RH
-- `P-RH-01-triagem-curriculo` — Triagem de currículo com fit
-- `P-RH-02-feedback-360` — Análise de feedback 360
-- `P-RH-03-descritivo-vaga` — Descritivo de vaga em linguagem inclusiva
+| Marco | Conteúdo |
+|-------|----------|
+| v0.1 (atual) | Stubs com estrutura de pasta + esta documentação |
+| v0.2 | 3 prompts canônicos por categoria, totalizando 18 prompts |
+| v1.0 | Biblioteca completa espelhando L1-APX-L; 50+ prompts |
+| v1.x | Atualização contínua com prompts da comunidade |
 
-### Marketing (MKT)
-- `P-MKT-01-copy-ab` — Geração de copy A/B testável
-- `P-MKT-02-brand-voice` — Análise de brand voice
-- `P-MKT-03-sumula-pesquisa` — Súmula de pesquisa de mercado
+---
 
-### Educação (EDU)
-- `P-EDU-01-plano-aula` — Geração de plano de aula
-- `P-EDU-02-avaliacao-rubrica` — Avaliação rubrica-baseada
-- `P-EDU-03-resposta-socratica` — Resposta socrática a dúvida do aluno
-
-### Transversais (TR)
-- `P-TR-01-extracao-json` — Extração estruturada com schema JSON
-- `P-TR-02-multi-label` — Classificação multi-label
-- `P-TR-03-recusa-fallback` — Recusa estruturada com fallback
+🔗 [Cap 09 Engenharia de Prompt](../../Livro-1-Os-Invariantes/02-capitulos/L1-C09-engenharia-prompt.md) · [F4 PROMPT-EXT](../../Livro-1-Os-Invariantes/03-frameworks/L1-F4-prompt-ext.md)

@@ -1,0 +1,18 @@
+# Artefatos de execução local — não devem ir para o repo
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Tracing local gerado pelos agentes em execução
+traces/
+
+# Output simulado dos agentes (A02)
+outbox/
+state/
+.killed
+
+# Ambiente Python
+.venv/
+venv/
+.env

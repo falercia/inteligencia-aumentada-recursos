@@ -1,0 +1,14 @@
+# Artefatos do Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Ambiente Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+
+# Outputs locais
+demo_outputs/
+*.npy.cache

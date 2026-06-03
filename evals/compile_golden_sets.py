@@ -93,8 +93,9 @@ def compile_prompt(prompt_id: str, validate_only: bool = False) -> tuple[int, li
     out_path = DATASETS_DIR / f"{prompt_id}.jsonl"
     with out_path.open("w", encoding="utf-8") as f:
         for c in cases:
-            row = {"prompt_id": prompt_id, "version": version, **c}
-            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            row = {"prompt_id": prompt_id, "version": str(version), **c}
+            # JSON não serializa date/datetime nativos — convertemos para ISO string
+            f.write(json.dumps(row, ensure_ascii=False, default=str) + "\n")
 
     return len(cases), errors
 

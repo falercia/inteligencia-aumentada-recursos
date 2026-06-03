@@ -1,0 +1,14 @@
+{
+  "_comentario_": "Exemplo de configuração para Claude Desktop consumir o servidor M02. Substitua o path em 'args' e o REPO_ROOT em 'env' pelos caminhos ABSOLUTOS no seu sistema. Reinicie o Claude Desktop após editar. Configs reais: macOS = ~/Library/Application Support/Claude/claude_desktop_config.json ; Windows = %APPDATA%/Claude/claude_desktop_config.json",
+  "mcpServers": {
+    "biblioteca-interna": {
+      "command": "python",
+      "args": [
+        "/caminho/absoluto/para/inteligencia-aumentada-recursos/mcp/m02-biblioteca-interna/server.py"
+      ],
+      "env": {
+        "REPO_ROOT": "/caminho/absoluto/para/inteligencia-aumentada-recursos"
+      }
+    }
+  }
+}

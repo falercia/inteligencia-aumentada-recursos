@@ -1,0 +1,11 @@
+{
+  "_comentario_": "Exemplo de configuração para Claude Desktop consumir o servidor M01. Copie este conteúdo e cole no seu config real do Claude Desktop (macOS: ~/Library/Application Support/Claude/claude_desktop_config.json; Windows: %APPDATA%/Claude/claude_desktop_config.json). Substitua o path em 'args' pelo caminho ABSOLUTO do server.py no seu sistema. Reinicie o Claude Desktop após editar.",
+  "mcpServers": {
+    "hello-world-notes": {
+      "command": "python",
+      "args": [
+        "/caminho/absoluto/para/inteligencia-aumentada-recursos/mcp/m01-hello-world/server.py"
+      ]
+    }
+  }
+}

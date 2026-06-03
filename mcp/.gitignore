@@ -1,0 +1,17 @@
+# Artefatos de execução local — não devem ir para o repo
+__pycache__/
+*.pyc
+*.pyo
+
+# Tracing local
+traces/
+*.log.jsonl
+
+# Estado local dos servidores
+state/
+notes/
+
+# Ambiente Python
+.venv/
+venv/
+.env

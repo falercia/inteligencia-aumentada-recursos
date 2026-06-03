@@ -3,16 +3,14 @@
 > O número que muda. A Camada Dupla aplicada na prática.
 > Companheiro executável do livro **Inteligência Aumentada · Os Invariantes da IA** (Fabio Garcia, 2026).
 
-[![Status](https://img.shields.io/badge/vers%C3%A3o-v1.0.0-success)](#estado-atual)
 [![Licença código](https://img.shields.io/badge/c%C3%B3digo-MIT-blue)](#licença)
 [![Licença conteúdo](https://img.shields.io/badge/conte%C3%BAdo-CC--BY%204.0-lightgrey)](#licença)
-[![Cadência](https://img.shields.io/badge/cad%C3%AAncia-mensal-success)](#cadência-pública-de-expansão)
 
 ---
 
 ## Por que este repositório existe
 
-A obra **Inteligência Aumentada** opera sob o Princípio Três, a Camada Dupla, que afirma que conhecimento em IA vive em dois andares, o padrão que dura e o número que muda. O livro carrega o padrão — frameworks, arquiteturas, anti-padrões, vocabulário durável. Este repositório carrega o número — XML versionado de prompts, golden sets executáveis, scripts de regressão, changelog público mensal, exemplos rodáveis.
+A obra **Inteligência Aumentada** opera sob o Princípio Três, a Camada Dupla, que afirma que conhecimento em IA vive em dois andares, o padrão que dura e o número que muda. O livro carrega o padrão — frameworks, arquiteturas, anti-padrões, vocabulário durável. Este repositório carrega o número — XML versionado de prompts, golden sets executáveis, scripts de regressão, changelog versionado, exemplos rodáveis, agentes e servidores MCP educacionais.
 
 Sem o livro, este repositório é catálogo sem mapa, com receitas que o operador desentendido aplicará no contexto errado. Sem o repositório, o livro é vocabulário sem executável, com método que o operador entendeu mas não consegue colocar em produção sem reescrever cada artefato do zero. Juntos, os dois materializam a tese central da obra, com o leitor que opera com os dois saindo com modelo mental sólido e ativos prontos para entrar em pipeline.
 
@@ -33,12 +31,12 @@ Sem o livro, este repositório é catálogo sem mapa, com receitas que o operado
 | Pasta | Conteúdo | Capítulos relacionados |
 |---|---|---|
 | 📚 [`/prompts`](./prompts/) | 30 prompts profissionais em XML versionado, com golden set, prefill, self-critique, changelog e métrica de qualidade por prompt | Cap 9 Engenharia de Prompt · F4 Engenharia de Prompt Estendida · APX-L Biblioteca de Prompts |
-| 🏛️ [`/governance`](./governance/) | Caderno de Governança v1.0 em Camada Dupla — 6 seções fatiadas, modelo de 6 pg para imprimir e assinar, anexos clonáveis | Cap 42 Governança · F6 Governança Indelegável · APX-O Caderno de Governança |
-| 🔬 [`/evals`](./evals/) | `eval_runner.py` executável, `compile_golden_sets.py`, judges integrados, gate de CI | Cap 39 Evals · F8 Pirâmide da Avaliação |
-| 📦 [`/datasets`](./datasets/) | Golden sets em JSONL compilados a partir dos YAML originais, prontos para CI | Cap 39 Evals · Cap 41 Alignment (adversarial sets) |
-| 🤖 [`/agents`](./agents/) | Exemplos de agentes que compõem prompts da biblioteca em fluxos práticos | Cap 12 Agentes · Cap 40 LLMOps · F3 Escala de Propriedade do Agente |
-| 🔌 [`/mcp`](./mcp/) | Servidores MCP de referência, minimalistas e auditáveis | Cap 13 MCP · F5 Matriz de Cobertura de Integrações |
-| 📓 [`/notebooks`](./notebooks/) | Notebooks Python reproduzíveis para conceitos fundacionais | Cap 2 Como Modelos Funcionam · Cap 3 Tokens · Cap 4 Janela de Contexto |
+| 🏛️ [`/governance`](./governance/) | Caderno de Governança v1.0 em Camada Dupla — 6 seções fatiadas, modelo de 6 pg para imprimir e assinar, anexos clonáveis | Cap 24 Governança · F6 Governança Indelegável · APX-O Caderno de Governança |
+| 🔬 [`/evals`](./evals/) | `eval_runner.py` executável, `compile_golden_sets.py`, judges integrados, gate de CI | Cap 21 Evals · F8 Pirâmide da Avaliação |
+| 📦 [`/datasets`](./datasets/) | Golden sets em JSONL compilados a partir dos YAML originais, prontos para CI | Cap 21 Evals · Cap 23 Alignment (adversarial sets) |
+| 🤖 [`/agents`](./agents/) | Agentes educacionais em Python puro — A01 ReAct e A02 Escala de Propriedade nos 4 níveis F3 lado a lado, com tracing, gates, kill switch e rollback | Cap 12 Agentes · Cap 14C SDD · Cap 22 LLMOps · F3 Escala de Propriedade do Agente |
+| 🔌 [`/mcp`](./mcp/) | Servidores MCP educacionais — M01 Hello World e M02 Biblioteca Interna que expõe `/prompts` e `/governance` para qualquer cliente MCP | Cap 13 MCP · F5 Matriz de Cobertura de Integrações |
+| 📓 [`/notebooks`](./notebooks/) | 4 notebooks fundacionais executáveis — tokenização, janela de contexto/Lost in the Middle, embeddings com visualização 2D, prompt caching | Cap 3 Tokens · Cap 4 Janela de Contexto · Cap 5 Embeddings · Cap 18 Economia de Tokens |
 
 Cada pasta tem seu próprio `README.md` com instruções específicas, padrões de uso e exemplos práticos.
 
@@ -57,13 +55,13 @@ Três caminhos a partir daqui, conforme seu objetivo:
 
 **2. Quero colocar em produção rápido.** Pegue o prompt mais próximo do seu domínio, copie o diretório inteiro para o seu repositório interno, adapte a constituição ao seu contexto, construa seu golden set próprio com pelo menos vinte casos representativos do seu tráfego real, e rode `eval.py` antes de cada release. O atalho está em [Padrão de adoção](./prompts/README.md).
 
-**3. Quero contribuir.** Leia [CONTRATO.md](./CONTRATO.md) e abra uma issue com a categoria sugerida. Contribuições qualificadas com fonte primária são incorporadas na revisão mensal seguinte, com atribuição quando o contribuidor autoriza.
+**3. Quero contribuir.** Leia [CONTRATO.md](./CONTRATO.md) e abra uma issue com a categoria sugerida. Contribuições qualificadas com fonte primária são incorporadas em revisões futuras do repositório, com atribuição quando o contribuidor autoriza.
 
 ---
 
 ## Estado atual
 
-**Versão v1.0.0 · publicada em junho de 2026.** Biblioteca completa com os 30 prompts em qualidade plena. A cadência mensal continua como compromisso público declarado, agora orientada à expansão das demais pastas (evals, datasets, agents, mcp, notebooks).
+**Biblioteca de prompts completa, com infraestrutura executável de evals, agentes educacionais, servidores MCP e notebooks fundacionais disponíveis.** Os artefatos são revisados quando a calibração exige, e não em cadência fixa pré-anunciada.
 
 ### Biblioteca de prompts — status por domínio
 
@@ -88,31 +86,12 @@ Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Tempora
 
 | Pasta | Estado |
 |---|---|
-| `/governance` | **v1.0 executável** · Caderno de Governança em Camada Dupla, 10 arquivos (artefato do APX-O) |
-| `/evals` | **v1.1.0 executável** · `eval_runner.py` rodável, `compile_golden_sets.py`, gate de CI |
-| `/datasets` | **v1.1.0 estrutura definida** · esquema JSONL documentado, compilação a partir de YAML |
-| `/agents` | Stub estrutural · primeiros agentes compostos na v1.3.0 |
-| `/mcp` | Stub estrutural · primeiro servidor de referência na v1.4.0 |
-| `/notebooks` | Stub estrutural · notebooks fundacionais na v1.2.0 |
-
----
-
-## Cadência pública de expansão
-
-O compromisso editorial é publicar release com nota datada **toda primeira semana do mês**, nos primeiros doze meses pós-lançamento da obra. A partir do décimo terceiro mês, a cadência passa a trimestral, salvo emergência regulatória ou técnica que justifique release fora de janela.
-
-| Release | Janela | Escopo planejado |
-|---|---|---|
-| **v1.0.0** | **jun/2026** | **Biblioteca completa: 30 prompts em qualidade plena** |
-| **v1.0.1** | **jun/2026** | **Caderno de Governança v1.0 em `/governance` (artefato do APX-O)** |
-| **v1.1.0** | **jul/2026** | **`eval_runner.py` executável · `compile_golden_sets.py` · gate de CI** |
-| v1.2.0 | ago/2026 | Notebooks fundacionais (tokenização, contexto, embeddings, caching) |
-| v1.3.0 | set/2026 | Primeiros agentes compostos (triagem, due diligence, customer success) |
-| v1.4.0 | out/2026 | Primeiro servidor MCP de referência |
-| v1.5.0 | nov/2026 | Adversarial sets · calibração estendida do LLM-as-judge |
-| v2.0.0 | dez/2026 | Reorganização para inclusão dos prompts do Livro 2 |
-
-Cada release vem com `CHANGELOG.md` versionado, indicando mudança item por item, motivo da mudança, e impacto observado em golden set ou em produção.
+| `/governance` | **Executável** · Caderno de Governança em Camada Dupla, 10 arquivos (artefato do APX-O) |
+| `/evals` | **Executável** · `eval_runner.py` rodável, `compile_golden_sets.py`, judges integrados, gate de CI |
+| `/datasets` | **Estrutura definida** · esquema JSONL documentado, compilação a partir de YAML, 60 golden sets calibrados em 3 domínios |
+| `/agents` | **Executável** · A01 ReAct Simples e A02 Escala de Propriedade (4 níveis F3 lado a lado) completos; A03 Orquestrador-Especialistas e A04 Multiagente Debate como stubs estruturais declarados |
+| `/mcp` | **Executável** · M01 Hello World e M02 Biblioteca Interna completos, com `claude_desktop_config.example.json` e cliente de teste local |
+| `/notebooks` | **Executáveis** · 4 notebooks fundacionais (tokenização, janela de contexto, embeddings, prompt caching) com narrativa didática célula a célula |
 
 ---
 
@@ -126,7 +105,7 @@ Cada release vem com `CHANGELOG.md` versionado, indicando mudança item por item
 
 **Por que self-critique.** Modelos longos perdem peso relativo das regras do início conforme a resposta cresce. Forçar uma rodada explícita de revisão antes de devolver o output recupera aderência à constituição em casos limítrofes onde o output direto fugiria do escopo.
 
-**Por que cadência pública declarada.** Repositório acompanhante de livro que não atualiza vira folheto promocional. A cadência mensal nos primeiros doze meses é a forma de honrar a promessa da Camada Dupla, com a obra dizendo que o número muda e mostrando que o autor reserva tempo para manter o número atualizado.
+**Por que repositório separado do livro.** O livro entrega o método que sobrevive à próxima geração de modelos. Este repositório entrega os artefatos que materializam o método em produção. Os dois evoluem em ritmos diferentes — o método dura anos, os artefatos são revisados quando a calibração exige —, e separar fisicamente os dois é a aplicação direta da Camada Dupla.
 
 ---
 
@@ -140,7 +119,7 @@ Três tipos de contribuição são bem-vindos, em ordem decrescente de impacto:
 
 **3. Sugestão de novo prompt para a biblioteca.** Você identifica caso de uso recorrente que não está coberto pelos 30 prompts atuais. Abra issue com o template `new-prompt-suggestion` e descreva a dor, o domínio, e por que a biblioteca atual não resolve.
 
-Todas as contribuições qualificadas com fonte primária ou validação por especialista são incorporadas na revisão mensal seguinte, com atribuição em `CONTRIBUTORS.md` quando o contribuidor autoriza.
+Todas as contribuições qualificadas com fonte primária ou validação por especialista são incorporadas em revisões futuras, com atribuição em `CONTRIBUTORS.md` quando o contribuidor autoriza.
 
 Antes de qualquer contribuição, leia [CONTRATO.md](./CONTRATO.md) para entender o escopo de manutenção, a política de versionamento e o direito autoral.
 
@@ -182,4 +161,4 @@ A obra **Inteligência Aumentada · Os Invariantes da IA** foi escrita como refe
 
 ---
 
-*Última atualização: junho de 2026 · Próxima janela de release: julho de 2026.*
+*Versão dos artefatos: junho de 2026.*

@@ -1,49 +1,87 @@
-# Contrato de Manutenção e Contribuição
+# CONTRATO DO REPOSITÓRIO ACOMPANHANTE
+## *Inteligência Aumentada — código vivo*
 
-## Política editorial
+> Este repositório é o **companheiro opcional** dos dois livros da obra *Inteligência Aumentada*. Existe deliberadamente fora do corpo dos livros, conforme a Direção Editorial Rota A. O propósito é entregar implementação rodável a quem quiser pôr a mão na massa, sem poluir a obra principal com código que envelhece em meses.
 
-Este repositório é mantido pelo autor da obra Inteligência Aumentada, com
-cadência de release **mensal** nos primeiros doze meses pós-lançamento, e
-**trimestral** a partir do décimo terceiro mês. Releases emergenciais fora
-dessa cadência podem acontecer em casos de correção regulatória, factual
-crítica ou de segurança.
+---
 
-## Tipos de contribuição aceitos
+## ROTA A — POR QUE O CÓDIGO MORA AQUI E NÃO LÁ
 
-### 1. Calibração de golden set por especialista
+A obra impressa segue a regra do Invariante 3 (Camada Dupla): padrão durável no livro, número volátil em apêndice datado. Código vai para um terceiro lugar — este repositório — porque envelhece mais rápido que o número e demanda manutenção contínua. Quem opera só pelos livros sai com método e decisão; quem opera com este repositório acrescenta implementação.
 
-Você é profissional sênior no domínio (advogado, médico, analista financeiro,
-RH, professor, etc.) e identifica caso limítrofe não coberto pelos 20 casos
-atuais, ou divergência entre saída esperada e prática profissional do seu
-campo. Abra issue com o template `golden-set-calibration.md`.
+**O que está aqui:** prompts testados, templates de eval, exemplos de agentes, servidores MCP minimalistas, notebooks de demonstração, datasets de prática.
+**O que NÃO está aqui:** explicação conceitual (vai no livro), versões correntes de modelos e preços (vão no Apêndice Vivo do Livro 2).
 
-### 2. Correção factual ou de referência
+---
 
-Você identifica referência jurisprudencial inexata, artigo de lei mal citado,
-paper com identificador errado, número de benchmark desatualizado. Abra issue
-com o template `factual-correction.md` e cite a fonte primária correta.
+## ESTRUTURA
 
-### 3. Sugestão de novo prompt
+```
+_repositorio-acompanhante/
+├── CONTRATO.md           ← este arquivo
+├── README.md             ← navegação
+├── prompts/              ← biblioteca de prompts testados (espelho L1-APX-L)
+├── evals/                ← templates de golden set, scorecards, regressão
+├── agents/               ← subagentes e workflows rodáveis
+├── mcp/                  ← servidores MCP minimalistas
+├── notebooks/            ← demonstrações conceituais executáveis
+└── datasets/             ← datasets de prática para evals
+```
 
-Você identifica caso de uso recorrente que não está coberto pelos 30 prompts
-atuais. Abra issue com o template `new-prompt-suggestion.md` e descreva a dor,
-o domínio e por que a biblioteca atual não resolve.
+---
 
-## O que NÃO é aceito
+## CONTRATO DE MANUTENÇÃO
 
-- Pull requests com mudanças editoriais não solicitadas
-- Adição de prompts proprietários de empresas ou conteúdo confidencial
-- Inclusão de dados pessoais reais, mesmo anonimizados
-- Conteúdo sem base em fonte primária verificável
+| Item | Compromisso |
+|------|-------------|
+| **Periodicidade de atualização** | Revisão mensal; release maior trimestral |
+| **Dono operacional** | A definir (pendente decisão do autor — ver `_PROJETO/ROADMAP-EXECUCAO.md`) |
+| **Versionamento** | SemVer aplicado a cada pasta (prompts/v0.1, evals/v0.1, etc.) |
+| **Política de breaking changes** | Anunciados em CHANGELOG.md com 30 dias de antecedência sempre que possível |
+| **Compatibilidade com versões dos livros** | Cada release do repositório aponta para qual edição dos livros é compatível |
+| **Issues e contribuições** | Aberto, com curadoria; PRs aceitos sob condição de aderência aos Invariantes |
+| **Licença** | MIT para código; CC-BY-SA para textos não-código |
 
-## Política de incorporação
+---
 
-Contribuições qualificadas são incorporadas na revisão mensal seguinte. O
-editor responsável é Fabio Garcia, autor da obra. Atribuição em
-`CONTRIBUTORS.md` é feita mediante autorização do contribuidor.
+## STATUS INICIAL DAS PASTAS
 
-## Licença das contribuições
+| Pasta | Status v0.1 | Próximo marco |
+|-------|--------------|----------------|
+| `/prompts` | Stub com 5 categorias documentadas | Onda 4 — biblioteca completa espelhando L1-APX-L |
+| `/evals` | Stub com template de golden set | Onda 4 — golden sets dos 4 capítulos definitivos |
+| `/agents` | Stub com 1 exemplo de subagente | Onda 4 — agentes dos 7 estudos de caso |
+| `/mcp` | Stub com 1 servidor MCP minimalista | Onda 4 — 5 MCPs canônicos por categoria |
+| `/notebooks` | Stub com 1 notebook de demonstração | Onda 4 — 10 notebooks cobrindo Caps 02-08 |
+| `/datasets` | Stub com 2 datasets de prática | Onda 4 — datasets dos 7 estudos de caso |
 
-Ao contribuir, você concorda que sua contribuição será publicada sob as
-licenças deste repositório (MIT para código, CC-BY 4.0 para conteúdo
-editorial). Você mantém o crédito autoral da sua contribuição.
+---
+
+## REGRAS DE CONTRIBUIÇÃO
+
+1. **Aderência aos Invariantes.** Todo código novo declara qual Invariante e qual framework ele instancia, na docstring inicial.
+2. **Eval obrigatório.** Todo prompt ou agente vem com pelo menos golden set mínimo de 10 itens.
+3. **Sem versões cravadas.** Nenhum exemplo cita modelo X.Y específico no código; usa variável de ambiente ou config.
+4. **Sem PII.** Nenhum exemplo carrega PII de cliente real, mesmo anonimizado.
+5. **Português executivo.** Documentação principal em pt-BR; docstrings podem ser bilíngues.
+
+---
+
+## CONEXÃO COM OS LIVROS
+
+- **Livro 1** ([raiz](../Livro-1-Os-Invariantes/)) — método, conceito, framework
+- **Livro 2** ([raiz](../Livro-2-Dominando-Claude/)) — ecossistema Claude, casos, Apêndice Vivo
+- **Este repositório** — implementação rodável
+
+---
+
+## ATRIBUIÇÃO E COMUNIDADE
+
+**Autor:** Fabio Garcia
+**Origem:** Inteligência Aumentada — Os Invariantes da IA · Volume Vivo — Dominando Claude
+
+Comunidade de Operadores Inteligência Aumentada — em formação. Detalhes a publicar em release v1.0.
+
+---
+
+> *"Código no repositório. Método no livro. Número no apêndice datado. Quem mistura os três paga em manutenção."*
