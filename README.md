@@ -37,6 +37,10 @@ Sem o livro, este repositório é catálogo sem mapa, com receitas que o operado
 | 🤖 [`/agents`](./agents/) | Quatro agentes educacionais em Python puro — A01 ReAct Simples, A02 Escala de Propriedade nos 4 níveis F3 lado a lado, A03 Orquestrador-Especialistas (multiagente cooperativo em estrela reusando `/prompts`) e A04 Multiagente Debate (adversarial com juiz integrável a `/evals`), com tracing, gates, kill switch e exemplos rodáveis | Cap 12 Agentes · Cap 14C SDD · Cap 21 Evals · Cap 22 LLMOps · Cap 25 Trade-offs · F3 Escala de Propriedade · F8 Pirâmide da Avaliação |
 | 🔌 [`/mcp`](./mcp/) | Servidores MCP educacionais — M01 Hello World e M02 Biblioteca Interna que expõe `/prompts` e `/governance` para qualquer cliente MCP | Cap 13 MCP · F5 Matriz de Cobertura de Integrações |
 | 📓 [`/notebooks`](./notebooks/) | 4 notebooks fundacionais executáveis — tokenização, janela de contexto/Lost in the Middle, embeddings com visualização 2D, prompt caching | Cap 3 Tokens · Cap 4 Janela de Contexto · Cap 5 Embeddings · Cap 18 Economia de Tokens |
+| 🔗 [`/apendice-vivo`](./apendice-vivo/) | Ponteiro para a fonte única de números cross-vendor da série (modelos, preços, benchmarks, janelas de contexto) mantida no repo deep-claude, com método vendor-neutral de ler comparações de modelo e preço de token | APX-J Trilha do Número · Princípio Três Camada Dupla · Cap 15 Modelos |
+| 🛠️ [`/ferramentas`](./ferramentas/) | Catálogo de ferramentas e stack extraído do APX-D — plataformas de inferência, modelos open weights, frameworks de agente, bancos vetoriais, observabilidade, evals, MCP e gestão de prompts — com critério de seleção em seis dimensões e data de revisão | APX-D Ferramentas e Stack · Framework F5 Matriz de Cobertura · Cap 17 Auditoria de Repositório |
+| 📦 [`/repos-curados`](./repos-curados/) | Lista de repositórios GitHub do Cap 17, com o Protocolo de 30 Minutos (seis critérios duráveis), as quatro armadilhas clássicas e o ciclo de vida do repositório como cabeçalho — a lista envelhece, o método não | Cap 17 Auditoria de Repositório · Cap 13 MCP · Cap 16 Open Source |
+| 📚 [`/fontes`](./fontes/) | Leituras (APX-E) e comunidade brasileira (APX-F) fundidas — livros de fundamento técnico, livros de governança, blogs e newsletters em inglês, newsletters e podcasts brasileiros, conferências e comunidades online, com critérios de curadoria e data de revisão | APX-E Leituras · APX-F Comunidade Brasileira de IA · Princípio Cinco Honestidade Temporal |
 
 Cada pasta tem seu próprio `README.md` com instruções específicas, padrões de uso e exemplos práticos.
 
@@ -92,6 +96,10 @@ Esta postura segue o que a obra prega no Princípio Cinco, a Honestidade Tempora
 | `/agents` | **Executável — 4 agentes completos** · A01 ReAct Simples, A02 Escala de Propriedade nos 4 níveis F3 lado a lado, A03 Orquestrador-Especialistas (cooperativo em estrela, reusando `/prompts` como especialistas) e A04 Multiagente Debate (adversarial proponente × oponente com juiz integrável a `/evals`) |
 | `/mcp` | **Executável** · M01 Hello World e M02 Biblioteca Interna completos, com `claude_desktop_config.example.json` e cliente de teste local |
 | `/notebooks` | **Executáveis** · 4 notebooks fundacionais (tokenização, janela de contexto, embeddings, prompt caching) com narrativa didática célula a célula |
+| `/apendice-vivo` | **Ponteiro** · Redireciona para a fonte única de números cross-vendor no repo deep-claude, com método vendor-neutral de leitura |
+| `/ferramentas` | **Catálogo datado** · APX-D completo — 8 categorias, critério de seleção em 6 dimensões, data de referência junho/2026 |
+| `/repos-curados` | **Catálogo datado** · Lista do Cap 17 com Protocolo de 30 Minutos, armadilhas e ciclo de vida do repositório como cabeçalho |
+| `/fontes` | **Catálogo datado** · APX-E + APX-F fundidos — livros, blogs, newsletters, podcasts, conferências e comunidades brasileiras |
 
 ---
 
