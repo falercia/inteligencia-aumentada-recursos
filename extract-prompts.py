@@ -30,9 +30,18 @@ from pathlib import Path
 # CONFIGURAÇÃO
 # ====================================================================
 
-APX_L_PATH = Path(
+# Caminho do APX-L (fonte dos prompts no manuscrito). Resolvido nesta ordem:
+#   1. variável de ambiente APX_L_PATH
+#   2. 1º argumento de linha de comando
+#   3. default abaixo (máquina do autor) — ferramenta de autor, não portável
+import os
+_DEFAULT_APX_L = (
     "/Users/fabiogarcia/Documents/Personal/Livros/Ebook IA/"
     "Livro-1-Os-Invariantes/04-apendices/L1-APX-L-biblioteca-prompts.md"
+)
+APX_L_PATH = Path(
+    os.environ.get("APX_L_PATH")
+    or (sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else _DEFAULT_APX_L)
 )
 
 REPO_ROOT = Path.cwd()  # assume execução dentro do repo clonado

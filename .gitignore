@@ -24,3 +24,7 @@ Thumbs.db
 *.log
 output/
 tmp/
+
+# Artefatos compilados de evals
+datasets/*.jsonl
+evals/reports/

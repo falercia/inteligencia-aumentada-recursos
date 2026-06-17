@@ -83,6 +83,43 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 PROMPTS_DIR = ROOT / "prompts"
 DATASETS_DIR = ROOT / "datasets"
 REPORTS_DIR = pathlib.Path(__file__).parent / "reports"
+
+
+def resolve_prompt_dir(prompt_id: str) -> pathlib.Path:
+    """Resolve um ID (curto, ex. P-LEG-01) para a pasta do prompt, aceitando o
+    nome exato ou o prefixo da pasta canônica (P-LEG-01-clausula-...)."""
+    exact = PROMPTS_DIR / prompt_id
+    if exact.is_dir():
+        return exact
+    matches = sorted(p for p in PROMPTS_DIR.glob(f"{prompt_id}*") if p.is_dir())
+    return matches[0] if matches else exact
+
+
+def golden_path(prompt_dir: pathlib.Path) -> pathlib.Path:
+    """Golden set executável: 'golden-set.yaml' (canônico) ou 'golden.yaml'."""
+    canonical = prompt_dir / "golden-set.yaml"
+    return canonical if canonical.exists() else prompt_dir / "golden.yaml"
+
+
+def find_prompt_file(prompt_id: str, *names: str) -> pathlib.Path:
+    """Procura o primeiro arquivo (entre `names`) nas pastas que casam o ID —
+    a pasta exata e as de mesmo prefixo. Tolera o caso em que os artefatos de
+    um prompt estão repartidos entre a pasta curta (P-LEG-01) e a longa
+    (P-LEG-01-clausula-...). Retorna o 1º caminho do 1º nome se nada existir."""
+    dirs: list[pathlib.Path] = []
+    exact = PROMPTS_DIR / prompt_id
+    if exact.is_dir():
+        dirs.append(exact)
+    for p in sorted(PROMPTS_DIR.glob(f"{prompt_id}*")):
+        if p.is_dir() and p not in dirs:
+            dirs.append(p)
+    for d in dirs:
+        for n in names:
+            f = d / n
+            if f.exists():
+                return f
+    base = dirs[0] if dirs else PROMPTS_DIR / prompt_id
+    return base / names[0]
 REPORTS_DIR.mkdir(exist_ok=True)
 
 
@@ -298,8 +335,11 @@ JUDGES: dict[str, Callable] = {
 def load_golden_set(prompt_id: str) -> list[GoldenCase]:
     """Carrega golden set de um prompt — YAML em prompts/{ID}/golden.yaml
     ou JSONL em datasets/{ID}.jsonl (preferido em CI)."""
-    jsonl_path = DATASETS_DIR / f"{prompt_id}.jsonl"
-    yaml_path = PROMPTS_DIR / prompt_id / "golden.yaml"
+    prompt_dir = resolve_prompt_dir(prompt_id)
+    jsonl_path = DATASETS_DIR / f"{prompt_dir.name}.jsonl"
+    if not jsonl_path.exists():
+        jsonl_path = DATASETS_DIR / f"{prompt_id}.jsonl"
+    yaml_path = find_prompt_file(prompt_id, "golden-set.yaml", "golden.yaml")
 
     cases = []
     if jsonl_path.exists():
@@ -340,7 +380,7 @@ def load_golden_set(prompt_id: str) -> list[GoldenCase]:
 
 def load_prompt(prompt_id: str) -> str:
     """Carrega o XML do prompt."""
-    path = PROMPTS_DIR / prompt_id / "prompt.xml"
+    path = find_prompt_file(prompt_id, "prompt.xml")
     if not path.exists():
         raise FileNotFoundError(f"Prompt não encontrado: {path}")
     return path.read_text(encoding="utf-8")
@@ -348,7 +388,7 @@ def load_prompt(prompt_id: str) -> str:
 
 def load_config(prompt_id: str) -> dict:
     """Carrega eval.config.yaml — limiar, judges ativos, modelo padrão."""
-    path = PROMPTS_DIR / prompt_id / "eval.config.yaml"
+    path = find_prompt_file(prompt_id, "eval.config.yaml")
     defaults = {
         "threshold": 0.85,
         "judges": ["substring", "regex", "json_schema"],
@@ -533,7 +573,12 @@ def cmd_one(args):
 
 def cmd_suite(args):
     if args.suite == "all":
-        prompts = sorted([p.name for p in PROMPTS_DIR.iterdir() if p.is_dir()])
+        prompts = sorted(
+            p.name for p in PROMPTS_DIR.iterdir()
+            if p.is_dir() and (
+                (p / "golden-set.yaml").exists() or (p / "golden.yaml").exists()
+            )
+        )
     else:
         prompts = args.suite.split(",")
 

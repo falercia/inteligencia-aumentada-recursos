@@ -61,6 +61,23 @@ DATASETS_DIR = ROOT / "datasets"
 DATASETS_DIR.mkdir(exist_ok=True)
 
 
+def resolve_prompt_dir(prompt_id: str) -> pathlib.Path:
+    """Resolve um ID para a pasta do prompt, aceitando o nome exato
+    (P-LEG-01) ou o prefixo da pasta canônica (P-LEG-01-clausula-...)."""
+    exact = PROMPTS_DIR / prompt_id
+    if exact.is_dir():
+        return exact
+    matches = sorted(p for p in PROMPTS_DIR.glob(f"{prompt_id}*") if p.is_dir())
+    return matches[0] if matches else exact
+
+
+def golden_path(prompt_dir: pathlib.Path) -> pathlib.Path:
+    """Nome canônico do golden set é 'golden-set.yaml' (gerado por
+    extract-prompts.py); aceita 'golden.yaml' por retrocompatibilidade."""
+    canonical = prompt_dir / "golden-set.yaml"
+    return canonical if canonical.exists() else prompt_dir / "golden.yaml"
+
+
 def validate_case(case: dict, prompt_id: str) -> list[str]:
     errors = []
     required = ["id", "category", "input", "expected"]
@@ -75,13 +92,24 @@ def validate_case(case: dict, prompt_id: str) -> list[str]:
 
 
 def compile_prompt(prompt_id: str, validate_only: bool = False) -> tuple[int, list[str]]:
-    yaml_path = PROMPTS_DIR / prompt_id / "golden.yaml"
+    prompt_dir = resolve_prompt_dir(prompt_id)
+    prompt_id = prompt_dir.name  # normaliza para o nome canônico da pasta
+    yaml_path = golden_path(prompt_dir)
     if not yaml_path.exists():
-        return 0, [f"{prompt_id}: golden.yaml não encontrado em {yaml_path}"]
+        return 0, [f"{prompt_id}: golden-set.yaml não encontrado em {yaml_path}"]
 
     data = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
     cases = data.get("cases", [])
     version = data.get("version", "0.0.0")
+
+    # Dois formatos coexistem no repo: o EXECUTÁVEL ('cases' com input/expected,
+    # que o motor roda) e o DESCRITIVO ('casos' com descrição livre, gerado por
+    # extract-prompts.py a partir do golden set em prosa do livro). O descritivo
+    # não tem asserções e não pode ser compilado para JSONL executável.
+    if not cases and data.get("casos"):
+        n = len(data["casos"])
+        return 0, [f"{prompt_id}: golden set DESCRITIVO ({n} casos), sem asserções "
+                   f"executáveis — requer upgrade ao formato 'cases/input/expected'"]
 
     errors = []
     for c in cases:
@@ -108,7 +136,12 @@ def main():
     if args:
         prompts = args
     else:
-        prompts = sorted([p.name for p in PROMPTS_DIR.iterdir() if p.is_dir()])
+        prompts = sorted(
+            p.name for p in PROMPTS_DIR.iterdir()
+            if p.is_dir() and (
+                (p / "golden-set.yaml").exists() or (p / "golden.yaml").exists()
+            )
+        )
 
     total_cases = 0
     total_errors = []
