@@ -39,7 +39,7 @@ Marcar o ticket como "fora de escopo — financeiro" e fechar.
 
 ## Por que este exemplo importa
 
-Recusar atender fora de escopo é uma das competências mais subestimadas em sistemas multiagente. O agente que tenta cobrir tudo vira generalista medíocre e perde confiança do usuário. O agente disciplinado reconhece a fronteira do que pode entregar com qualidade e encaminha o resto explicitamente — este é o Princípio 1 da obra (Plausibilidade não é verdade) aplicado à arquitetura.
+Recusar atender fora de escopo é uma das competências mais subestimadas em sistemas multiagente. O agente que tenta cobrir tudo vira generalista medíocre e perde confiança do usuário. O agente disciplinado reconhece a fronteira do que pode entregar com qualidade e encaminha o resto explicitamente — este é o Invariante 1 da obra (Plausibilidade não é verdade) aplicado à arquitetura.
 
 ## Variação útil para teste adversarial
 

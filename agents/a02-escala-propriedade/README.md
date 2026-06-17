@@ -128,7 +128,7 @@ O ponto de F3 não é "qual nível é melhor" — é "qual é o nível **máximo
 - 🔗 [**Framework F3 — Escala de Propriedade**](../../../Livro-1-Os-Invariantes/03-frameworks/L1-F3-agente-prop.md) — fundação direta deste agente
 - 🔗 [**Capítulo 12 — Agentes de IA**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C12-agentes.md) — anatomia dos níveis canônicos
 - 🔗 [**Capítulo 22 — LLMOps**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C22-llmops.md) — operação dos níveis 3 e 4 em produção
-- 🔗 [**Capítulo 24 — Governança**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C24-governanca.md) — o nível 4 só é defensável com governança nominal (Princípio 8)
+- 🔗 [**Capítulo 24 — Governança**](../../../Livro-1-Os-Invariantes/02-capitulos/L1-C24-governanca.md) — o nível 4 só é defensável com governança nominal (Invariante 8)
 
 ---
 

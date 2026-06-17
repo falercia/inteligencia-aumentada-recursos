@@ -7,7 +7,7 @@
 
 ## 2.1 Matriz RACI por classe de decisão
 
-A matriz abaixo cobre as classes de decisão recorrentes em operação de IA. **Cada classe tem um único Accountable, sem exceção.** Esta é a regra fundamental do Princípio Oito, Responsabilidade Indelegável.
+A matriz abaixo cobre as classes de decisão recorrentes em operação de IA. **Cada classe tem um único Accountable, sem exceção.** Esta é a regra fundamental do Invariante Oito, Responsabilidade Indelegável.
 
 | Classe de decisão | Responsible | Accountable | Consulted | Informed |
 |---|---|---|---|---|
@@ -27,7 +27,7 @@ As sete classes acima são piso, jamais teto. Customize ao seu contexto seguindo
 
 2. **Substitua o Accountable apenas quando o cargo correspondente não existe na organização.** Empresa sem CTO formal pode atribuir o Accountable a "Head de Tecnologia", "Diretor de Engenharia" ou cargo equivalente, sempre nominado.
 
-3. **Nunca distribua Accountable entre duas pessoas.** O Princípio Oito é categórico. Duas pessoas Accountables significa ninguém Accountable na hora do incidente. Quando a decisão exigir aprovação cruzada, mantenha um Accountable e adicione o segundo como Consulted obrigatório com poder de veto registrado em ata.
+3. **Nunca distribua Accountable entre duas pessoas.** O Invariante Oito é categórico. Duas pessoas Accountables significa ninguém Accountable na hora do incidente. Quando a decisão exigir aprovação cruzada, mantenha um Accountable e adicione o segundo como Consulted obrigatório com poder de veto registrado em ata.
 
 ---
 

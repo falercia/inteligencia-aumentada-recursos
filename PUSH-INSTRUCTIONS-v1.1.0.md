@@ -94,7 +94,7 @@ Os 30 JSONLs em `/datasets` serão gerados a partir dos `prompts/{ID}/golden.yam
 - **Gerados localmente e commitados** antes do `git push v1.1.0` se quiser que a release já contenha os JSONLs
 - **Gerados após push e publicados como v1.1.1** patch nos próximos dias, com calibração datada
 
-Recomendação: rodar localmente, conferir o conteúdo, commitar como `v1.1.1` patch para separar claramente "infraestrutura" (v1.1.0) de "calibração de dados" (v1.1.1). Princípio Cinco aplicado.
+Recomendação: rodar localmente, conferir o conteúdo, commitar como `v1.1.1` patch para separar claramente "infraestrutura" (v1.1.0) de "calibração de dados" (v1.1.1). Invariante Cinco aplicado.
 
 ```bash
 # Quando os YAMLs estiverem prontos
@@ -109,7 +109,7 @@ git push origin main && git push origin v1.1.1
 
 ## Anti-padrão que esta release evita
 
-Publicar JSONLs sintéticos gerados automaticamente, sem calibração humana datada, viola o Princípio Cinco (Honestidade Temporal) e o pacto editorial do APX-L. Por isso a release de **infraestrutura** (motor + script de compilação) sai independente da release de **dados** (JSONLs calibrados).
+Publicar JSONLs sintéticos gerados automaticamente, sem calibração humana datada, viola o Invariante Cinco (Honestidade Temporal) e o pacto editorial do APX-L. Por isso a release de **infraestrutura** (motor + script de compilação) sai independente da release de **dados** (JSONLs calibrados).
 
 A documentação no README e no CHANGELOG é explícita sobre essa separação. O leitor que clonar o repo na manhã do dia 1 de julho encontra um motor rodável; o leitor que clonar na manhã do dia 10 encontra também os 30 JSONLs públicos com data de calibração visível.
 

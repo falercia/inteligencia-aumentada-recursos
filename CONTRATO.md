@@ -21,7 +21,7 @@
 
 ## A regra editorial inegociável: Camada Dupla
 
-A obra opera sob o que o livro chama de **Camada Dupla** (o Princípio Três dos Nove Invariantes Permanentes da IA): conhecimento em IA vive em dois andares, o padrão que dura e o número que muda. O livro carrega o padrão — frameworks, arquiteturas, anti-padrões, vocabulário durável que sobrevive à próxima geração de modelos. Este repositório carrega o número — XML versionado, golden sets executáveis, scripts de regressão, exemplos rodáveis.
+A obra opera sob o que o livro chama de **Camada Dupla** (o Invariante Três dos Nove Invariantes da IA): conhecimento em IA vive em dois andares, o padrão que dura e o número que muda. O livro carrega o padrão — frameworks, arquiteturas, anti-padrões, vocabulário durável que sobrevive à próxima geração de modelos. Este repositório carrega o número — XML versionado, golden sets executáveis, scripts de regressão, exemplos rodáveis.
 
 A separação física é deliberada e materializa o método. Quem só lê o livro sai com método; quem só usa este repositório sem ler o livro opera no escuro; quem usa os dois sai com modelo mental sólido e ativos prontos para entrar em pipeline.
 

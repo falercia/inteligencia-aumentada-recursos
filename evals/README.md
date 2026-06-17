@@ -2,7 +2,7 @@
 
 > v1.1.0 · julho de 2026 · Implementação executável do Framework Oito · Pirâmide da Avaliação
 
-Esta pasta entrega o motor de regressão que sustenta o Princípio Sete da obra, **Termômetro Permanente**, em forma executável. Trocar prompt porque "ficou melhor" sem golden set é torcida, não decisão. Aqui está a bateria de testes automatizada que separa os dois.
+Esta pasta entrega o motor de regressão que sustenta o Invariante Sete da obra, **Termômetro Permanente**, em forma executável. Trocar prompt porque "ficou melhor" sem golden set é torcida, não decisão. Aqui está a bateria de testes automatizada que separa os dois.
 
 ---
 
@@ -55,7 +55,7 @@ Cada caso do golden set carrega:
 - `category`: `facil` | `medio` | `limitrofe` | `adversarial`
 - `input`: variáveis nomeadas que serão substituídas no prompt
 - `expected`: critérios de avaliação (`must_contain`, `regex_required`, `json_keys`, etc.)
-- `calibration_date`: data em que o caso foi calibrado (Princípio 5, Honestidade Temporal)
+- `calibration_date`: data em que o caso foi calibrado (Invariante 5, Honestidade Temporal)
 - `notes`: contexto humano da calibração
 
 ---
@@ -102,7 +102,7 @@ Cálculo orientativo, em USD, considerando Anthropic em junho de 2026:
 | Suite completa em release | Sonnet 4.6 | 600 | ~$10 |
 | Suite completa em release com Opus | Opus 4.6 | 600 | ~$45 |
 
-**Recomendação operacional.** Haiku no PR check, Sonnet no merge para main, Opus apenas no release público com tag versionada. Princípio Cinco, Custo Composto, aplicado à esteira de avaliação.
+**Recomendação operacional.** Haiku no PR check, Sonnet no merge para main, Opus apenas no release público com tag versionada. Invariante Cinco, Custo Composto, aplicado à esteira de avaliação.
 
 ---
 

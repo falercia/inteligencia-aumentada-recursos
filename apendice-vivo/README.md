@@ -14,7 +14,7 @@ Esta pasta é um ponteiro deliberado. A camada de números cross-vendor da séri
 
 > **github.com/falercia/deep-claude → `apendice-vivo/`**
 
-A decisão de manter os números em um único lugar, e não replicá-los aqui, é a aplicação direta do que o livro prega no Princípio Três, a Camada Dupla. Dois lugares com o mesmo dado não é redundância útil; é garantia de inconsistência. Quando os números mudarem — e vão mudar, provavelmente antes do fim do mês — um só arquivo precisa ser atualizado, e a informação permanece coerente para o leitor de qualquer dos dois repositórios.
+A decisão de manter os números em um único lugar, e não replicá-los aqui, é a aplicação direta do que o livro prega no Invariante Três, a Camada Dupla. Dois lugares com o mesmo dado não é redundância útil; é garantia de inconsistência. Quando os números mudarem — e vão mudar, provavelmente antes do fim do mês — um só arquivo precisa ser atualizado, e a informação permanece coerente para o leitor de qualquer dos dois repositórios.
 
 ---
 
@@ -74,8 +74,8 @@ O que sobrevive ao ciclo não é o ranking — é o método de avaliar: qual é 
 ## Capítulos relacionados do livro
 
 - **Apêndice J — Trilha do Número** — referencia o Apêndice Vivo como fonte viva dos dados que mudam
-- **Princípio Três — A Camada Dupla** — a tese que justifica o ponteiro em vez da duplicação
-- **Princípio Cinco — Honestidade Temporal** — a postura que exige data em cada dado perecível
+- **Invariante Três — A Camada Dupla** — a tese que justifica o ponteiro em vez da duplicação
+- **Invariante Cinco — Honestidade Temporal** — a postura que exige data em cada dado perecível
 - **Capítulo 15 — Modelos** — framework de decisão de modelo que este apêndice alimenta com números
 
 ---

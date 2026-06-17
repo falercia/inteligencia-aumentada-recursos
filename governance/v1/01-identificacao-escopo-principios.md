@@ -50,7 +50,7 @@ Mudança de escopo exige decisão registrada em ata do Comitê de IA, com justif
 
 ## 1.3 Princípios condutores
 
-A organização adota os Nove Princípios da obra **Inteligência Aumentada · Os Invariantes da IA** como referência editorial, e converte os mais operacionais em compromissos auditáveis.
+A organização adota os Nove Invariantes da obra **Inteligência Aumentada · Os Invariantes da IA** como referência editorial, e converte os mais operacionais em compromissos auditáveis.
 
 1. **Plausibilidade, não verdade.** Toda saída de IA é tratada como plausível, não verdadeira. Decisão crítica passa por verificação humana proporcional ao risco.
 2. **Física da atenção.** Prompts produtivos respeitam ordem deliberada de blocos. Regra crítica nunca no meio.
@@ -62,7 +62,7 @@ A organização adota os Nove Princípios da obra **Inteligência Aumentada · O
 8. **Responsabilidade indelegável.** Toda decisão de IA tem um Accountable humano único e nomeado.
 9. **Operador como multiplicador.** A IA amplia competência e amplifica incompetência. Treinamento e calibração são parte do contrato com o operador.
 
-Os princípios não são preâmbulo decorativo. Aparecem operacionalizados em cada um dos blocos seguintes do caderno, e a auditoria do caderno se faz contra o princípio que sustenta cada controle.
+Os invariantes não são preâmbulo decorativo. Aparecem operacionalizados em cada um dos blocos seguintes do caderno, e a auditoria do caderno se faz contra o invariante que sustenta cada controle.
 
 ---
 

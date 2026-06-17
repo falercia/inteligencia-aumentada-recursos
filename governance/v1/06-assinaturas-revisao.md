@@ -103,7 +103,7 @@ Tabela aberta para registro contínuo. Toda edição é incorporada antes da pub
 
 ## 6.5 Compromisso final
 
-A diretoria, ao assinar este documento, compromete-se com a regra fundamental do Princípio Oito: **toda decisão de IA tem um nome humano responsável.** A IA executa. A responsabilidade tem dono. Quando alguém disser "foi a IA que decidiu", a organização precisa saber, em até cinco minutos, de quem é a cadeira.
+A diretoria, ao assinar este documento, compromete-se com a regra fundamental do Invariante Oito: **toda decisão de IA tem um nome humano responsável.** A IA executa. A responsabilidade tem dono. Quando alguém disser "foi a IA que decidiu", a organização precisa saber, em até cinco minutos, de quem é a cadeira.
 
 Este é o pacto que o caderno materializa, e é a métrica final pela qual ele será julgado, ainda que muito antes disso o conselho já tenha julgado os sete indicadores de caderno vivo descritos na ficha conceitual do Apêndice O da obra.
 

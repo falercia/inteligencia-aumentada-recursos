@@ -121,7 +121,7 @@ A oferta brasileira de newsletter sobre IA cresceu nos últimos dois ciclos. As 
 
 **Hipsters.tech, da Alura.** Episódios regulares dedicados a IA aplicada, com convidados que operam em produção em empresas brasileiras.
 
-**Tecnocracia, do Manual do Usuário.** Pensamento crítico sobre tecnologia, cobertura recorrente de IA. Tom adversarial qualificado, útil para treinar o senso crítico que o Princípio Um da obra exige.
+**Tecnocracia, do Manual do Usuário.** Pensamento crítico sobre tecnologia, cobertura recorrente de IA. Tom adversarial qualificado, útil para treinar o senso crítico que o Invariante Um da obra exige.
 
 ---
 
@@ -165,7 +165,7 @@ Esta lista é revisada periodicamente sem cadência fixa. O leitor que quiser su
 
 - **Apêndice E — Leituras Complementares** — fonte primária da seção de livros e cursos
 - **Apêndice F — Comunidade Brasileira de IA em 2026** — fonte primária da seção de newsletters, podcasts e conferências
-- **Princípio Cinco — Honestidade Temporal** — a postura que exige data e revisão declaradas em toda lista perecível
+- **Invariante Cinco — Honestidade Temporal** — a postura que exige data e revisão declaradas em toda lista perecível
 - **Capítulo 17 — Auditoria de Repositório GitHub** — o método que também se aplica a avaliar qualquer repositório de ferramentas listado aqui
 
 > *"A segunda vida da profissão de IA no Brasil acontece em português, em rodas de conversa em meetups, em comunidades no Discord e Telegram, e essa segunda vida é a que sustenta carreira, contratação, mentoria, debate sobre regulação local, e troca real de aprendizado em contexto brasileiro."*

@@ -94,9 +94,9 @@ Cada agente tem um conjunto de exemplos prontos em `exemplos/`, com a saída esp
 A pasta opera sob cinco regras que não são negociáveis em nenhum agente desta biblioteca, e que reproduzem em código o que o livro ensina como prática. Quem vai adaptar para a empresa precisa manter as cinco, mesmo que adapte a stack inteira.
 
 1. **Todo agente declara o nível F3 em que opera**, e o nível está nomeado no `README.md` da pasta. Pular essa declaração é violar a primeira regra do F3.
-2. **Todo agente declara um dono humano nominal** no `README.md`. Em ambiente educacional o dono é "o leitor que está executando"; em produção é nome e cargo. Princípio 8 — Responsabilidade Indelegável.
-3. **Tracing por chamada é ativado por padrão**, escrito em JSONL local. Quem quer desligar precisa passar flag explícita. Princípio 7 — Termômetro.
-4. **Kill switch existe e é testável** em todo agente, com tempo de resposta declarado e teste rodável incluído. Princípio 6 — Autonomia Proporcional.
+2. **Todo agente declara um dono humano nominal** no `README.md`. Em ambiente educacional o dono é "o leitor que está executando"; em produção é nome e cargo. Invariante 8 — Responsabilidade Indelegável.
+3. **Tracing por chamada é ativado por padrão**, escrito em JSONL local. Quem quer desligar precisa passar flag explícita. Invariante 7 — Termômetro.
+4. **Kill switch existe e é testável** em todo agente, com tempo de resposta declarado e teste rodável incluído. Invariante 6 — Autonomia Proporcional.
 5. **Rollback documentado e testado** quando o agente tem efeito colateral. Em agentes educacionais sem efeito colateral, esta regra fica explicitamente marcada como "não aplicável" no `README.md`, em vez de omitida.
 
 ---

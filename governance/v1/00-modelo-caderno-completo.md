@@ -26,7 +26,7 @@ Estão fora do escopo, salvo declaração explícita em revisão futura: ferrame
 
 ### 1.3 Princípios condutores
 
-A organização adota os Nove Princípios da obra como referência editorial, e converte os mais operacionais em compromissos auditáveis.
+A organização adota os Nove Invariantes da obra como referência editorial, e converte os mais operacionais em compromissos auditáveis.
 
 1. **Plausibilidade, não verdade.** Toda saída de IA é tratada como plausível, não verdadeira. Decisão crítica passa por verificação humana proporcional ao risco.
 2. **Física da atenção.** Prompts produtivos respeitam ordem deliberada de blocos. Regra crítica nunca no meio.
@@ -206,7 +206,7 @@ Toda edição registra três campos no log: data, item alterado, motivo. O log f
 
 ### 6.4 Compromisso final
 
-A diretoria, ao assinar este documento, compromete-se com a regra fundamental do Princípio Oito: toda decisão de IA tem um nome humano responsável. A IA executa. A responsabilidade tem dono. Quando alguém disser "foi a IA que decidiu", a organização precisa saber, em até cinco minutos, de quem é a cadeira.
+A diretoria, ao assinar este documento, compromete-se com a regra fundamental do Invariante Oito: toda decisão de IA tem um nome humano responsável. A IA executa. A responsabilidade tem dono. Quando alguém disser "foi a IA que decidiu", a organização precisa saber, em até cinco minutos, de quem é a cadeira.
 
 ---
 
