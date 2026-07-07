@@ -3,6 +3,10 @@
 > O número que muda. A Camada Dupla aplicada na prática.
 > Companheiro executável do livro **Inteligência Aumentada · Os Invariantes da IA** (Fabio Garcia, 2026).
 
+> 📖 **Os livros são gratuitos.** Baixe nos Releases: [Livro 1 — Os Invariantes da IA](https://github.com/falercia/inteligencia-aumentada-recursos/releases/latest) · [Livro 2 — Deep Claude](https://github.com/falercia/deep-claude/releases/latest)
+>
+> 💡 **Dica — leia com IA:** jogue os PDFs no **[NotebookLM](https://notebooklm.google.com)** (grátis). Você conversa com os livros, pede resumo por capítulo e gera um *audio overview* pra ouvir no trânsito. Vira um tutor particular da obra.
+
 [![Licença código](https://img.shields.io/badge/c%C3%B3digo-MIT-blue)](#licença)
 [![Licença conteúdo](https://img.shields.io/badge/conte%C3%BAdo-CC--BY%204.0-lightgrey)](#licença)
 
@@ -163,7 +167,7 @@ Você pode usar comercialmente, modificar, redistribuir e construir produtos der
 
 A obra **Inteligência Aumentada · Os Invariantes da IA** foi escrita como referência executiva em português para CTOs, AI engineers, executivos e operadores que precisam navegar a IA moderna sem cair nas armadilhas clássicas do hype. O livro entrega o método que sobrevive à próxima geração de modelos; este repositório entrega os artefatos que materializam o método em produção.
 
-🔗 **Livro:** disponível em formato digital e impresso · [link para venda em breve]
+🔗 **Livros (grátis):** [Livro 1 — Os Invariantes da IA](https://github.com/falercia/inteligencia-aumentada-recursos/releases/latest) · [Livro 2 — Deep Claude](https://github.com/falercia/deep-claude/releases/latest)
 🔗 **LinkedIn:** [linkedin.com/in/falercia](https://linkedin.com/in/falercia)
 🔗 **Issues e contato editorial:** [github.com/falercia/inteligencia-aumentada-recursos/issues](https://github.com/falercia/inteligencia-aumentada-recursos/issues)
 
